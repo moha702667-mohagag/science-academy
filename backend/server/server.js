@@ -38,7 +38,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:5173",
   process.env.FRONTEND_URL
-];
+].filter(Boolean);
 
 app.use(
   cors({
@@ -310,10 +310,6 @@ const deleteExpiredUnverifiedAccounts = async () => {
       Date.now() - 14 * 24 * 60 * 60 * 1000
     );
 
-    // =========================================
-    // FIND EXPIRED UNVERIFIED USERS
-    // =========================================
-
     const expiredUsers = await User.find({
       emailVerified: false,
       createdAt: {
@@ -324,10 +320,6 @@ const deleteExpiredUnverifiedAccounts = async () => {
     if (expiredUsers.length === 0) {
       return;
     }
-
-    // =========================================
-    // DELETE TEACHER PROFILES
-    // =========================================
 
     const teacherIds = expiredUsers
       .filter((user) => user.role === "teacher")
@@ -341,10 +333,6 @@ const deleteExpiredUnverifiedAccounts = async () => {
       });
     }
 
-    // =========================================
-    // DELETE USERS
-    // =========================================
-
     const userIds = expiredUsers.map(
       (user) => user._id
     );
@@ -355,10 +343,6 @@ const deleteExpiredUnverifiedAccounts = async () => {
       },
       emailVerified: false,
     });
-
-    // =========================================
-    // LOG
-    // =========================================
 
     if (result.deletedCount > 0) {
       console.log(
@@ -374,6 +358,13 @@ const deleteExpiredUnverifiedAccounts = async () => {
   }
 };
 
+// ==================================================
+// CHECK EXPIRED UNVERIFIED ACCOUNTS DAILY
+// ==================================================
+
+cron.schedule("0 3 * * *", async () => {
+  await deleteExpiredUnverifiedAccounts();
+});
 
 /* ==================================================
    TEACHER PROFILE
