@@ -1,0 +1,1959 @@
+/* =========================================================
+   EXAM PLAYER
+   Premium Professional RTL Design
+   Supports:
+   html[data-theme="light"]
+   html[data-theme="dark"]
+========================================================= */
+
+
+/* =========================================================
+   LIGHT VARIABLES
+========================================================= */
+
+.exam-player,
+.exam-loading {
+
+  --exam-bg: #f5f7fb;
+  --exam-card: #ffffff;
+  --exam-card-soft: #f8fafc;
+
+  --exam-border: #e7ebf2;
+  --exam-border-strong: #d8dee9;
+
+  --exam-text: #111827;
+  --exam-text-secondary: #667085;
+  --exam-text-muted: #98a2b3;
+
+  --exam-primary: #2563eb;
+  --exam-primary-dark: #1d4ed8;
+  --exam-primary-soft: rgba(37, 99, 235, 0.08);
+
+  --exam-success: #16a34a;
+  --exam-success-dark: #15803d;
+  --exam-success-soft: rgba(22, 163, 74, 0.09);
+
+  --exam-danger: #dc2626;
+  --exam-danger-soft: rgba(220, 38, 38, 0.08);
+
+  --exam-warning: #d97706;
+  --exam-warning-soft: rgba(217, 119, 6, 0.09);
+
+  --exam-shadow:
+    0 20px 55px rgba(15, 23, 42, 0.07);
+
+  --exam-shadow-small:
+    0 7px 24px rgba(15, 23, 42, 0.06);
+
+  --exam-radius: 20px;
+
+  --exam-focus:
+    rgba(37, 99, 235, 0.18);
+
+}
+
+
+/* =========================================================
+   DARK VARIABLES
+========================================================= */
+
+html[data-theme="dark"] .exam-player,
+html[data-theme="dark"] .exam-loading {
+
+  --exam-bg: #070b14;
+
+  --exam-card: #0f1726;
+  --exam-card-soft: #141e2f;
+
+  --exam-border:
+    rgba(255, 255, 255, 0.075);
+
+  --exam-border-strong:
+    rgba(255, 255, 255, 0.12);
+
+  --exam-text: #f8fafc;
+  --exam-text-secondary: #aab5c5;
+  --exam-text-muted: #7d899d;
+
+  --exam-primary: #60a5fa;
+  --exam-primary-dark: #3b82f6;
+
+  --exam-primary-soft:
+    rgba(96, 165, 250, 0.10);
+
+  --exam-success: #4ade80;
+  --exam-success-dark: #22c55e;
+
+  --exam-success-soft:
+    rgba(74, 222, 128, 0.10);
+
+  --exam-danger: #f87171;
+
+  --exam-danger-soft:
+    rgba(248, 113, 113, 0.10);
+
+  --exam-warning: #fbbf24;
+
+  --exam-warning-soft:
+    rgba(251, 191, 36, 0.10);
+
+  --exam-shadow:
+    0 25px 75px rgba(0, 0, 0, 0.42);
+
+  --exam-shadow-small:
+    0 10px 30px rgba(0, 0, 0, 0.28);
+
+  --exam-focus:
+    rgba(96, 165, 250, 0.20);
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.exam-player {
+
+  min-height: 100vh;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding:
+    32px
+    20px
+    70px;
+
+  direction: rtl;
+
+  font-family:
+    "Cairo",
+    "Tajawal",
+    Arial,
+    sans-serif;
+
+  color:
+    var(--exam-text);
+
+  background:
+
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(37, 99, 235, 0.065),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(37, 99, 235, 0.045),
+      transparent 28%
+    ),
+
+    var(--exam-bg);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+
+}
+
+
+/* =========================================================
+   MAIN WIDTH
+========================================================= */
+
+.exam-player-header,
+.player-card,
+.player-actions {
+
+  width:
+    min(950px, 100%);
+
+  margin-left:
+    auto;
+
+  margin-right:
+    auto;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.exam-player-header {
+
+  min-height:
+    78px;
+
+  box-sizing:
+    border-box;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    22px;
+
+  padding:
+    15px 20px;
+
+  margin-bottom:
+    18px;
+
+  border:
+    1px solid
+    var(--exam-border);
+
+  border-radius:
+    var(--exam-radius);
+
+  background:
+    var(--exam-card);
+
+  box-shadow:
+    var(--exam-shadow-small);
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+}
+
+
+/* =========================================================
+   HEADER ACCENT
+========================================================= */
+
+.exam-player-header::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  right:
+    0;
+
+  left:
+    0;
+
+  height:
+    3px;
+
+  background:
+    var(--exam-primary);
+
+}
+
+
+/* =========================================================
+   HEADER TITLE
+========================================================= */
+
+.exam-player-header h1 {
+
+  margin:
+    0;
+
+  color:
+    var(--exam-text);
+
+  font-size:
+    23px;
+
+  font-weight:
+    800;
+
+  line-height:
+    1.5;
+
+  letter-spacing:
+    -0.3px;
+
+  overflow-wrap:
+    anywhere;
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+.timer {
+
+  min-width:
+    126px;
+
+  height:
+    46px;
+
+  padding:
+    0 15px;
+
+  box-sizing:
+    border-box;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+
+  border:
+    1px solid
+    rgba(37, 99, 235, 0.14);
+
+  border-radius:
+    13px;
+
+  color:
+    var(--exam-primary);
+
+  background:
+    var(--exam-primary-soft);
+
+  font-size:
+    16px;
+
+  font-weight:
+    800;
+
+  direction:
+    ltr;
+
+  white-space:
+    nowrap;
+
+}
+
+
+/* =========================================================
+   TIMER ICON
+========================================================= */
+
+.timer svg {
+
+  font-size:
+    19px;
+
+  flex-shrink:
+    0;
+
+}
+
+
+/* =========================================================
+   PLAYER CARD
+========================================================= */
+
+.player-card {
+
+  box-sizing:
+    border-box;
+
+  padding:
+    32px;
+
+  border:
+    1px solid
+    var(--exam-border);
+
+  border-radius:
+    24px;
+
+  background:
+    var(--exam-card);
+
+  box-shadow:
+    var(--exam-shadow);
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+}
+
+
+/* =========================================================
+   CARD ACCENT
+========================================================= */
+
+.player-card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  right:
+    0;
+
+  left:
+    0;
+
+  height:
+    3px;
+
+  background:
+    var(--exam-primary);
+
+}
+
+
+/* =========================================================
+   QUESTION TITLE
+========================================================= */
+
+.player-card h2 {
+
+  margin:
+    0 0 26px;
+
+  color:
+    var(--exam-text);
+
+  font-size:
+    21px;
+
+  font-weight:
+    800;
+
+  line-height:
+    1.9;
+
+  letter-spacing:
+    -0.2px;
+
+  overflow-wrap:
+    anywhere;
+
+}
+
+
+/* =========================================================
+   QUESTION NUMBER
+========================================================= */
+
+.player-card h2::first-letter {
+
+  color:
+    var(--exam-primary);
+
+}
+
+
+/* =========================================================
+   QUESTION IMAGE BOX
+========================================================= */
+
+.question-image-box {
+
+  width:
+    100%;
+
+  min-height:
+    120px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  margin:
+    0 0 26px;
+
+  padding:
+    14px;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    var(--exam-border);
+
+  border-radius:
+    17px;
+
+  background:
+    var(--exam-card-soft);
+
+}
+
+
+/* =========================================================
+   QUESTION IMAGE
+========================================================= */
+
+.question-image {
+
+  display:
+    block;
+
+  max-width:
+    100%;
+
+  max-height:
+    420px;
+
+  width:
+    auto;
+
+  height:
+    auto;
+
+  object-fit:
+    contain;
+
+  border-radius:
+    11px;
+
+  cursor:
+    zoom-in;
+
+  box-shadow:
+    0 10px 28px
+    rgba(15, 23, 42, 0.09);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+
+}
+
+
+.question-image:hover {
+
+  transform:
+    scale(1.012);
+
+  box-shadow:
+    0 14px 35px
+    rgba(15, 23, 42, 0.13);
+
+}
+
+
+/* =========================================================
+   ANSWERS LIST
+========================================================= */
+
+.answers-list {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    12px;
+
+}
+
+
+/* =========================================================
+   ANSWER BUTTON
+========================================================= */
+
+.answers-list > button {
+
+  width:
+    100%;
+
+  min-height:
+    61px;
+
+  padding:
+    14px 18px;
+
+  box-sizing:
+    border-box;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  text-align:
+    right;
+
+  direction:
+    rtl;
+
+  border:
+    1.5px solid
+    var(--exam-border-strong);
+
+  border-radius:
+    14px;
+
+  background:
+    var(--exam-card-soft);
+
+  color:
+    var(--exam-text);
+
+  font-family:
+    inherit;
+
+  font-size:
+    15px;
+
+  font-weight:
+    700;
+
+  line-height:
+    1.7;
+
+  cursor:
+    pointer;
+
+  outline:
+    none;
+
+  position:
+    relative;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+
+}
+
+
+/* =========================================================
+   ANSWER HOVER
+========================================================= */
+
+.answers-list > button:hover:not(:disabled) {
+
+  transform:
+    translateY(-1px);
+
+  border-color:
+    var(--exam-primary);
+
+  background:
+    var(--exam-primary-soft);
+
+  box-shadow:
+    0 7px 20px
+    rgba(37, 99, 235, 0.07);
+
+}
+
+
+/* =========================================================
+   ANSWER ACTIVE
+========================================================= */
+
+.answers-list > button:active:not(:disabled) {
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   SELECTED ANSWER
+========================================================= */
+
+.answers-list > button.answer-selected {
+
+  color:
+    #ffffff;
+
+  border-color:
+    var(--exam-primary);
+
+  background:
+    var(--exam-primary);
+
+  box-shadow:
+    0 8px 22px
+    rgba(37, 99, 235, 0.20);
+
+}
+
+
+/* =========================================================
+   SELECTED ANSWER HOVER
+========================================================= */
+
+.answers-list > button.answer-selected:hover:not(:disabled) {
+
+  color:
+    #ffffff;
+
+  border-color:
+    var(--exam-primary-dark);
+
+  background:
+    var(--exam-primary-dark);
+
+}
+
+
+/* =========================================================
+   DARK SELECTED
+========================================================= */
+
+html[data-theme="dark"]
+.answers-list > button.answer-selected {
+
+  color:
+    #ffffff;
+
+  background:
+    var(--exam-primary);
+
+  box-shadow:
+    0 9px 26px
+    rgba(96, 165, 250, 0.18);
+
+}
+
+
+/* =========================================================
+   DISABLED ANSWERS
+========================================================= */
+
+.answers-list > button:disabled {
+
+  cursor:
+    not-allowed;
+
+}
+
+
+/* =========================================================
+   ESSAY ANSWER
+========================================================= */
+
+.essay-answer {
+
+  width:
+    100%;
+
+  min-height:
+    190px;
+
+  box-sizing:
+    border-box;
+
+  resize:
+    vertical;
+
+  padding:
+    16px 17px;
+
+  border:
+    1.5px solid
+    var(--exam-border-strong);
+
+  border-radius:
+    15px;
+
+  background:
+    var(--exam-card-soft);
+
+  color:
+    var(--exam-text);
+
+  font-family:
+    inherit;
+
+  font-size:
+    15px;
+
+  font-weight:
+    600;
+
+  line-height:
+    1.9;
+
+  direction:
+    rtl;
+
+  text-align:
+    right;
+
+  outline:
+    none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+
+.essay-answer::placeholder {
+
+  color:
+    var(--exam-text-muted);
+
+}
+
+
+.essay-answer:hover:not(:disabled) {
+
+  border-color:
+    rgba(37, 99, 235, 0.40);
+
+}
+
+
+.essay-answer:focus {
+
+  background:
+    var(--exam-card);
+
+  border-color:
+    var(--exam-primary);
+
+  box-shadow:
+    0 0 0 4px
+    var(--exam-focus);
+
+}
+
+
+.essay-answer:disabled {
+
+  cursor:
+    not-allowed;
+
+  opacity:
+    0.75;
+
+}
+
+
+/* =========================================================
+   PLAYER ACTIONS
+========================================================= */
+
+.player-actions {
+
+  box-sizing:
+    border-box;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    14px;
+
+  margin-top:
+    18px;
+
+}
+
+
+/* =========================================================
+   NAVIGATION BUTTONS
+========================================================= */
+
+.player-actions button {
+
+  min-width:
+    125px;
+
+  height:
+    49px;
+
+  padding:
+    0 19px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+
+  border:
+    1px solid
+    var(--exam-border);
+
+  border-radius:
+    13px;
+
+  background:
+    var(--exam-card);
+
+  color:
+    var(--exam-text);
+
+  font-family:
+    inherit;
+
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    var(--exam-shadow-small);
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+}
+
+
+/* =========================================================
+   NAVIGATION HOVER
+========================================================= */
+
+.player-actions button:hover:not(:disabled) {
+
+  transform:
+    translateY(-1px);
+
+  color:
+    var(--exam-primary);
+
+  border-color:
+    var(--exam-primary);
+
+  background:
+    var(--exam-primary-soft);
+
+  box-shadow:
+    0 8px 20px
+    rgba(37, 99, 235, 0.08);
+
+}
+
+
+/* =========================================================
+   NAVIGATION ACTIVE
+========================================================= */
+
+.player-actions button:active:not(:disabled) {
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   DISABLED BUTTON
+========================================================= */
+
+.player-actions button:disabled {
+
+  opacity:
+    0.45;
+
+  cursor:
+    not-allowed;
+
+  box-shadow:
+    none;
+
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.player-actions button.submit {
+
+  color:
+    #ffffff;
+
+  border-color:
+    transparent;
+
+  background:
+    var(--exam-success);
+
+  box-shadow:
+    0 9px 23px
+    rgba(22, 163, 74, 0.20);
+
+}
+
+
+/* =========================================================
+   SUBMIT HOVER
+========================================================= */
+
+.player-actions button.submit:hover:not(:disabled) {
+
+  color:
+    #ffffff;
+
+  border-color:
+    transparent;
+
+  background:
+    var(--exam-success-dark);
+
+  box-shadow:
+    0 12px 27px
+    rgba(22, 163, 74, 0.27);
+
+}
+
+
+/* =========================================================
+   SUBMIT DISABLED
+========================================================= */
+
+.player-actions button.submit:disabled {
+
+  opacity:
+    0.45;
+
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+.exam-loading {
+
+  min-height:
+    100vh;
+
+  width:
+    100%;
+
+  box-sizing:
+    border-box;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    16px;
+
+  padding:
+    30px;
+
+  direction:
+    rtl;
+
+  font-family:
+    "Cairo",
+    "Tajawal",
+    Arial,
+    sans-serif;
+
+  font-size:
+    18px;
+
+  font-weight:
+    800;
+
+  color:
+    var(--exam-text);
+
+  background:
+    var(--exam-bg);
+
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.exam-loading::before {
+
+  content:
+    "";
+
+  width:
+    44px;
+
+  height:
+    44px;
+
+  border-radius:
+    50%;
+
+  border:
+    4px solid
+    var(--exam-border);
+
+  border-top-color:
+    var(--exam-primary);
+
+  animation:
+    exam-spin 0.8s linear infinite;
+
+}
+
+
+@keyframes exam-spin {
+
+  to {
+
+    transform:
+      rotate(360deg);
+
+  }
+
+}
+
+
+/* =========================================================
+   PAUSED SCREEN
+========================================================= */
+
+.exam-loading h2 {
+
+  margin:
+    0;
+
+  color:
+    var(--exam-text);
+
+  font-size:
+    24px;
+
+  font-weight:
+    800;
+
+}
+
+
+.exam-loading p {
+
+  color:
+    var(--exam-text-secondary);
+
+  line-height:
+    1.9;
+
+}
+
+
+/* =========================================================
+   IMAGE MODAL
+========================================================= */
+
+.image-modal {
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    9999;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    25px;
+
+  box-sizing:
+    border-box;
+
+  background:
+    rgba(15, 23, 42, 0.84);
+
+  backdrop-filter:
+    blur(9px);
+
+  -webkit-backdrop-filter:
+    blur(9px);
+
+  cursor:
+    zoom-out;
+
+  animation:
+    exam-modal-in 0.2s ease;
+
+}
+
+
+/* =========================================================
+   MODAL IMAGE
+========================================================= */
+
+.image-modal-content {
+
+  max-width:
+    min(100%, 1100px);
+
+  max-height:
+    90vh;
+
+  width:
+    auto;
+
+  height:
+    auto;
+
+  object-fit:
+    contain;
+
+  border-radius:
+    15px;
+
+  background:
+    #ffffff;
+
+  padding:
+    7px;
+
+  box-sizing:
+    border-box;
+
+  box-shadow:
+    0 30px 90px
+    rgba(0, 0, 0, 0.45);
+
+  cursor:
+    default;
+
+}
+
+
+@keyframes exam-modal-in {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      scale(0.97);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+
+  }
+
+}
+
+
+/* =========================================================
+   TIME ENDED
+========================================================= */
+
+.exam-time-ended {
+
+  width:
+    min(950px, 100%);
+
+  box-sizing:
+    border-box;
+
+  margin:
+    0 auto 16px;
+
+  padding:
+    14px 18px;
+
+  border:
+    1px solid
+    #fecdd3;
+
+  border-radius:
+    13px;
+
+  background:
+    #fff1f2;
+
+  color:
+    #be123c;
+
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
+  text-align:
+    center;
+
+}
+
+
+.exam-time-ended span {
+
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  font-size:
+    13px;
+
+  font-weight:
+    600;
+
+  opacity:
+    0.85;
+
+}
+
+
+/* =========================================================
+   DARK TIME ENDED
+========================================================= */
+
+html[data-theme="dark"]
+.exam-time-ended {
+
+  border-color:
+    rgba(248, 113, 113, 0.18);
+
+  background:
+    rgba(248, 113, 113, 0.08);
+
+  color:
+    #fca5a5;
+
+}
+
+
+/* =========================================================
+   DARK MODAL
+========================================================= */
+
+html[data-theme="dark"]
+.image-modal {
+
+  background:
+    rgba(2, 6, 23, 0.92);
+
+}
+
+
+html[data-theme="dark"]
+.image-modal-content {
+
+  background:
+    #101827;
+
+  box-shadow:
+    0 30px 100px
+    rgba(0, 0, 0, 0.65);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .exam-player {
+
+    padding:
+      22px
+      15px
+      50px;
+
+  }
+
+
+  .exam-player-header {
+
+    padding:
+      16px
+      18px;
+
+    border-radius:
+      18px;
+
+  }
+
+
+  .exam-player-header h1 {
+
+    font-size:
+      20px;
+
+  }
+
+
+  .timer {
+
+    min-width:
+      112px;
+
+    height:
+      44px;
+
+    font-size:
+      15px;
+
+  }
+
+
+  .player-card {
+
+    padding:
+      26px
+      21px;
+
+    border-radius:
+      21px;
+
+  }
+
+
+  .player-card h2 {
+
+    font-size:
+      19px;
+
+    line-height:
+      1.85;
+
+  }
+
+
+  .answers-list {
+
+    gap:
+      11px;
+
+  }
+
+
+  .answers-list > button {
+
+    min-height:
+      58px;
+
+    font-size:
+      14px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .exam-player {
+
+    padding:
+      12px
+      9px
+      35px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Header
+  ------------------------------------------------------- */
+
+  .exam-player-header {
+
+    min-height:
+      auto;
+
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+
+    gap:
+      11px;
+
+    padding:
+      17px
+      14px;
+
+    border-radius:
+      16px;
+
+  }
+
+
+  .exam-player-header h1 {
+
+    font-size:
+      18px;
+
+    text-align:
+      center;
+
+    line-height:
+      1.6;
+
+  }
+
+
+  .timer {
+
+    width:
+      100%;
+
+    height:
+      43px;
+
+    font-size:
+      15px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Card
+  ------------------------------------------------------- */
+
+  .player-card {
+
+    padding:
+      22px
+      13px;
+
+    border-radius:
+      17px;
+
+  }
+
+
+  .player-card h2 {
+
+    margin-bottom:
+      19px;
+
+    font-size:
+      17px;
+
+    line-height:
+      1.9;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Image
+  ------------------------------------------------------- */
+
+  .question-image-box {
+
+    min-height:
+      90px;
+
+    padding:
+      8px;
+
+    margin-bottom:
+      19px;
+
+    border-radius:
+      13px;
+
+  }
+
+
+  .question-image {
+
+    max-height:
+      290px;
+
+    border-radius:
+      8px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Answers
+  ------------------------------------------------------- */
+
+  .answers-list {
+
+    gap:
+      9px;
+
+  }
+
+
+  .answers-list > button {
+
+    min-height:
+      54px;
+
+    padding:
+      12px
+      13px;
+
+    border-radius:
+      12px;
+
+    font-size:
+      13px;
+
+    line-height:
+      1.7;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Essay
+  ------------------------------------------------------- */
+
+  .essay-answer {
+
+    min-height:
+      165px;
+
+    padding:
+      13px;
+
+    border-radius:
+      12px;
+
+    font-size:
+      13px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Actions
+  ------------------------------------------------------- */
+
+  .player-actions {
+
+    gap:
+      8px;
+
+    margin-top:
+      13px;
+
+  }
+
+
+  .player-actions button {
+
+    min-width:
+      0;
+
+    flex:
+      1;
+
+    height:
+      46px;
+
+    padding:
+      0
+      8px;
+
+    border-radius:
+      11px;
+
+    font-size:
+      12px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Modal
+  ------------------------------------------------------- */
+
+  .image-modal {
+
+    padding:
+      10px;
+
+  }
+
+
+  .image-modal-content {
+
+    max-width:
+      100%;
+
+    max-height:
+      85vh;
+
+    border-radius:
+      11px;
+
+    padding:
+      4px;
+
+  }
+
+
+  /* -------------------------------------------------------
+     Time ended
+  ------------------------------------------------------- */
+
+  .exam-time-ended {
+
+    margin-bottom:
+      12px;
+
+    padding:
+      12px
+      13px;
+
+    font-size:
+      13px;
+
+  }
+
+
+  .exam-time-ended span {
+
+    font-size:
+      12px;
+
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .exam-player {
+
+    padding:
+      9px
+      6px
+      25px;
+
+  }
+
+
+  .exam-player-header {
+
+    padding:
+      15px
+      11px;
+
+  }
+
+
+  .exam-player-header h1 {
+
+    font-size:
+      16px;
+
+  }
+
+
+  .timer {
+
+    height:
+      41px;
+
+    font-size:
+      14px;
+
+  }
+
+
+  .player-card {
+
+    padding:
+      19px
+      10px;
+
+  }
+
+
+  .player-card h2 {
+
+    font-size:
+      15px;
+
+  }
+
+
+  .answers-list > button {
+
+    min-height:
+      50px;
+
+    padding:
+      10px;
+
+    font-size:
+      12px;
+
+  }
+
+
+  .essay-answer {
+
+    min-height:
+      150px;
+
+    font-size:
+      12px;
+
+  }
+
+
+  .player-actions {
+
+    gap:
+      6px;
+
+  }
+
+
+  .player-actions button {
+
+    height:
+      44px;
+
+    font-size:
+      11px;
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.answers-list > button:focus-visible,
+.player-actions button:focus-visible,
+.essay-answer:focus-visible {
+
+  outline:
+    3px solid
+    var(--exam-focus);
+
+  outline-offset:
+    2px;
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .exam-player *,
+  .exam-loading *,
+  .image-modal * {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    scroll-behavior:
+      auto !important;
+
+  }
+
+}

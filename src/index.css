@@ -1,0 +1,422 @@
+/* =========================================
+   GLOBAL THEME SYSTEM
+========================================= */
+
+:root {
+  --primary: #2563eb;
+
+  --bg-color: #f8fafc;
+  --section-bg: #ffffff;
+
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-solid: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(37, 99, 235, 0.12);
+
+  --shadow: 0 15px 40px rgba(15, 23, 42, 0.06);
+
+  --input-bg: #ffffff;
+
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-text: #111827;
+
+  --science-bg: #f8fafc;
+  --science-opacity: 1;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+[data-theme="dark"] {
+  --primary: #60a5fa;
+
+  --bg-color: #050b16;
+  --section-bg: #08111f;
+
+  --card-bg: rgba(15, 27, 48, 0.9);
+  --card-solid: #0f1b30;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(96, 165, 250, 0.2);
+
+  --shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4);
+
+  --input-bg: #0f1b30;
+
+  --nav-bg: rgba(5, 11, 22, 0.94);
+  --nav-text: #f8fafc;
+
+  /* أهم جزء */
+  --science-bg: #050b16;
+  --science-opacity: 1;
+}
+
+
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+  margin: 0;
+
+  background-color: var(--bg-color) !important;
+  color: var(--text-primary);
+
+  font-family:
+    "Cairo",
+    "Tajawal",
+    Arial,
+    sans-serif;
+
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+
+/* =========================================
+   DARK BODY FORCE
+========================================= */
+
+[data-theme="dark"],
+[data-theme="dark"] body,
+[data-theme="dark"] #root {
+  background-color: #050b16 !important;
+  color: #f8fafc;
+}
+
+
+/* =========================================
+   GLOBAL TRANSITIONS
+========================================= */
+
+body,
+section,
+nav,
+header,
+footer,
+div,
+article,
+main,
+.card,
+button,
+input,
+textarea {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+
+/* =========================================
+   HOME SECTION
+========================================= */
+
+.home-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--bg-color) !important;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   HOME CONTENT
+========================================= */
+
+.home-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+}
+
+
+/* =========================================
+   DARK HOME
+========================================= */
+
+[data-theme="dark"] .home-section {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(59, 130, 246, 0.06),
+      transparent 30%
+    ),
+    #050b16 !important;
+}
+
+
+/* =========================================
+   COMMON TITLES
+========================================= */
+
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+  color: inherit;
+}
+
+
+/* =========================================
+   ALL MAIN SECTIONS
+========================================= */
+
+.features,
+.classes-section,
+.testimonials,
+.contact-section {
+  position: relative;
+
+  width: 100%;
+
+  background: transparent !important;
+
+  color: var(--text-primary);
+}
+
+
+/* =========================================
+   DARK MAIN SECTIONS
+========================================= */
+
+[data-theme="dark"] .features,
+[data-theme="dark"] .classes-section,
+[data-theme="dark"] .testimonials,
+[data-theme="dark"] .contact-section {
+  background: transparent !important;
+  color: #f8fafc;
+}
+
+
+/* =========================================
+   SELECTION
+========================================= */
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+
+/* =========================================
+   =========================================
+   SCIENCE BACKGROUND
+   =========================================
+========================================= */
+
+.science-background {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-height: 100%;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  background: var(--science-bg) !important;
+
+  transition:
+    background 0.4s ease,
+    opacity 0.4s ease;
+}
+
+
+/* =========================================
+   SCIENCE BACKGROUND DARK MODE
+========================================= */
+
+[data-theme="dark"] .science-background {
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(37, 99, 235, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 80%,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    ),
+    #050b16 !important;
+
+  opacity: 1 !important;
+}
+
+
+/* =========================================
+   IMPORTANT:
+   PREVENT INNER BACKGROUND FROM STAYING WHITE
+========================================= */
+
+[data-theme="dark"] .science-background *,
+[data-theme="dark"] .science-background::before,
+[data-theme="dark"] .science-background::after {
+  border-color: rgba(96, 165, 250, 0.12);
+}
+
+
+/* =========================================
+   MAIN HOME PAGE
+========================================= */
+
+.main-home-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--bg-color) !important;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   SCIENCE BACKGROUND INSIDE HOME
+========================================= */
+
+.main-home-page > .science-background {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-height: 100%;
+
+  z-index: 0;
+
+  background: var(--science-bg) !important;
+}
+
+
+/* =========================================
+   DARK MAIN HOME
+========================================= */
+
+[data-theme="dark"] .main-home-page {
+  background: #050b16 !important;
+}
+
+[data-theme="dark"] .main-home-page > .science-background {
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(37, 99, 235, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    ),
+    #050b16 !important;
+}
+
+
+/* =========================================
+   HOME CONTENT
+========================================= */
+
+.main-home-page > .home-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .home-section,
+  .main-home-page {
+    min-height: 100vh;
+  }
+
+  [data-theme="dark"] .home-section,
+  [data-theme="dark"] .main-home-page {
+    background: #050b16 !important;
+  }
+
+  [data-theme="dark"] .science-background,
+  [data-theme="dark"] .main-home-page > .science-background {
+    background: #050b16 !important;
+  }
+}

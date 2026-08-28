@@ -1,0 +1,834 @@
+/* =========================================================
+   FEATURES SECTION
+========================================================= */
+
+.features {
+  position: relative;
+
+  width: 100%;
+  padding: 90px 24px 110px;
+
+  box-sizing: border-box;
+
+  direction: rtl;
+
+  font-family: "Cairo", "Tajawal", sans-serif;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(37, 99, 235, 0.06),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(37, 99, 235, 0.045),
+      transparent 32%
+    );
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+  width: min(760px, 100%);
+
+  margin: 0 auto 60px;
+
+  text-align: center;
+}
+
+
+.section-title > span {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+
+  padding: 6px 17px;
+
+  margin-bottom: 15px;
+
+  border-radius: 30px;
+
+  background: rgba(37, 99, 235, 0.08);
+
+  border: 1px solid rgba(37, 99, 235, 0.12);
+
+  color: #2563eb;
+
+  font-size: 45px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.1px;
+
+  box-sizing: border-box;
+}
+
+
+.section-title h2 {
+  margin: 0 0 15px;
+
+  color: #172033;
+
+  font-size: clamp(28px, 4vw, 40px);
+
+  line-height: 1.35;
+
+  font-weight: 900;
+
+  letter-spacing: -0.7px;
+}
+
+
+.section-title p {
+  width: min(650px, 100%);
+
+  margin: 0 auto;
+
+  color: #000000;
+
+  font-size: 18px;
+
+  line-height: 2;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   FEATURES GRID
+========================================================= */
+
+.features-grid {
+  width: min(1180px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 28px;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   FEATURE CARD
+========================================================= */
+
+.feature-card {
+  position: relative;
+
+  width: 100%;
+  max-width: 330px;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(226, 232, 240, 0.9);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 10px 28px rgba(15, 23, 42, 0.055),
+    0 2px 7px rgba(15, 23, 42, 0.025);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.feature-card:hover {
+  transform: translateY(-7px);
+
+  border-color: rgba(37, 99, 235, 0.20);
+
+  box-shadow:
+    0 20px 42px rgba(15, 23, 42, 0.10),
+    0 7px 18px rgba(37, 99, 235, 0.055);
+}
+
+
+/* =========================================================
+   TOP BLUE ACCENT
+========================================================= */
+
+.feature-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 0;
+  height: 3px;
+
+  background: #2563eb;
+
+  z-index: 5;
+
+  transition: width 0.4s ease;
+}
+
+
+.feature-card:hover::before {
+  width: 100%;
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.feature-image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  height: 235px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px 25px 8px;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   IMAGE GLOW
+========================================================= */
+
+.feature-image-wrapper::before {
+  content: "";
+
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  background: rgba(37, 99, 235, 0.055);
+
+  filter: blur(2px);
+
+  z-index: 0;
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease;
+}
+
+
+.feature-card:hover
+.feature-image-wrapper::before {
+  transform: scale(1.12);
+
+  background: rgba(37, 99, 235, 0.085);
+}
+
+
+/* =========================================================
+   FEATURE IMAGE
+   Transparent PNG
+========================================================= */
+
+.feature-image {
+  position: relative;
+
+  z-index: 1;
+
+  display: block;
+
+  width: auto;
+
+  max-width: 92%;
+
+  height: 195px;
+
+  object-fit: contain;
+
+  object-position: center;
+
+  filter:
+    drop-shadow(
+      0 12px 18px rgba(15, 23, 42, 0.10)
+    );
+
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
+
+.feature-card:hover .feature-image {
+  transform:
+    translateY(-7px)
+    scale(1.035);
+
+  filter:
+    drop-shadow(
+      0 18px 25px rgba(37, 99, 235, 0.15)
+    );
+}
+
+
+/* =========================================================
+   FEATURE CONTENT
+========================================================= */
+
+.feature-content {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  flex: 1;
+
+  padding: 12px 27px 27px;
+}
+
+
+/* =========================================================
+   FEATURE ICON — FIX
+========================================================= */
+
+.feature-icon {
+  position: relative;
+
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 15px;
+
+  background: #2563eb !important;
+
+  color: #ffffff !important;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  box-shadow:
+    0 9px 20px rgba(37, 99, 235, 0.22);
+
+  z-index: 3;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* React Icons نفسها */
+
+.feature-icon svg {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  color: #ffffff !important;
+
+  fill: currentColor;
+
+  stroke: currentColor;
+
+  flex-shrink: 0;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+}
+
+
+/* Hover */
+
+.feature-card:hover .feature-icon {
+  transform:
+    translateY(-3px)
+    rotate(-2deg);
+
+  box-shadow:
+    0 13px 27px rgba(37, 99, 235, 0.30);
+}
+
+
+.feature-card:hover .feature-icon svg {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] .feature-icon {
+  background: #2563eb !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.30);
+}
+
+
+html[data-theme="dark"] .feature-icon svg {
+  color: #ffffff !important;
+
+  fill: currentColor;
+
+  stroke: currentColor;
+
+  opacity: 1 !important;
+}
+/* =========================================================
+   TITLE
+========================================================= */
+
+.feature-content h3 {
+  margin: 0 0 9px;
+
+  color: #000000;
+
+  font-size: 19px;
+
+  line-height: 1.5;
+
+  font-weight: 850;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.feature-content p {
+  width: 100%;
+
+  max-width: 300px;
+
+  min-height: 52px;
+
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 13.5px;
+
+  line-height: 1.9;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   BOTTOM LINE
+========================================================= */
+
+.feature-line {
+  width: 38px;
+
+  height: 3px;
+
+  margin-top: 20px;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  opacity: 0.75;
+
+  transition:
+    width 0.3s ease,
+    opacity 0.3s ease;
+}
+
+
+.feature-card:hover .feature-line {
+  width: 70px;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   DARK MODE
+   Works with ThemeContext:
+   html[data-theme="dark"]
+========================================================= */
+
+html[data-theme="dark"] .features {
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(37, 99, 235, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(37, 99, 235, 0.08),
+      transparent 32%
+    );
+}
+
+
+html[data-theme="dark"] .section-title > span {
+  background: rgba(37, 99, 235, 0.13);
+
+  border-color: rgba(96, 165, 250, 0.18);
+
+  color: #60a5fa;
+}
+
+
+html[data-theme="dark"] .section-title h2 {
+  color: #f8fafc;
+}
+
+
+html[data-theme="dark"] .section-title p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   DARK CARD
+========================================================= */
+
+html[data-theme="dark"] .feature-card {
+  background: rgba(15, 23, 42, 0.82);
+
+  border-color: rgba(51, 65, 85, 0.85);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+html[data-theme="dark"] .feature-card:hover {
+  border-color: rgba(37, 99, 235, 0.42);
+
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.30),
+    0 8px 25px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   DARK IMAGE GLOW
+========================================================= */
+
+html[data-theme="dark"]
+.feature-image-wrapper::before {
+  background: rgba(37, 99, 235, 0.10);
+}
+
+
+html[data-theme="dark"]
+.feature-card:hover
+.feature-image-wrapper::before {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+
+/* =========================================================
+   DARK IMAGE SHADOW
+========================================================= */
+
+html[data-theme="dark"] .feature-image {
+  filter:
+    drop-shadow(
+      0 14px 20px rgba(0, 0, 0, 0.28)
+    );
+}
+
+
+html[data-theme="dark"]
+.feature-card:hover
+.feature-image {
+  filter:
+    drop-shadow(
+      0 18px 27px rgba(37, 99, 235, 0.20)
+    );
+}
+
+
+/* =========================================================
+   DARK CONTENT
+========================================================= */
+
+html[data-theme="dark"] .feature-content h3 {
+  color: #f1f5f9;
+}
+
+
+html[data-theme="dark"] .feature-content p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .features {
+    padding:
+      75px 20px
+      90px;
+  }
+
+
+  .features-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+  }
+
+
+  .feature-image-wrapper {
+    height: 225px;
+  }
+
+
+  .feature-image {
+    height: 185px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .features {
+    padding:
+      60px 15px
+      75px;
+  }
+
+
+  .section-title {
+    margin-bottom: 40px;
+  }
+
+
+  .section-title > span {
+    font-size: 12px;
+
+    padding:
+      5px 14px;
+  }
+
+
+  .section-title h2 {
+    font-size: 27px;
+
+    letter-spacing: -0.4px;
+  }
+
+
+  .section-title p {
+    font-size: 13px;
+
+    line-height: 1.9;
+  }
+
+
+  .features-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    max-width: 470px;
+  }
+
+
+  .feature-card {
+    border-radius: 21px;
+  }
+
+
+  .feature-image-wrapper {
+    height: 235px;
+
+    padding:
+      20px 20px
+      5px;
+  }
+
+
+  .feature-image {
+    height: 195px;
+
+    max-width: 90%;
+  }
+
+
+  .feature-content {
+    padding:
+      10px 23px
+      25px;
+  }
+
+
+  .feature-content h3 {
+    font-size: 18px;
+  }
+
+
+  .feature-content p {
+    font-size: 13px;
+
+    min-height: auto;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .features {
+    padding:
+      50px 12px
+      65px;
+  }
+
+
+  .section-title h2 {
+    font-size: 24px;
+  }
+
+
+  .section-title p {
+    font-size: 12.5px;
+  }
+
+
+  .feature-image-wrapper {
+    height: 215px;
+  }
+
+
+  .feature-image {
+    height: 180px;
+  }
+
+
+  .feature-content {
+    padding:
+      8px 18px
+      22px;
+  }
+
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 13px;
+
+    font-size: 17px;
+  }
+
+
+  .feature-content h3 {
+    font-size: 17px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .feature-card,
+  .feature-image,
+  .feature-icon,
+  .feature-line,
+  .feature-image-wrapper::before {
+    transition: none;
+  }
+
+}
+
+
+/* =========================================================
+   DARK MODE SMOOTH TRANSITION
+========================================================= */
+
+.features,
+.feature-card,
+.section-title h2,
+.section-title p,
+.feature-content h3,
+.feature-content p {
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}

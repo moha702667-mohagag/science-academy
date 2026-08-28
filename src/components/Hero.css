@@ -1,0 +1,1975 @@
+/* =========================================================
+   HERO — MR. HAGAG SCIENCE ACADEMY
+   Premium Science Education Design
+   Primary Brand: #2563EB
+========================================================= */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  min-height: calc(100vh - 80px);
+
+  margin-top: 80px;
+
+  padding: 55px 7% 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 60px;
+
+  direction: rtl;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 82% 35%,
+      rgba(37, 99, 235, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 15% 75%,
+      rgba(37, 99, 235, 0.05),
+      transparent 30%
+    );
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  top: 50%;
+  right: 2%;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.10),
+      rgba(37, 99, 235, 0.035) 40%,
+      transparent 72%
+    );
+
+  filter: blur(12px);
+
+  pointer-events: none;
+
+  z-index: -2;
+}
+
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  left: -220px;
+  bottom: -260px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.07),
+      transparent 70%
+    );
+
+  filter: blur(35px);
+
+  pointer-events: none;
+
+  z-index: -2;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+  position: relative;
+
+  flex: 1;
+
+  max-width: 650px;
+
+  z-index: 10;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.hero-badge {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 10px 19px;
+
+  margin-bottom: 25px;
+
+  color: #2563eb;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.10),
+      rgba(255, 255, 255, 0.82)
+    );
+
+  border:
+    1px solid rgba(37, 99, 235, 0.18);
+
+  border-radius: 999px;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 30px rgba(37, 99, 235, 0.08);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  overflow: hidden;
+}
+
+
+.hero-badge::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.7) 50%,
+      transparent 80%
+    );
+
+  transform: translateX(-120%);
+
+  animation:
+    badgeShine 4s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+.hero-badge svg {
+  position: relative;
+
+  z-index: 2;
+
+  color: #2563eb;
+
+  font-size: 16px;
+
+  filter:
+    drop-shadow(
+      0 3px 6px
+      rgba(37, 99, 235, 0.22)
+    );
+}
+
+
+@keyframes badgeShine {
+
+  0%,
+  65%,
+  100% {
+    transform: translateX(-120%);
+  }
+
+  80% {
+    transform: translateX(120%);
+  }
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.hero h1 {
+  position: relative;
+
+  margin: 0;
+
+  font-size: clamp(44px, 5.2vw, 74px);
+
+  line-height: 1.12;
+
+  font-weight: 950;
+
+  letter-spacing: -2px;
+
+  color: #0f172a;
+
+  text-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+
+.hero h1::after {
+  content: "";
+
+  display: block;
+
+  width: 95px;
+  height: 5px;
+
+  margin-top: 16px;
+  margin-right: 0;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #60a5fa
+    );
+
+  box-shadow:
+    0 5px 20px rgba(37, 99, 235, 0.30);
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.hero h2 {
+  margin: 20px 0 18px;
+
+  font-size: clamp(26px, 3vw, 39px);
+
+  line-height: 1.25;
+
+  font-weight: 850;
+
+  color: #2563eb;
+
+  letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero p {
+  max-width: 610px;
+
+  margin: 0 0 32px;
+
+  color: #64748b;
+
+  font-size: 18px;
+
+  line-height: 2;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.hero-buttons {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 42px;
+}
+
+
+.hero-buttons button {
+  position: relative;
+
+  min-width: 175px;
+  height: 57px;
+
+  padding: 0 28px;
+
+  border-radius: 16px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 850;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-btn {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.27);
+}
+
+
+.primary-btn::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 80%
+    );
+
+  transform: translateX(-120%);
+
+  transition:
+    transform 0.6s ease;
+}
+
+
+.primary-btn:hover::before {
+  transform: translateX(120%);
+}
+
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 40px rgba(37, 99, 235, 0.36);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.secondary-btn {
+  color: #2563eb;
+
+  background:
+    rgba(255, 255, 255, 0.80);
+
+  border:
+    1.5px solid rgba(37, 99, 235, 0.22) !important;
+
+  box-shadow:
+    0 8px 22px rgba(15, 23, 42, 0.05);
+}
+
+
+.secondary-btn:hover {
+  color: #ffffff;
+
+  background: #2563eb;
+
+  border-color: #2563eb !important;
+
+  box-shadow:
+    0 14px 30px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.hero-stats {
+  display: flex;
+
+  align-items: stretch;
+
+  width: fit-content;
+
+  min-width: 410px;
+
+  padding: 7px;
+
+  direction: rtl;
+
+  background:
+    rgba(255, 255, 255, 0.84);
+
+  border:
+    1px solid rgba(37, 99, 235, 0.13);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.07),
+    0 4px 12px rgba(15, 23, 42, 0.03);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  overflow: hidden;
+}
+
+
+.hero-stats > div {
+  position: relative;
+
+  min-width: 130px;
+
+  padding: 14px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.hero-stats > div:hover {
+  transform: translateY(-3px);
+
+  background:
+    rgba(37, 99, 235, 0.055);
+}
+
+
+.hero-stats > div:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 20%;
+
+  width: 1px;
+  height: 60%;
+
+  background:
+    rgba(37, 99, 235, 0.14);
+}
+
+
+.stat-icon {
+  color: #2563eb;
+
+  font-size: 23px;
+
+  margin-bottom: 6px;
+
+  filter:
+    drop-shadow(
+      0 5px 10px
+      rgba(37, 99, 235, 0.20)
+    );
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.hero-stats > div:hover .stat-icon {
+  transform:
+    translateY(-3px)
+    scale(1.1);
+}
+
+
+.hero-stats h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 25px;
+
+  line-height: 1.2;
+
+  font-weight: 950;
+
+  letter-spacing: -0.5px;
+}
+
+
+.hero-stats span {
+  margin-top: 4px;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TEACHER AREA
+   الصورة هنا أكبر
+========================================================= */
+
+.hero-image {
+  position: relative;
+
+  flex: 0 0 560px;
+
+  width: 560px;
+
+  min-height: 660px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 4;
+}
+
+
+/* =========================================================
+   TEACHER GLOW
+========================================================= */
+
+.teacher-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  left: 50%;
+  top: 51%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.20) 0%,
+      rgba(37, 99, 235, 0.11) 35%,
+      rgba(37, 99, 235, 0.035) 60%,
+      transparent 74%
+    );
+
+  filter: blur(12px);
+
+  animation:
+    teacherGlow 5s ease-in-out infinite;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+@keyframes teacherGlow {
+
+  0%,
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+}
+
+
+/* =========================================================
+   TEACHER CUTOUT
+   تم تكبير الصورة
+========================================================= */
+
+.teacher-cutout {
+  position: relative;
+
+  width: 480px;
+
+  height: 610px;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  z-index: 5;
+
+  filter:
+    drop-shadow(
+      0 28px 38px
+      rgba(15, 23, 42, 0.17)
+    );
+
+  transition:
+    filter 0.4s ease;
+}
+
+
+.teacher-cutout:hover {
+  filter:
+    drop-shadow(
+      0 32px 45px
+      rgba(37, 99, 235, 0.20)
+    );
+}
+
+
+/* =========================================================
+   TEACHER PNG
+========================================================= */
+
+.teacher-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  object-position: center bottom;
+
+  display: block;
+
+  filter:
+    saturate(1.04)
+    contrast(1.02)
+    drop-shadow(
+      0 18px 28px
+      rgba(37, 99, 235, 0.09)
+    );
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   SCIENCE ORBITS
+========================================================= */
+
+.science-orbit {
+  position: absolute;
+
+  border:
+    1px solid rgba(37, 99, 235, 0.16);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+.science-orbit::before {
+  content: "";
+
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #2563eb;
+
+  box-shadow:
+    0 0 12px rgba(37, 99, 235, 0.55);
+}
+
+
+.orbit-1 {
+  width: 530px;
+  height: 530px;
+
+  top: 55px;
+  left: 15px;
+
+  animation:
+    orbitRotate 18s linear infinite;
+}
+
+
+.orbit-1::before {
+  top: 8px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+
+.orbit-2 {
+  width: 415px;
+  height: 415px;
+
+  top: 115px;
+  left: 72px;
+
+  border-color:
+    rgba(37, 99, 235, 0.12);
+
+  animation:
+    orbitRotate 14s linear infinite reverse;
+}
+
+
+.orbit-2::before {
+  right: 15px;
+  bottom: 30px;
+}
+
+
+.orbit-3 {
+  width: 335px;
+  height: 335px;
+
+  top: 155px;
+  left: 112px;
+
+  border-color:
+    rgba(37, 99, 235, 0.09);
+
+  animation:
+    orbitRotate 11s linear infinite;
+}
+
+
+.orbit-3::before {
+  left: 20px;
+  bottom: 35px;
+}
+
+
+@keyframes orbitRotate {
+
+  from {
+    transform:
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   ORBIT ICONS
+========================================================= */
+
+.science-orbit span {
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #2563eb;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  border:
+    1px solid rgba(37, 99, 235, 0.15);
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.12);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size: 18px;
+}
+
+
+.orbit-1 span {
+  right: 18px;
+  bottom: 45px;
+}
+
+
+.orbit-2 span {
+  left: 10px;
+  top: 40px;
+}
+
+
+.orbit-3 span {
+  right: 5px;
+  top: 65px;
+}
+
+
+/* =========================================================
+   FLOATING SCIENCE ICONS
+========================================================= */
+
+.science-icon {
+  position: absolute;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  color: #2563eb;
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  border:
+    1px solid rgba(37, 99, 235, 0.13);
+
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.09),
+    0 5px 15px rgba(37, 99, 235, 0.08);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-size: 24px;
+
+  z-index: 8;
+}
+
+
+.atom-icon {
+  top: 65px;
+  right: 10px;
+}
+
+
+.flask-icon {
+  top: 190px;
+  left: 0;
+}
+
+
+.microscope-icon {
+  bottom: 100px;
+  left: 5px;
+}
+
+
+.bulb-icon {
+  top: 100px;
+  left: 50px;
+
+  color: #2563eb;
+}
+
+
+@keyframes sciencePulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 14px 30px rgba(15, 23, 42, 0.09),
+      0 5px 15px rgba(37, 99, 235, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 18px 35px rgba(15, 23, 42, 0.11),
+      0 0 25px rgba(37, 99, 235, 0.16);
+  }
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.science-dot {
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #2563eb;
+
+  box-shadow:
+    0 0 15px rgba(37, 99, 235, 0.45);
+
+  z-index: 3;
+}
+
+
+.dot-1 {
+  top: 100px;
+  right: 100px;
+}
+
+
+.dot-2 {
+  top: 300px;
+  right: 30px;
+}
+
+
+.dot-3 {
+  bottom: 125px;
+  right: 95px;
+}
+
+
+.dot-4 {
+  bottom: 190px;
+  left: 65px;
+}
+
+
+@keyframes dotFloat {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translateY(-10px)
+      scale(1.3);
+  }
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.social-icons {
+  position: absolute;
+
+  right: -2px;
+  bottom: 42px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  z-index: 20;
+}
+
+
+.social-icons a {
+  position: relative;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  color: #2563eb;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  border:
+    1px solid rgba(37, 99, 235, 0.13);
+
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.08);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  text-decoration: none;
+
+  font-size: 19px;
+
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.social-icons a:hover {
+  transform:
+    translateX(-7px)
+    scale(1.08);
+
+  color: #ffffff;
+
+  background: #2563eb;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 14px 32px rgba(37, 99, 235, 0.28);
+}
+
+
+.facebook,
+.whatsapp,
+.instagram,
+.youtube,
+.telegram {
+  color: #2563eb !important;
+}
+
+
+.facebook:hover,
+.whatsapp:hover,
+.instagram:hover,
+.youtube:hover,
+.telegram:hover {
+  color: #ffffff !important;
+
+  background: #2563eb !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+[data-theme="dark"] .hero {
+  background:
+    radial-gradient(
+      circle at 82% 35%,
+      rgba(37, 99, 235, 0.13),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 15% 75%,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    );
+
+  color: #f8fafc;
+}
+
+
+[data-theme="dark"] .hero::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.16),
+      rgba(37, 99, 235, 0.06) 35%,
+      transparent 70%
+    );
+}
+
+
+[data-theme="dark"] .hero h1 {
+  color: #f8fafc;
+
+  text-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+[data-theme="dark"] .hero h2 {
+  color: #60a5fa;
+}
+
+
+[data-theme="dark"] .hero p {
+  color: #cbd5e1;
+}
+
+
+[data-theme="dark"] .hero-badge {
+  color: #60a5fa;
+
+  background:
+    rgba(37, 99, 235, 0.12);
+
+  border-color:
+    rgba(96, 165, 250, 0.22);
+}
+
+
+[data-theme="dark"] .hero-badge svg {
+  color: #60a5fa;
+}
+
+
+[data-theme="dark"] .hero-stats {
+  background:
+    rgba(15, 27, 48, 0.88);
+
+  border-color:
+    rgba(96, 165, 250, 0.18);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.30);
+}
+
+
+[data-theme="dark"] .hero-stats > div:hover {
+  background:
+    rgba(37, 99, 235, 0.12);
+}
+
+
+[data-theme="dark"] .hero-stats h3 {
+  color: #f8fafc;
+}
+
+
+[data-theme="dark"] .hero-stats span {
+  color: #94a3b8;
+}
+
+
+[data-theme="dark"] .stat-icon {
+  color: #60a5fa;
+}
+
+
+[data-theme="dark"] .secondary-btn {
+  color: #f8fafc;
+
+  background:
+    rgba(15, 27, 48, 0.75);
+
+  border-color:
+    rgba(96, 165, 250, 0.22) !important;
+}
+
+
+[data-theme="dark"] .secondary-btn:hover {
+  color: #ffffff;
+
+  background: #2563eb;
+
+  border-color: #2563eb !important;
+}
+
+
+[data-theme="dark"] .science-icon,
+[data-theme="dark"] .science-orbit span,
+[data-theme="dark"] .social-icons a {
+  background:
+    rgba(15, 27, 48, 0.88);
+
+  border-color:
+    rgba(96, 165, 250, 0.18);
+
+  color: #60a5fa;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+[data-theme="dark"] .social-icons a:hover {
+  color: #ffffff;
+
+  background: #2563eb;
+}
+
+
+[data-theme="dark"] .science-orbit {
+  border-color:
+    rgba(96, 165, 250, 0.15);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .hero {
+    padding-left: 8%;
+    padding-right: 8%;
+
+    min-height: 760px;
+
+    gap: 80px;
+  }
+
+
+  .hero-image {
+    flex-basis: 620px;
+
+    width: 620px;
+
+    min-height: 700px;
+  }
+
+
+  .teacher-cutout {
+    width: 530px;
+
+    height: 670px;
+  }
+
+
+  .teacher-glow {
+    width: 560px;
+    height: 560px;
+  }
+
+
+  .orbit-1 {
+    width: 590px;
+    height: 590px;
+
+    left: 15px;
+  }
+
+
+  .orbit-2 {
+    width: 455px;
+    height: 455px;
+
+    left: 85px;
+  }
+
+
+  .orbit-3 {
+    width: 370px;
+    height: 370px;
+
+    left: 125px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .hero {
+    padding:
+      70px 5%
+      65px;
+
+    gap: 30px;
+  }
+
+
+  .hero-content {
+    max-width: 570px;
+  }
+
+
+  .hero-image {
+    flex-basis: 480px;
+
+    width: 480px;
+
+    min-height: 590px;
+  }
+
+
+  .teacher-cutout {
+    width: 425px;
+
+    height: 545px;
+  }
+
+
+  .teacher-glow {
+    width: 430px;
+    height: 430px;
+  }
+
+
+  .hero-stats {
+    min-width: 370px;
+  }
+
+
+  .hero-stats > div {
+    min-width: 115px;
+
+    padding:
+      12px 14px;
+  }
+
+
+  .orbit-1 {
+    width: 470px;
+    height: 470px;
+
+    left: 5px;
+  }
+
+
+  .orbit-2 {
+    width: 365px;
+    height: 365px;
+
+    left: 55px;
+  }
+
+
+  .orbit-3 {
+    width: 295px;
+    height: 295px;
+
+    left: 90px;
+  }
+
+
+  .science-icon {
+    width: 52px;
+    height: 52px;
+
+    font-size: 22px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .hero {
+    min-height: calc(100vh - 70px);
+
+    margin-top: 70px;
+
+    padding:
+      55px 6%
+      65px;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 45px;
+  }
+
+
+  .hero-content {
+    width: 100%;
+
+    max-width: 700px;
+
+    text-align: center;
+  }
+
+
+  .hero h1::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+
+  .hero-stats {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .hero-image {
+    flex: none;
+
+    width: 100%;
+
+    max-width: 560px;
+
+    min-height: 610px;
+  }
+
+
+  .teacher-cutout {
+    width: 455px;
+
+    height: 585px;
+  }
+
+
+  .teacher-glow {
+    width: 500px;
+
+    height: 500px;
+  }
+
+
+  .orbit-1 {
+    width: 520px !important;
+
+    height: 520px !important;
+
+    top: 45px;
+
+    left: 50% !important;
+
+    margin-left: -260px;
+  }
+
+
+  .orbit-2 {
+    width: 405px !important;
+
+    height: 405px !important;
+
+    top: 105px;
+
+    left: 50% !important;
+
+    margin-left: -202px;
+  }
+
+
+  .orbit-3 {
+    width: 325px !important;
+
+    height: 325px !important;
+
+    top: 145px;
+
+    left: 50% !important;
+
+    margin-left: -162px;
+  }
+
+
+  .social-icons {
+    right: 0;
+
+    bottom: 35px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .hero {
+    padding:
+      45px 18px
+      55px;
+
+    gap: 30px;
+  }
+
+
+  .hero-badge {
+    font-size: 12px;
+
+    padding:
+      9px 14px;
+
+    gap: 7px;
+  }
+
+
+  .hero-badge svg {
+    font-size: 14px;
+  }
+
+
+  .hero h1 {
+    font-size: 39px;
+
+    letter-spacing: -1px;
+  }
+
+
+  .hero h1::after {
+    width: 70px;
+
+    height: 4px;
+
+    margin-top: 12px;
+  }
+
+
+  .hero h2 {
+    font-size: 25px;
+
+    margin:
+      15px 0;
+  }
+
+
+  .hero p {
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    margin-bottom: 25px;
+  }
+
+
+  .hero-buttons {
+    width: 100%;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin-bottom: 30px;
+  }
+
+
+  .hero-buttons button {
+    width: 100%;
+
+    max-width: 330px;
+
+    height: 54px;
+  }
+
+
+  .hero-stats {
+    width: 100%;
+
+    min-width: 0;
+
+    max-width: 380px;
+
+    padding: 5px;
+
+    border-radius: 18px;
+  }
+
+
+  .hero-stats > div {
+    min-width: 0;
+
+    flex: 1;
+
+    padding:
+      10px 4px;
+  }
+
+
+  .hero-stats h3 {
+    font-size: 19px;
+  }
+
+
+  .hero-stats span {
+    font-size: 10px;
+  }
+
+
+  .stat-icon {
+    font-size: 18px;
+
+    margin-bottom: 4px;
+  }
+
+
+  /* =====================================================
+     MOBILE TEACHER — أكبر من النسخة السابقة
+  ===================================================== */
+
+  .hero-image {
+    min-height: 500px;
+
+    max-width: 430px;
+
+    width: 100%;
+  }
+
+
+  .teacher-cutout {
+    width: 350px;
+
+    height: 455px;
+  }
+
+
+  .teacher-glow {
+    width: 390px;
+
+    height: 390px;
+  }
+
+
+  /* =====================================================
+     MOBILE ORBITS
+  ===================================================== */
+
+  .orbit-1 {
+    width: 390px !important;
+
+    height: 390px !important;
+
+    top: 45px;
+
+    margin-left: -195px;
+  }
+
+
+  .orbit-2 {
+    width: 310px !important;
+
+    height: 310px !important;
+
+    top: 85px;
+
+    margin-left: -155px;
+  }
+
+
+  .orbit-3 {
+    width: 250px !important;
+
+    height: 250px !important;
+
+    top: 115px;
+
+    margin-left: -125px;
+  }
+
+
+  .science-orbit span {
+    width: 35px;
+
+    height: 35px;
+
+    font-size: 15px;
+  }
+
+
+  /* =====================================================
+     FLOATING ICONS
+  ===================================================== */
+
+  .science-icon {
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 13px;
+
+    font-size: 18px;
+  }
+
+
+  .atom-icon {
+    top: 45px;
+
+    right: 5px;
+  }
+
+
+  .flask-icon {
+    top: 155px;
+
+    left: 5px;
+  }
+
+
+  .microscope-icon {
+    bottom: 85px;
+
+    left: 10px;
+  }
+
+
+  .bulb-icon {
+    top: 80px;
+
+    left: 50px;
+  }
+
+
+  /* =====================================================
+     SOCIAL
+  ===================================================== */
+
+  .social-icons {
+    right: 0;
+
+    bottom: 10px;
+
+    gap: 7px;
+  }
+
+
+  .social-icons a {
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+  }
+
+
+  /* =====================================================
+     DOTS
+  ===================================================== */
+
+  .dot-1 {
+    top: 75px;
+
+    right: 65px;
+  }
+
+
+  .dot-2 {
+    top: 230px;
+
+    right: 15px;
+  }
+
+
+  .dot-3 {
+    bottom: 90px;
+
+    right: 65px;
+  }
+
+
+  .dot-4 {
+    bottom: 155px;
+
+    left: 40px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .hero {
+    padding:
+      40px 14px
+      45px;
+  }
+
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+
+  .hero h2 {
+    font-size: 22px;
+  }
+
+
+  .hero p {
+    font-size: 14px;
+  }
+
+
+  .hero-stats h3 {
+    font-size: 17px;
+  }
+
+
+  .hero-stats span {
+    font-size: 9px;
+  }
+
+
+  .stat-icon {
+    font-size: 16px;
+  }
+
+
+  /* =====================================================
+     SMALL MOBILE TEACHER
+  ===================================================== */
+
+  .hero-image {
+    min-height: 445px;
+
+    max-width: 350px;
+  }
+
+
+  .teacher-cutout {
+    width: 315px;
+
+    height: 410px;
+  }
+
+
+  .teacher-glow {
+    width: 330px;
+
+    height: 330px;
+  }
+
+
+  .orbit-1 {
+    width: 335px !important;
+
+    height: 335px !important;
+
+    margin-left: -167px;
+  }
+
+
+  .orbit-2 {
+    width: 265px !important;
+
+    height: 265px !important;
+
+    margin-left: -132px;
+  }
+
+
+  .orbit-3 {
+    width: 215px !important;
+
+    height: 215px !important;
+
+    margin-left: -107px;
+  }
+
+
+  .science-icon {
+    width: 38px;
+
+    height: 38px;
+
+    font-size: 16px;
+  }
+
+
+  .social-icons a {
+    width: 36px;
+
+    height: 36px;
+
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .teacher-glow,
+  .science-orbit,
+  .science-icon,
+  .science-dot,
+  .hero-badge::before {
+    animation: none !important;
+  }
+
+}

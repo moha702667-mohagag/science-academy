@@ -1,0 +1,208 @@
+/* =========================================
+   FOOTER
+========================================= */
+
+.site-footer {
+  width: 100%;
+
+  margin-top: 80px;
+
+  padding: 35px 7%;
+
+  background: #ffffff;
+
+  border-top: 1px solid rgba(37, 99, 235, 0.08);
+
+  direction: rtl;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.footer-content {
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.footer-brand h3 {
+
+  margin: 0 0 7px;
+
+  color: #2563eb;
+
+  font-size: 18px;
+
+  font-weight: 800;
+}
+
+
+.footer-brand p {
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.footer-divider {
+
+  width: 1px;
+
+  height: 45px;
+
+  background: #e2e8f0;
+}
+
+
+/* =========================================
+   COPYRIGHT
+========================================= */
+
+.footer-copyright {
+
+  text-align: left;
+}
+
+
+.footer-copyright p {
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   DEVELOPER
+========================================= */
+
+.developer-credit {
+
+  margin-top: 2px !important;
+}
+
+
+.developer-credit span {
+
+  color: #2563eb;
+
+  font-weight: 800;
+
+  margin-right: 4px;
+
+  transition: color 0.2s ease;
+}
+
+
+.developer-credit span:hover {
+
+  color: #1d4ed8;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+html[data-theme="dark"] .site-footer {
+
+  background: #0f172a;
+
+  border-top-color:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+html[data-theme="dark"] .footer-brand h3 {
+
+  color: #60a5fa;
+}
+
+
+html[data-theme="dark"] .footer-brand p,
+
+html[data-theme="dark"] .footer-copyright p {
+
+  color: #94a3b8;
+}
+
+
+html[data-theme="dark"] .footer-divider {
+
+  background: #334155;
+}
+
+
+html[data-theme="dark"] .developer-credit span {
+
+  color: #60a5fa;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .site-footer {
+
+    margin-top: 50px;
+
+    padding: 30px 20px;
+  }
+
+
+  .footer-content {
+
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 18px;
+  }
+
+
+  .footer-divider {
+
+    width: 70px;
+
+    height: 1px;
+  }
+
+
+  .footer-copyright {
+
+    text-align: center;
+  }
+
+}

@@ -1,0 +1,695 @@
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(1400px, calc(100% - 40px));
+  min-height: 78px;
+
+  padding: 10px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  direction: rtl;
+
+  background: var(--nav-bg);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 35px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  z-index: 1000;
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.3s ease;
+}
+
+
+/* =========================================
+   DARK NAVBAR
+========================================= */
+
+[data-theme="dark"] .navbar {
+  background: rgba(7, 17, 31, 0.92);
+
+  border-color:
+    rgba(96, 165, 250, 0.16);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-img {
+  width: 54px;
+  height: 54px;
+
+  object-fit: cover;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 5px 15px rgba(37, 99, 235, 0.18);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.logo:hover .logo-img {
+  transform:
+    rotate(-5deg)
+    scale(1.07);
+
+  box-shadow:
+    0 8px 22px rgba(37, 99, 235, 0.28);
+}
+
+
+/* =========================================
+   LOGO TEXT
+========================================= */
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+
+  line-height: 1.1;
+}
+
+.logo-text h2 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+
+  color: var(--text-primary);
+}
+
+.logo-text span {
+  margin-top: 4px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: var(--primary);
+}
+
+
+/* =========================================
+   NAV MENU
+========================================= */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  flex: 1;
+}
+
+.nav-box {
+  position: relative;
+
+  padding: 12px 18px;
+
+  border-radius: 13px;
+
+  color: var(--nav-text);
+
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nav-box::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 5px;
+  right: 50%;
+
+  width: 0;
+  height: 2px;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+
+  transform: translateX(50%);
+
+  transition:
+    width 0.3s ease;
+}
+
+.nav-box:hover {
+  color: var(--primary);
+
+  background:
+    rgba(37, 99, 235, 0.08);
+
+  transform:
+    translateY(-2px);
+}
+
+.nav-box:hover::after {
+  width: 45%;
+}
+
+
+/* =========================================
+   USER AREA
+========================================= */
+
+.nav-user-area {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  flex-shrink: 0;
+}
+
+.user-welcome {
+  padding: 9px 13px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(37, 99, 235, 0.06);
+
+  color: var(--text-secondary);
+
+  font-size: 17px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.user-welcome span {
+  color: var(--primary);
+
+  font-weight: 800;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn-dashboard,
+.btn-logout,
+.btn-login {
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 11px 15px;
+
+  font-family: inherit;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.btn-dashboard {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  box-shadow:
+    0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.btn-dashboard:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.btn-logout {
+  color: #dc2626;
+
+  background:
+    rgba(220, 38, 38, 0.08);
+
+  border:
+    1px solid rgba(220, 38, 38, 0.12);
+}
+
+.btn-logout:hover {
+  color: #ffffff;
+
+  background: #dc2626;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(220, 38, 38, 0.22);
+}
+
+
+/* =========================================
+   DARK LOGOUT
+========================================= */
+
+[data-theme="dark"] .btn-logout {
+  color: #f87171;
+
+  background:
+    rgba(248, 113, 113, 0.08);
+
+  border-color:
+    rgba(248, 113, 113, 0.16);
+}
+
+[data-theme="dark"] .btn-logout:hover {
+  color: #ffffff;
+
+  background: #dc2626;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.btn-login {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #06b6d4
+    );
+
+  box-shadow:
+    0 7px 20px rgba(37, 99, 235, 0.25);
+}
+
+.btn-login:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 11px 28px rgba(37, 99, 235, 0.35);
+}
+
+
+/* =========================================
+   THEME TOGGLE
+========================================= */
+
+.theme-toggle {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid var(--border-color);
+
+  border-radius: 50%;
+
+  background:
+    var(--card-bg);
+
+  color:
+    var(--primary);
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform:
+    rotate(15deg)
+    scale(1.08);
+
+  background:
+    var(--primary);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+.theme-toggle:active {
+  transform:
+    scale(0.92);
+}
+
+.theme-toggle svg {
+  transition:
+    transform 0.35s ease;
+}
+
+
+/* =========================================
+   DARK THEME BUTTON
+========================================= */
+
+[data-theme="dark"] .theme-toggle {
+  color: #fbbf24;
+
+  background:
+    rgba(251, 191, 36, 0.10);
+
+  border-color:
+    rgba(251, 191, 36, 0.15);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  color: #111827;
+
+  background:
+    #fbbf24;
+
+  box-shadow:
+    0 8px 25px rgba(251, 191, 36, 0.28);
+}
+
+
+/* =========================================
+   LARGE TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .navbar {
+    width:
+      calc(100% - 25px);
+
+    gap: 10px;
+  }
+
+  .nav-menu {
+    gap: 3px;
+  }
+
+  .nav-box {
+    padding: 10px 12px;
+
+    font-size: 13px;
+  }
+
+  .user-welcome {
+    display: none;
+  }
+
+  .btn-dashboard,
+  .btn-logout,
+  .btn-login {
+    padding: 10px 12px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .navbar {
+    min-height: 70px;
+
+    padding: 8px 11px;
+
+    border-radius: 18px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .nav-menu {
+    gap: 2px;
+  }
+
+  .nav-box {
+    padding: 9px;
+
+    font-size: 12px;
+  }
+
+  .nav-user-area {
+    gap: 5px;
+  }
+
+  .btn-dashboard,
+  .btn-logout {
+    font-size: 0;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+  }
+
+  .btn-dashboard::before {
+    content: "⌂";
+
+    font-size: 19px;
+  }
+
+  .btn-logout::before {
+    content: "↪";
+
+    font-size: 20px;
+  }
+
+  .btn-login {
+    font-size: 12px;
+
+    padding: 9px 11px;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    top: 8px;
+
+    width:
+      calc(100% - 14px);
+
+    padding: 7px 8px;
+
+    border-radius: 16px;
+  }
+
+  .logo-img {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+  }
+
+  .nav-menu {
+    flex: 1;
+
+    justify-content: center;
+  }
+
+  .nav-box {
+    padding: 8px 6px;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+  }
+
+  .nav-box::after {
+    bottom: 3px;
+  }
+
+  .btn-dashboard,
+  .btn-logout {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL DEVICES
+========================================= */
+
+@media (max-width: 430px) {
+
+  .navbar {
+    gap: 4px;
+  }
+
+  .nav-box {
+    font-size: 9px;
+
+    padding: 8px 4px;
+  }
+
+  .logo-img {
+    width: 39px;
+    height: 39px;
+  }
+
+  .btn-dashboard,
+  .btn-logout {
+    width: 33px;
+    height: 33px;
+  }
+
+  .theme-toggle {
+    width: 33px;
+    height: 33px;
+  }
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar,
+  .logo-img,
+  .nav-box,
+  .btn-dashboard,
+  .btn-logout,
+  .btn-login,
+  .theme-toggle {
+    transition: none !important;
+  }
+
+  .nav-box:hover,
+  .btn-dashboard:hover,
+  .btn-logout:hover,
+  .btn-login:hover,
+  .theme-toggle:hover {
+    transform: none;
+  }
+}

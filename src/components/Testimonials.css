@@ -1,0 +1,608 @@
+/* =========================================
+   TESTIMONIALS SECTION
+========================================= */
+
+.testimonials {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 120px 7% 110px;
+
+  direction: rtl;
+
+  background: transparent;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.testimonials .title {
+  position: relative;
+
+  width: fit-content;
+
+  margin: 0 auto 70px;
+
+  color: #111827;
+
+  font-size: clamp(38px, 4.5vw, 52px);
+
+  font-weight: 900;
+
+  line-height: 1.35;
+
+  text-align: center;
+
+  z-index: 5;
+}
+
+
+/* الخط الأزرق */
+
+.testimonials .title::after {
+  content: "";
+
+  display: block;
+
+  width: 90px;
+  height: 5px;
+
+  margin: 16px auto 0;
+
+  border-radius: 50px;
+
+  background: #2563EB;
+
+  box-shadow:
+    0 5px 18px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================
+   MASONRY
+========================================= */
+
+.masonry {
+
+  width: 100%;
+
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  columns: 3 300px;
+
+  column-gap: 28px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* =========================================
+   REVIEW CARD
+========================================= */
+
+.review-card {
+
+  position: relative;
+
+  display: inline-block;
+
+  width: 100%;
+
+  margin-bottom: 28px;
+
+  padding: 7px;
+
+  break-inside: avoid;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  /*
+     Glass effect
+  */
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  border:
+    1px solid rgba(37, 99, 235, 0.12);
+
+  box-shadow:
+    0 15px 40px rgba(15, 23, 42, 0.09);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+
+/* =========================================
+   BLUE TOP LINE
+========================================= */
+
+.review-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #2563EB,
+      transparent
+    );
+
+  z-index: 3;
+
+  opacity: 0.75;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.review-card img {
+
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  border-radius: 18px;
+
+  object-fit: cover;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.55s ease,
+    filter 0.4s ease;
+}
+
+
+/* =========================================
+   HOVER CARD
+========================================= */
+
+.review-card:hover {
+
+  transform:
+    translateY(-10px);
+
+  border-color:
+    rgba(37, 99, 235, 0.30);
+
+  box-shadow:
+    0 25px 60px rgba(37, 99, 235, 0.15);
+}
+
+
+/* تكبير الصورة */
+
+.review-card:hover img {
+
+  transform:
+    scale(1.045);
+
+  filter:
+    brightness(0.93);
+}
+
+
+/* =========================================
+   IMAGE OVERLAY
+========================================= */
+
+.review-card::after {
+
+  content: "🔍 عرض الصورة";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.8);
+
+  padding: 11px 18px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(37, 99, 235, 0.92);
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 10px 30px rgba(37, 99, 235, 0.30);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+
+  z-index: 4;
+}
+
+
+.review-card:hover::after {
+
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================
+   LIGHTBOX
+========================================= */
+
+.lightbox {
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    rgba(3, 7, 18, 0.88);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  z-index: 9999;
+
+  cursor: zoom-out;
+
+  animation:
+    lightboxFade 0.3s ease;
+}
+
+
+/* =========================================
+   LIGHTBOX IMAGE
+========================================= */
+
+.lightbox img {
+
+  max-width: 92vw;
+
+  max-height: 90vh;
+
+  width: auto;
+
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 18px;
+
+  border:
+    2px solid rgba(255, 255, 255, 0.15);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.50);
+
+  animation:
+    imageZoom 0.35s ease;
+
+  cursor: default;
+}
+
+
+/* =========================================
+   DARK MODE - TESTIMONIALS
+========================================= */
+
+[data-theme="dark"] .testimonials {
+
+  background:
+    transparent;
+
+}
+
+
+[data-theme="dark"] .testimonials .title {
+
+  color:
+    #F8FAFC;
+
+}
+
+
+[data-theme="dark"] .review-card {
+
+  background:
+    rgba(15, 27, 48, 0.75);
+
+  border-color:
+    rgba(59, 130, 246, 0.18);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.30);
+
+}
+
+
+[data-theme="dark"] .lightbox {
+
+  background:
+    rgba(0, 0, 0, 0.88);
+
+}
+/* =========================================
+   LIGHTBOX ANIMATIONS
+========================================= */
+
+@keyframes lightboxFade {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes imageZoom {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      scale(0.85);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      scale(1);
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .testimonials {
+
+    padding:
+      100px 5% 90px;
+  }
+
+
+  .masonry {
+
+    columns: 2 280px;
+
+    column-gap: 22px;
+  }
+
+
+  .review-card {
+
+    margin-bottom: 22px;
+
+    border-radius: 20px;
+  }
+
+
+  .review-card img {
+
+    border-radius: 15px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .testimonials {
+
+    padding:
+      80px 20px 75px;
+  }
+
+
+  .testimonials .title {
+
+    font-size: 32px;
+
+    margin-bottom: 48px;
+
+    line-height: 1.45;
+  }
+
+
+  .testimonials .title::after {
+
+    width: 70px;
+
+    height: 4px;
+
+    margin-top: 12px;
+  }
+
+
+  .masonry {
+
+    columns: 1;
+
+    width: 100%;
+  }
+
+
+  .review-card {
+
+    margin-bottom: 20px;
+
+    padding: 6px;
+
+    border-radius: 20px;
+  }
+
+
+  .review-card img {
+
+    border-radius: 15px;
+  }
+
+
+  /*
+     على الموبايل مفيش Hover
+     فمش محتاجين overlay
+  */
+
+  .review-card::after {
+
+    display: none;
+  }
+
+
+  .review-card:hover {
+
+    transform: none;
+  }
+
+
+  .review-card:hover img {
+
+    transform: none;
+
+    filter: none;
+  }
+
+
+  .lightbox {
+
+    padding: 15px;
+  }
+
+
+  .lightbox img {
+
+    max-width: 95vw;
+
+    max-height: 85vh;
+
+    border-radius: 14px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+  .testimonials {
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+  }
+
+
+  .testimonials .title {
+
+    font-size: 28px;
+  }
+
+
+  .review-card {
+
+    border-radius: 17px;
+
+    padding: 5px;
+  }
+
+
+  .review-card img {
+
+    border-radius: 13px;
+  }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .review-card,
+  .review-card img,
+  .review-card::after,
+  .lightbox,
+  .lightbox img {
+
+    animation: none;
+
+    transition: none;
+  }
+
+}

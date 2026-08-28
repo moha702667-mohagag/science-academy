@@ -1,0 +1,399 @@
+/* =========================================
+   GLOBAL APP
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  width: 100%;
+  min-height: 100%;
+
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  overflow-x: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   ROOT
+========================================= */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+.main-home {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================
+   ALL SECTIONS
+========================================= */
+
+.site-section {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+
+/*
+   مهم جدًا:
+   ممنوع نحط max-width هنا
+   عشان الـ Science Background
+   ياخد الشاشة كلها.
+*/
+
+
+/* =========================================
+   SECTION CONTENT
+========================================= */
+
+.section-content {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0 auto;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   SCIENCE BACKGROUND
+========================================= */
+
+.site-section > .science-background {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  margin: 0;
+  padding: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero-section {
+  position: relative;
+
+  width: 100%;
+
+  /*
+     مهم:
+     ارتفاع الـ Hero يفضل زي تصميمك
+  */
+
+  min-height: 680px;
+}
+
+
+.hero-content {
+  position: relative;
+
+  width: 100%;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.features-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 650px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   CLASSES
+========================================= */
+
+.classes-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 650px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   TESTIMONIALS
+========================================= */
+
+.testimonials-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 600px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 550px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   MAKE CHILDREN STAY ABOVE BACKGROUND
+========================================= */
+
+.features-section > .section-content,
+.classes-section > .section-content,
+.testimonials-section > .section-content,
+.contact-section > .section-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   REMOVE COMMON CONTAINER LIMITS
+========================================= */
+
+.site-section > .container,
+.site-section > .section-container {
+  width: 100%;
+}
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.main-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================================
+   SCIENCE BACKGROUND
+========================================= */
+
+.main-page > .science-background {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  /*
+    يغطي الصفحة كلها
+  */
+  height: 100%;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   CONTENT ABOVE BACKGROUND
+========================================= */
+
+.main-page-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+}
+
+
+/* =========================================
+   ALL SECTIONS
+========================================= */
+
+.page-section,
+.home-section {
+  position: relative;
+
+  width: 100%;
+}
+
+
+/* =========================================
+   DON'T HIDE THE BACKGROUND
+========================================= */
+
+.classes-section,
+.testimonials-section,
+.contact-section {
+  position: relative;
+
+  z-index: 2;
+
+  background: transparent;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.home-section {
+  min-height: auto;
+
+  background: transparent;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .main-page {
+    overflow: hidden;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .hero-section {
+    min-height: 620px;
+  }
+
+
+  .features-section {
+    min-height: 700px;
+  }
+
+
+  .classes-section {
+    min-height: 650px;
+  }
+
+
+  .testimonials-section {
+    min-height: 600px;
+  }
+
+
+  .contact-section {
+    min-height: 550px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .hero-section {
+    min-height: 600px;
+  }
+
+
+  .features-section {
+    min-height: 750px;
+  }
+
+
+  .classes-section {
+    min-height: 700px;
+  }
+
+
+  .testimonials-section {
+    min-height: 650px;
+  }
+
+
+  .contact-section {
+    min-height: 600px;
+  }
+
+}

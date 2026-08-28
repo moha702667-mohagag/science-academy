@@ -1,0 +1,918 @@
+/* =========================================================
+   PENDING STUDENTS
+========================================================= */
+
+.pending-students-page {
+  direction: rtl;
+
+  min-height: 100vh;
+
+  padding: 40px clamp(18px, 4vw, 70px) 60px;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(37, 99, 235, 0.09),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(37, 99, 235, 0.05),
+      transparent 28%
+    ),
+    var(--teacher-bg, #f6f8fc);
+
+  color: var(--teacher-text, #172033);
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.pending-top-bar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 30px;
+}
+
+
+.pending-back-btn,
+.pending-refresh-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 12px 20px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    color .25s ease,
+    box-shadow .25s ease;
+}
+
+
+.pending-back-btn {
+  border: 1px solid rgba(37, 99, 235, .15);
+
+  background: var(--teacher-card-solid, #fff);
+
+  color: #2563eb;
+}
+
+
+.pending-back-btn:hover {
+  transform: translateY(-2px);
+
+  background: #2563eb;
+
+  color: #fff;
+
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, .2);
+}
+
+
+.pending-refresh-btn {
+  border: none;
+
+  background: #2563eb;
+
+  color: #fff;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, .2);
+}
+
+
+.pending-refresh-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 30px rgba(37, 99, 235, .3);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.pending-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 30px;
+
+  margin-bottom: 25px;
+
+  border-radius: 26px;
+
+  border: 1px solid var(--teacher-border, rgba(15,23,42,.08));
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37, 99, 235, .1),
+      rgba(37, 99, 235, .025)
+    ),
+    var(--teacher-card, rgba(255,255,255,.92));
+
+  box-shadow:
+    0 18px 45px rgba(15,23,42,.07);
+}
+
+
+.pending-header-icon {
+  width: 70px;
+
+  height: 70px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 21px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6
+    );
+
+  color: #fff;
+
+  font-size: 29px;
+
+  box-shadow:
+    0 14px 30px rgba(37, 99, 235, .25);
+}
+
+
+.pending-header h1 {
+  margin: 0 0 8px;
+
+  font-size: clamp(26px, 4vw, 38px);
+
+  font-weight: 900;
+
+  color: var(--teacher-text, #172033);
+}
+
+
+.pending-header p {
+  margin: 0;
+
+  color: var(--teacher-muted, #6b7280);
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.pending-error {
+  padding: 15px 18px;
+
+  margin-bottom: 20px;
+
+  border-radius: 14px;
+
+  background: rgba(239, 68, 68, .09);
+
+  border: 1px solid rgba(239, 68, 68, .18);
+
+  color: #dc2626;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   COUNTER
+========================================================= */
+
+.pending-counter {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 18px 22px;
+
+  margin-bottom: 22px;
+
+  border-radius: 18px;
+
+  background: var(--teacher-card-solid, #fff);
+
+  border: 1px solid var(--teacher-border);
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.05);
+}
+
+
+.pending-counter span {
+  color: var(--teacher-muted);
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+.pending-counter strong {
+  min-width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: rgba(37,99,235,.1);
+
+  color: #2563eb;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.pending-students-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   STUDENT CARD
+========================================================= */
+
+.pending-student-card {
+  position: relative;
+
+  padding: 25px;
+
+  border-radius: 24px;
+
+  border: 1px solid var(--teacher-border);
+
+  background: var(--teacher-card);
+
+  box-shadow:
+    0 18px 45px rgba(15,23,42,.07);
+
+  overflow: hidden;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+
+
+.pending-student-card::before {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+
+  top: 0;
+
+  width: 5px;
+
+  height: 100%;
+
+  background: #2563eb;
+}
+
+
+.pending-student-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 25px 55px rgba(15,23,42,.12);
+
+  border-color:
+    rgba(37,99,235,.2);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.student-card-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 23px;
+}
+
+
+.student-avatar {
+  width: 65px;
+
+  height: 65px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 19px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6
+    );
+
+  color: white;
+
+  font-size: 27px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 12px 25px rgba(37,99,235,.2);
+}
+
+
+.student-name-area {
+  min-width: 0;
+}
+
+
+.student-name-area h2 {
+  margin: 0 0 6px;
+
+  font-size: 19px;
+
+  font-weight: 900;
+
+  color: var(--teacher-text);
+}
+
+
+.student-name-area span {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background: rgba(37,99,235,.09);
+
+  color: #2563eb;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.student-info-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+
+  margin-bottom: 18px;
+}
+
+
+.student-info-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.student-info-icon {
+  width: 35px;
+
+  height: 35px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(37,99,235,.08);
+
+  color: #2563eb;
+
+  font-size: 14px;
+}
+
+
+.student-info-item div:last-child {
+  min-width: 0;
+}
+
+
+.student-info-item small {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: var(--teacher-muted);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+.student-info-item strong {
+  display: block;
+
+  max-width: 230px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: var(--teacher-text);
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   PARENT PHONE
+========================================================= */
+
+.student-parent-phone {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 12px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background: rgba(37,99,235,.05);
+
+  color: var(--teacher-muted);
+
+  font-size: 11px;
+}
+
+
+.student-parent-phone svg {
+  color: #2563eb;
+}
+
+
+.student-parent-phone strong {
+  color: var(--teacher-text);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.student-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+}
+
+
+.student-actions button {
+  min-height: 43px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    opacity .25s ease;
+}
+
+
+.student-actions button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+
+.student-actions button:disabled {
+  opacity: .6;
+
+  cursor: not-allowed;
+}
+
+
+/* APPROVE */
+
+.approve-student-btn {
+  background: #2563eb;
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 20px rgba(37,99,235,.18);
+}
+
+
+.approve-student-btn:hover:not(:disabled) {
+  box-shadow:
+    0 12px 25px rgba(37,99,235,.28);
+}
+
+
+/* REJECT */
+
+.reject-student-btn {
+  background: rgba(239,68,68,.08);
+
+  color: #dc2626;
+}
+
+
+.reject-student-btn:hover:not(:disabled) {
+  background: #dc2626;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.pending-empty {
+  padding: 70px 25px;
+
+  text-align: center;
+
+  border-radius: 25px;
+
+  border: 1px solid var(--teacher-border);
+
+  background: var(--teacher-card);
+
+  box-shadow:
+    0 18px 45px rgba(15,23,42,.06);
+}
+
+
+.pending-empty-icon {
+  width: 80px;
+
+  height: 80px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 25px;
+
+  background: rgba(37,99,235,.09);
+
+  color: #2563eb;
+
+  font-size: 32px;
+}
+
+
+.pending-empty h2 {
+  margin: 0 0 8px;
+
+  color: var(--teacher-text);
+
+  font-size: 22px;
+
+  font-weight: 900;
+}
+
+
+.pending-empty p {
+  margin: 0 auto;
+
+  max-width: 500px;
+
+  color: var(--teacher-muted);
+
+  line-height: 1.8;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.pending-loading {
+  min-height: 70vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+.pending-spinner {
+  width: 48px;
+
+  height: 48px;
+
+  border: 4px solid rgba(37,99,235,.12);
+
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation:
+    pendingSpin .8s linear infinite;
+
+  margin-bottom: 20px;
+}
+
+
+@keyframes pendingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.pending-loading h3 {
+  margin: 0 0 7px;
+
+  color: var(--teacher-text);
+
+  font-size: 18px;
+}
+
+
+.pending-loading p {
+  margin: 0;
+
+  color: var(--teacher-muted);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] .pending-students-page {
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(37,99,235,.12),
+      transparent 32%
+    ),
+    var(--teacher-bg);
+}
+
+
+html[data-theme="dark"] .pending-back-btn {
+  background: rgba(30,41,59,.85);
+
+  color: #93c5fd;
+
+  border-color: rgba(96,165,250,.15);
+}
+
+
+html[data-theme="dark"] .pending-back-btn:hover {
+  background: #2563eb;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .pending-students-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .pending-students-page {
+    padding:
+      22px
+      15px
+      40px;
+  }
+
+
+  .pending-header {
+    align-items: flex-start;
+
+    padding: 23px;
+
+    border-radius: 21px;
+  }
+
+
+  .pending-header-icon {
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 17px;
+
+    font-size: 23px;
+  }
+
+
+  .pending-header h1 {
+    font-size: 25px;
+  }
+
+
+  .pending-header p {
+    font-size: 12px;
+  }
+
+
+  .pending-students-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .pending-student-card {
+    padding: 21px;
+
+    border-radius: 21px;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .pending-top-bar {
+    align-items: stretch;
+  }
+
+
+  .pending-back-btn,
+  .pending-refresh-btn {
+    flex: 1;
+
+    padding:
+      11px 12px;
+  }
+
+
+  .pending-header {
+    gap: 13px;
+  }
+
+
+  .pending-header-icon {
+    width: 52px;
+
+    height: 52px;
+
+    font-size: 21px;
+  }
+
+
+  .pending-header h1 {
+    font-size: 21px;
+  }
+
+
+  .student-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .pending-students-page *,
+  .pending-students-page *::before,
+  .pending-students-page *::after {
+    transition: none !important;
+
+    animation: none !important;
+  }
+
+}

@@ -1,0 +1,1830 @@
+/* =========================================================
+   MY HOMEWORK
+   PROFESSIONAL LIGHT + DARK MODE
+========================================================= */
+
+.my-homework-container {
+
+  /* =========================
+     LIGHT MODE VARIABLES
+  ========================= */
+
+  --bg: #f5f7fb;
+
+  --card-bg: #ffffff;
+
+  --card-bg-soft: #f8fafc;
+
+  --text: #172033;
+
+  --text-secondary: #667085;
+
+  --text-muted: #98a2b3;
+
+  --border: rgba(15, 23, 42, 0.08);
+
+  --primary: #2563eb;
+
+  --primary-dark: #1d4ed8;
+
+  --primary-soft: rgba(37, 99, 235, 0.10);
+
+  --green: #16a34a;
+
+  --green-soft: rgba(22, 163, 74, 0.10);
+
+  --yellow: #d97706;
+
+  --yellow-soft: rgba(217, 119, 6, 0.10);
+
+  --red: #dc2626;
+
+  --red-soft: rgba(220, 38, 38, 0.10);
+
+  --shadow:
+    0 10px 35px rgba(15, 23, 42, 0.07);
+
+  --shadow-hover:
+    0 20px 50px rgba(15, 23, 42, 0.12);
+
+
+  /* =========================
+     LAYOUT
+  ========================= */
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  padding: 35px;
+
+  direction: rtl;
+
+  box-sizing: border-box;
+
+
+  /* =========================
+     BACKGROUND
+  ========================= */
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(14, 165, 233, 0.06),
+      transparent 30%
+    ),
+
+    var(--bg);
+
+
+  color: var(--text);
+
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.homework-header {
+
+  max-width: 1250px;
+
+  margin: 0 auto 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 25px 28px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* Header content */
+
+.homework-header-content {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  min-width: 0;
+}
+
+
+/* Header icon */
+
+.homework-header-icon {
+
+  width: 62px;
+
+  height: 62px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #38bdf8
+    );
+
+  color: #ffffff;
+
+  font-size: 28px;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+
+/* Header title */
+
+.homework-header h1 {
+
+  margin: 0 0 6px;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  color: var(--text);
+
+  transition: color 0.3s ease;
+}
+
+
+/* Header description */
+
+.homework-header p {
+
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  transition: color 0.3s ease;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 115px;
+
+  padding: 12px 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  background: var(--card-bg-soft);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.back-btn svg {
+
+  font-size: 18px;
+
+}
+
+
+.back-btn:hover {
+
+  background: var(--primary);
+
+  color: #ffffff;
+
+  border-color: var(--primary);
+
+  transform: translateX(3px);
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.2);
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.homework-grid {
+
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(320px, 1fr)
+    );
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   HOMEWORK CARD
+========================================================= */
+
+.homework-card {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 390px;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border 0.3s ease;
+}
+
+
+/* Top line */
+
+.homework-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  left: 0;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      #38bdf8
+    );
+}
+
+
+.homework-card:hover {
+
+  transform: translateY(-7px);
+
+  box-shadow: var(--shadow-hover);
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.homework-top {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+
+.homework-title-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+
+.homework-card-icon {
+
+  width: 48px;
+
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 22px;
+}
+
+
+.homework-top h2 {
+
+  margin: 0;
+
+  font-size: 20px;
+
+  line-height: 1.5;
+
+  font-weight: 800;
+
+  color: var(--text);
+
+  word-break: break-word;
+
+  transition: color 0.3s ease;
+}
+
+
+/* =========================================================
+   AVAILABILITY
+========================================================= */
+
+.available,
+.expired {
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.available {
+
+  color: var(--green);
+
+  background: var(--green-soft);
+}
+
+
+.expired {
+
+  color: var(--red);
+
+  background: var(--red-soft);
+}
+
+
+.available svg,
+.expired svg {
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.homework-description {
+
+  min-height: 50px;
+
+  margin: 0 0 22px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  transition: color 0.3s ease;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.homework-info {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+.homework-info-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 13px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  background: var(--card-bg-soft);
+
+  transition:
+    background 0.3s ease,
+    border 0.3s ease;
+}
+
+
+.homework-info-item > svg {
+
+  flex-shrink: 0;
+
+  font-size: 20px;
+
+  color: var(--primary);
+}
+
+
+.homework-info-item div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+
+.homework-info-item span {
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.homework-info-item strong {
+
+  color: var(--text);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  word-break: break-word;
+
+  transition: color 0.3s ease;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-status {
+
+  margin-top: auto;
+
+  margin-bottom: 15px;
+}
+
+
+.status {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 11px 14px;
+
+  box-sizing: border-box;
+
+  border-radius: 13px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  border: 1px solid transparent;
+}
+
+
+.status span {
+
+  font-size: 13px;
+}
+
+
+.status.not-started {
+
+  color: var(--red);
+
+  background: var(--red-soft);
+
+  border-color:
+    rgba(220, 38, 38, 0.1);
+}
+
+
+.status.started {
+
+  color: var(--yellow);
+
+  background: var(--yellow-soft);
+
+  border-color:
+    rgba(217, 119, 6, 0.1);
+}
+
+
+.status.completed {
+
+  color: var(--green);
+
+  background: var(--green-soft);
+
+  border-color:
+    rgba(22, 163, 74, 0.1);
+}
+
+
+/* =========================================================
+   OPEN HOMEWORK
+========================================================= */
+
+.open-homework {
+
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 12px 18px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #0ea5e9
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.2);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.open-homework svg {
+
+  font-size: 18px;
+
+}
+
+
+.open-homework:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+.open-homework:active {
+
+  transform: translateY(0);
+
+}
+
+
+.open-homework:disabled {
+
+  background: var(--card-bg-soft);
+
+  color: var(--text-muted);
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+
+  opacity: 0.75;
+}
+
+
+.open-homework:disabled:hover {
+
+  transform: none;
+
+}
+
+
+/* =========================================================
+   NO FORM URL
+========================================================= */
+
+.no-form-url {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border-radius: 13px;
+
+  background: var(--yellow-soft);
+
+  color: var(--yellow);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.no-homework {
+
+  max-width: 650px;
+
+  min-height: 350px;
+
+  margin: 70px auto;
+
+  padding: 45px 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
+}
+
+
+.no-homework-icon {
+
+  width: 85px;
+
+  height: 85px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 25px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 38px;
+}
+
+
+.no-homework h2 {
+
+  margin: 0 0 10px;
+
+  color: var(--text);
+
+  font-size: 22px;
+
+  font-weight: 800;
+}
+
+
+.no-homework p {
+
+  max-width: 450px;
+
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.homework-loading {
+
+  min-height: 70vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  direction: rtl;
+
+  background: #f5f7fb;
+
+  color: #172033;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+
+.homework-loading svg {
+
+  width: 55px;
+
+  height: 55px;
+
+  padding: 13px;
+
+  box-sizing: border-box;
+
+  border-radius: 18px;
+
+  background: rgba(37, 99, 235, 0.10);
+
+  color: #2563eb;
+
+  animation:
+    homeworkPulse 1.4s infinite ease-in-out;
+}
+
+
+@keyframes homeworkPulse {
+
+  0% {
+
+    transform: scale(1);
+
+    opacity: 0.6;
+
+  }
+
+  50% {
+
+    transform: scale(1.1);
+
+    opacity: 1;
+
+  }
+
+  100% {
+
+    transform: scale(1);
+
+    opacity: 0.6;
+
+  }
+
+}
+
+
+/* =========================================================
+   DARK MODE - FINAL
+   Supports:
+   body.dark-mode
+   html.dark-mode
+   html[data-theme="dark"]
+   body[data-theme="dark"]
+========================================================= */
+
+
+/* =========================================================
+   DARK VARIABLES
+========================================================= */
+
+body.dark-mode .my-homework-container,
+html.dark-mode .my-homework-container,
+html[data-theme="dark"] .my-homework-container,
+body[data-theme="dark"] .my-homework-container {
+
+  --bg: #080d18;
+
+  --card-bg: #101827;
+
+  --card-bg-soft: #151f31;
+
+  --text: #f1f5f9;
+
+  --text-secondary: #aab5c5;
+
+  --text-muted: #7f8ba0;
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  --primary: #60a5fa;
+
+  --primary-dark: #3b82f6;
+
+  --primary-soft: rgba(96, 165, 250, 0.13);
+
+  --green: #4ade80;
+
+  --green-soft: rgba(74, 222, 128, 0.12);
+
+  --yellow: #fbbf24;
+
+  --yellow-soft: rgba(251, 191, 36, 0.12);
+
+  --red: #f87171;
+
+  --red-soft: rgba(248, 113, 113, 0.12);
+
+  --shadow:
+    0 15px 45px rgba(0, 0, 0, 0.35);
+
+  --shadow-hover:
+    0 25px 60px rgba(0, 0, 0, 0.5);
+
+}
+
+
+/* =========================================================
+   MAIN BACKGROUND
+========================================================= */
+
+body.dark-mode .my-homework-container,
+html.dark-mode .my-homework-container,
+html[data-theme="dark"] .my-homework-container,
+body[data-theme="dark"] .my-homework-container {
+
+  background:
+
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(59, 130, 246, 0.16),
+      transparent 32%
+    ),
+
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(14, 165, 233, 0.10),
+      transparent 32%
+    ),
+
+    var(--bg);
+
+  color: var(--text);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+body.dark-mode .homework-header,
+html.dark-mode .homework-header,
+html[data-theme="dark"] .homework-header,
+body[data-theme="dark"] .homework-header {
+
+  background: rgba(16, 24, 39, 0.96);
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.32);
+
+}
+
+
+/* =========================================================
+   HEADER TEXT
+========================================================= */
+
+body.dark-mode .homework-header h1,
+html.dark-mode .homework-header h1,
+html[data-theme="dark"] .homework-header h1,
+body[data-theme="dark"] .homework-header h1 {
+
+  color: #f8fafc;
+
+}
+
+
+body.dark-mode .homework-header p,
+html.dark-mode .homework-header p,
+html[data-theme="dark"] .homework-header p,
+body[data-theme="dark"] .homework-header p {
+
+  color: #aab5c5;
+
+}
+
+
+/* =========================================================
+   HEADER ICON
+========================================================= */
+
+body.dark-mode .homework-header-icon,
+html.dark-mode .homework-header-icon,
+html[data-theme="dark"] .homework-header-icon,
+body[data-theme="dark"] .homework-header-icon {
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #06b6d4
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.35);
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+body.dark-mode .back-btn,
+html.dark-mode .back-btn,
+html[data-theme="dark"] .back-btn,
+body[data-theme="dark"] .back-btn {
+
+  background: #151f31;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  color: #f1f5f9;
+
+}
+
+
+body.dark-mode .back-btn:hover,
+html.dark-mode .back-btn:hover,
+html[data-theme="dark"] .back-btn:hover,
+body[data-theme="dark"] .back-btn:hover {
+
+  background: #60a5fa;
+
+  border-color: #60a5fa;
+
+  color: #07111f;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+body.dark-mode .homework-card,
+html.dark-mode .homework-card,
+html[data-theme="dark"] .homework-card,
+body[data-theme="dark"] .homework-card {
+
+  background: #101827;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.32);
+
+}
+
+
+body.dark-mode .homework-card:hover,
+html.dark-mode .homework-card:hover,
+html[data-theme="dark"] .homework-card:hover,
+body[data-theme="dark"] .homework-card:hover {
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5);
+
+}
+
+
+/* =========================================================
+   CARD TOP LINE
+========================================================= */
+
+body.dark-mode .homework-card::before,
+html.dark-mode .homework-card::before,
+html[data-theme="dark"] .homework-card::before,
+body[data-theme="dark"] .homework-card::before {
+
+  background:
+    linear-gradient(
+      90deg,
+      #3b82f6,
+      #06b6d4
+    );
+
+}
+
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+body.dark-mode .homework-card-icon,
+html.dark-mode .homework-card-icon,
+html[data-theme="dark"] .homework-card-icon,
+body[data-theme="dark"] .homework-card-icon {
+
+  background:
+    rgba(96, 165, 250, 0.13);
+
+  color: #60a5fa;
+
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+body.dark-mode .homework-top h2,
+html.dark-mode .homework-top h2,
+html[data-theme="dark"] .homework-top h2,
+body[data-theme="dark"] .homework-top h2 {
+
+  color: #f1f5f9;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+body.dark-mode .homework-description,
+html.dark-mode .homework-description,
+html[data-theme="dark"] .homework-description,
+body[data-theme="dark"] .homework-description {
+
+  color: #aab5c5;
+
+}
+
+
+/* =========================================================
+   INFO BOXES
+========================================================= */
+
+body.dark-mode .homework-info-item,
+html.dark-mode .homework-info-item,
+html[data-theme="dark"] .homework-info-item,
+body[data-theme="dark"] .homework-info-item {
+
+  background: #151f31;
+
+  border-color:
+    rgba(255, 255, 255, 0.07);
+
+}
+
+
+body.dark-mode .homework-info-item > svg,
+html.dark-mode .homework-info-item > svg,
+html[data-theme="dark"] .homework-info-item > svg,
+body[data-theme="dark"] .homework-info-item > svg {
+
+  color: #60a5fa;
+
+}
+
+
+body.dark-mode .homework-info-item span,
+html.dark-mode .homework-info-item span,
+html[data-theme="dark"] .homework-info-item span,
+body[data-theme="dark"] .homework-info-item span {
+
+  color: #7f8ba0;
+
+}
+
+
+body.dark-mode .homework-info-item strong,
+html.dark-mode .homework-info-item strong,
+html[data-theme="dark"] .homework-info-item strong,
+body[data-theme="dark"] .homework-info-item strong {
+
+  color: #f1f5f9;
+
+}
+
+
+/* =========================================================
+   AVAILABLE
+========================================================= */
+
+body.dark-mode .available,
+html.dark-mode .available,
+html[data-theme="dark"] .available,
+body[data-theme="dark"] .available {
+
+  color: #4ade80;
+
+  background:
+    rgba(74, 222, 128, 0.12);
+
+}
+
+
+/* =========================================================
+   EXPIRED
+========================================================= */
+
+body.dark-mode .expired,
+html.dark-mode .expired,
+html[data-theme="dark"] .expired,
+body[data-theme="dark"] .expired {
+
+  color: #f87171;
+
+  background:
+    rgba(248, 113, 113, 0.12);
+
+}
+
+
+/* =========================================================
+   PROGRESS - NOT STARTED
+========================================================= */
+
+body.dark-mode .status.not-started,
+html.dark-mode .status.not-started,
+html[data-theme="dark"] .status.not-started,
+body[data-theme="dark"] .status.not-started {
+
+  color: #f87171;
+
+  background:
+    rgba(248, 113, 113, 0.12);
+
+  border-color:
+    rgba(248, 113, 113, 0.15);
+
+}
+
+
+/* =========================================================
+   PROGRESS - STARTED
+========================================================= */
+
+body.dark-mode .status.started,
+html.dark-mode .status.started,
+html[data-theme="dark"] .status.started,
+body[data-theme="dark"] .status.started {
+
+  color: #fbbf24;
+
+  background:
+    rgba(251, 191, 36, 0.12);
+
+  border-color:
+    rgba(251, 191, 36, 0.15);
+
+}
+
+
+/* =========================================================
+   PROGRESS - COMPLETED
+========================================================= */
+
+body.dark-mode .status.completed,
+html.dark-mode .status.completed,
+html[data-theme="dark"] .status.completed,
+body[data-theme="dark"] .status.completed {
+
+  color: #4ade80;
+
+  background:
+    rgba(74, 222, 128, 0.12);
+
+  border-color:
+    rgba(74, 222, 128, 0.15);
+
+}
+
+
+/* =========================================================
+   OPEN HOMEWORK BUTTON
+========================================================= */
+
+body.dark-mode .open-homework,
+html.dark-mode .open-homework,
+html[data-theme="dark"] .open-homework,
+body[data-theme="dark"] .open-homework {
+
+  background:
+    linear-gradient(
+      135deg,
+      #60a5fa,
+      #22d3ee
+    );
+
+  color: #07111f;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.3);
+
+}
+
+
+body.dark-mode .open-homework:hover,
+html.dark-mode .open-homework:hover,
+html[data-theme="dark"] .open-homework:hover,
+body[data-theme="dark"] .open-homework:hover {
+
+  box-shadow:
+    0 15px 35px rgba(37, 99, 235, 0.4);
+
+}
+
+
+/* =========================================================
+   DISABLED BUTTON
+========================================================= */
+
+body.dark-mode .open-homework:disabled,
+html.dark-mode .open-homework:disabled,
+html[data-theme="dark"] .open-homework:disabled,
+body[data-theme="dark"] .open-homework:disabled {
+
+  background: #182235;
+
+  color: #69778d;
+
+  box-shadow: none;
+
+}
+
+
+/* =========================================================
+   NO FORM URL
+========================================================= */
+
+body.dark-mode .no-form-url,
+html.dark-mode .no-form-url,
+html[data-theme="dark"] .no-form-url,
+body[data-theme="dark"] .no-form-url {
+
+  background:
+    rgba(251, 191, 36, 0.12);
+
+  color: #fbbf24;
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+body.dark-mode .no-homework,
+html.dark-mode .no-homework,
+html[data-theme="dark"] .no-homework,
+body[data-theme="dark"] .no-homework {
+
+  background: #101827;
+
+  border-color:
+    rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.35);
+
+}
+
+
+body.dark-mode .no-homework-icon,
+html.dark-mode .no-homework-icon,
+html[data-theme="dark"] .no-homework-icon,
+body[data-theme="dark"] .no-homework-icon {
+
+  background:
+    rgba(96, 165, 250, 0.13);
+
+  color: #60a5fa;
+
+}
+
+
+body.dark-mode .no-homework h2,
+html.dark-mode .no-homework h2,
+html[data-theme="dark"] .no-homework h2,
+body[data-theme="dark"] .no-homework h2 {
+
+  color: #f1f5f9;
+
+}
+
+
+body.dark-mode .no-homework p,
+html.dark-mode .no-homework p,
+html[data-theme="dark"] .no-homework p,
+body[data-theme="dark"] .no-homework p {
+
+  color: #aab5c5;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+body.dark-mode .homework-loading,
+html.dark-mode .homework-loading,
+html[data-theme="dark"] .homework-loading,
+body[data-theme="dark"] .homework-loading {
+
+  background: #080d18;
+
+  color: #f1f5f9;
+
+}
+
+
+body.dark-mode .homework-loading svg,
+html.dark-mode .homework-loading svg,
+html[data-theme="dark"] .homework-loading svg,
+body[data-theme="dark"] .homework-loading svg {
+
+  background:
+    rgba(96, 165, 250, 0.13);
+
+  color: #60a5fa;
+
+}
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .my-homework-container {
+
+    padding: 25px 20px;
+
+  }
+
+
+  .homework-header {
+
+    padding: 22px;
+
+  }
+
+
+  .homework-header h1 {
+
+    font-size: 26px;
+
+  }
+
+
+  .homework-grid {
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap: 18px;
+
+  }
+
+
+  .homework-card {
+
+    padding: 21px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .my-homework-container {
+
+    padding: 18px 13px;
+
+  }
+
+
+  .homework-header {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+  }
+
+
+  .homework-header-content {
+
+    align-items: flex-start;
+
+  }
+
+
+  .homework-header-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 15px;
+
+    font-size: 23px;
+
+  }
+
+
+  .homework-header h1 {
+
+    font-size: 23px;
+
+  }
+
+
+  .homework-header p {
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+  }
+
+
+  .back-btn {
+
+    width: 100%;
+
+  }
+
+
+  .homework-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+
+  }
+
+
+  .homework-card {
+
+    min-height: auto;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+  }
+
+
+  .homework-top {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+  }
+
+
+  .homework-title-box {
+
+    align-items: flex-start;
+
+  }
+
+
+  .homework-top h2 {
+
+    font-size: 18px;
+
+  }
+
+
+  .available,
+  .expired {
+
+    width: fit-content;
+
+  }
+
+
+  .homework-info {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .no-homework {
+
+    min-height: 300px;
+
+    margin: 40px auto;
+
+    padding: 35px 20px;
+
+    border-radius: 22px;
+
+  }
+
+
+  .no-homework-icon {
+
+    width: 72px;
+
+    height: 72px;
+
+    font-size: 31px;
+
+  }
+
+
+  .no-homework h2 {
+
+    font-size: 19px;
+
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .my-homework-container {
+
+    padding: 13px 9px;
+
+  }
+
+
+  .homework-header {
+
+    padding: 17px;
+
+  }
+
+
+  .homework-card {
+
+    padding: 17px;
+
+  }
+
+
+  .homework-card-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    font-size: 19px;
+
+  }
+
+
+  .homework-top h2 {
+
+    font-size: 16px;
+
+  }
+
+
+  .homework-description {
+
+    font-size: 13px;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .homework-card,
+  .back-btn,
+  .open-homework {
+
+    transition: none;
+
+  }
+
+
+  .homework-loading svg {
+
+    animation: none;
+
+  }
+
+}

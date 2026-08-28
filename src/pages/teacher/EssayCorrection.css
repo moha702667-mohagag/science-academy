@@ -1,0 +1,1219 @@
+/* =========================================================
+   ESSAY CORRECTION
+   Premium Teacher Dashboard
+   Light / Dark Mode
+========================================================= */
+
+.essay-correction-page {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-soft: rgba(37, 99, 235, 0.09);
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+
+  --text: #111827;
+  --text-secondary: #64748b;
+
+  --border: #e5e7eb;
+
+  min-height: 100vh;
+
+  padding: 35px 45px 70px;
+
+  direction: rtl;
+
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at 5% 5%,
+      rgba(37, 99, 235, 0.09),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(124, 58, 237, 0.07),
+      transparent 28%
+    ),
+    var(--bg);
+
+  transition:
+    background .3s ease,
+    color .3s ease;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] .essay-correction-page,
+body.dark-mode .essay-correction-page {
+
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+  --primary-soft: rgba(96, 165, 250, 0.12);
+
+  --bg: #0b1120;
+  --surface: #111827;
+  --surface-soft: #172033;
+
+  --text: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --border: rgba(148, 163, 184, 0.16);
+
+  background:
+    radial-gradient(
+      circle at 5% 5%,
+      rgba(37, 99, 235, 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(124, 58, 237, 0.10),
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+
+/* =========================================================
+   CORRECTION HEADER
+========================================================= */
+
+.correction-header {
+
+  display: flex;
+
+  align-items: stretch;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+
+  padding: 30px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface),
+      var(--surface-soft)
+    );
+
+  box-shadow:
+    0 15px 45px rgba(15, 23, 42, 0.07);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.correction-header::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  opacity: .045;
+
+  left: -90px;
+  top: -100px;
+
+  pointer-events: none;
+}
+
+
+.correction-header > div:first-child {
+
+  position: relative;
+
+  z-index: 1;
+
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+.correction-header h1 {
+
+  margin: 0;
+
+  font-size: 31px;
+
+  font-weight: 900;
+
+  letter-spacing: -.6px;
+
+  color: var(--text);
+}
+
+
+.correction-header h1::before {
+
+  content: "✍";
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 45px;
+  height: 45px;
+
+  margin-left: 13px;
+
+  border-radius: 13px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #6366f1
+    );
+
+  font-size: 21px;
+
+  vertical-align: middle;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, .22);
+}
+
+
+.correction-header > div:first-child > p {
+
+  margin: 10px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   STUDENT CARD
+========================================================= */
+
+.student-card {
+
+  position: relative;
+
+  z-index: 2;
+
+  min-width: 340px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 18px 20px;
+
+  border-radius: 20px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, .06);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+
+.student-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 14px 35px rgba(15, 23, 42, .10);
+}
+
+
+/* =========================================================
+   STUDENT AVATAR
+========================================================= */
+
+.student-avatar {
+
+  width: 65px;
+  height: 65px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #7c3aed
+    );
+
+  color: white;
+
+  font-size: 27px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, .25);
+}
+
+
+.student-card h3 {
+
+  margin: 0 0 7px;
+
+  font-size: 17px;
+
+  font-weight: 850;
+
+  color: var(--text);
+}
+
+
+.student-card p {
+
+  margin: 4px 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+.student-card span {
+
+  display: inline-flex;
+
+  margin-top: 8px;
+
+  padding: 6px 10px;
+
+  border-radius: 9px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 12px;
+
+  font-weight: 850;
+}
+
+
+/* =========================================================
+   ESSAY CARD
+========================================================= */
+
+.essay-card {
+
+  position: relative;
+
+  margin-bottom: 24px;
+
+  padding: 28px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--surface),
+      var(--surface-soft)
+    );
+
+  box-shadow:
+    0 12px 35px rgba(15, 23, 42, .06);
+
+  overflow: hidden;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+
+.essay-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      #7c3aed
+    );
+}
+
+
+.essay-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, .09);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.essay-card-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+
+.essay-card-header h2 {
+
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 19px;
+
+  font-weight: 900;
+}
+
+
+.essay-card-header h2::before {
+
+  content: "";
+
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+}
+
+
+.question-mark {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 14px;
+
+  border-radius: 11px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.question-mark b {
+
+  min-width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: var(--primary);
+
+  color: white;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   QUESTION IMAGE
+========================================================= */
+
+.essay-question-image {
+
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 360px;
+
+  margin: 0 auto 22px;
+
+  border-radius: 16px;
+
+  border: 1px solid var(--border);
+
+  object-fit: contain;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, .08);
+}
+
+
+/* =========================================================
+   QUESTION TEXT
+========================================================= */
+
+.question-text {
+
+  margin: 0 0 24px;
+
+  padding: 20px 22px;
+
+  border-radius: 16px;
+
+  background: var(--primary-soft);
+
+  border-right: 4px solid var(--primary);
+
+  color: var(--text);
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  line-height: 2;
+
+}
+
+
+/* =========================================================
+   ANSWER BOX
+========================================================= */
+
+.answer-box {
+
+  margin-bottom: 25px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--border);
+
+  background: var(--surface-soft);
+
+  overflow: hidden;
+}
+
+
+.answer-box h4 {
+
+  margin: 0;
+
+  padding: 13px 18px;
+
+  border-bottom: 1px solid var(--border);
+
+  background:
+    rgba(37, 99, 235, .035);
+
+  color: var(--primary);
+
+  font-size: 14px;
+
+  font-weight: 850;
+}
+
+
+.answer-content {
+
+  min-height: 120px;
+
+  padding: 20px;
+
+  color: var(--text);
+
+  font-size: 15px;
+
+  line-height: 2;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   GRADE SECTION
+========================================================= */
+
+.grade-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px;
+
+  margin-bottom: 20px;
+
+  border-radius: 17px;
+
+  border: 1px solid var(--border);
+
+  background: var(--surface-soft);
+}
+
+
+.grade-row label {
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: 850;
+}
+
+
+.grade-input {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.grade-input input {
+
+  width: 85px;
+  height: 45px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  text-align: center;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 850;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.grade-input input:focus {
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 4px var(--primary-soft);
+}
+
+
+.grade-input span {
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  font-weight: 750;
+}
+
+
+/* Remove number arrows */
+
+.grade-input input::-webkit-inner-spin-button,
+.grade-input input::-webkit-outer-spin-button {
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   TEACHER COMMENT
+========================================================= */
+
+.teacher-comment-box {
+
+  margin-top: 5px;
+}
+
+
+.teacher-comment-box label {
+
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: 850;
+}
+
+
+.teacher-comment {
+
+  width: 100%;
+
+  min-height: 115px;
+
+  padding: 15px 16px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  outline: none;
+
+  resize: vertical;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+.teacher-comment::placeholder {
+
+  color: var(--text-secondary);
+
+  opacity: .7;
+}
+
+
+.teacher-comment:hover {
+
+  border-color:
+    rgba(37, 99, 235, .35);
+}
+
+
+.teacher-comment:focus {
+
+  border-color: var(--primary);
+
+  background: var(--surface);
+
+  box-shadow:
+    0 0 0 4px var(--primary-soft);
+}
+
+
+/* =========================================================
+   SAVE BOX
+========================================================= */
+
+.save-review-box {
+
+  position: sticky;
+
+  bottom: 20px;
+
+  z-index: 20;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 30px;
+
+  padding: 15px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.75);
+
+  backdrop-filter: blur(15px);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 15px 40px rgba(15,23,42,.10);
+}
+
+
+.save-review {
+
+  min-width: 240px;
+
+  min-height: 52px;
+
+  padding: 0 28px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #4f46e5
+    );
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, .25);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+
+.save-review:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 32px rgba(37, 99, 235, .32);
+
+  filter: brightness(1.03);
+}
+
+
+.save-review:active {
+
+  transform: translateY(0) scale(.98);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.essay-loading {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  direction: rtl;
+
+  background: var(--bg, #f5f7fb);
+
+  color: var(--text, #334155);
+
+  font-size: 17px;
+
+  font-weight: 800;
+}
+
+
+.essay-loading::after {
+
+  content: "";
+
+  width: 20px;
+  height: 20px;
+
+  margin-right: 12px;
+
+  border: 3px solid rgba(37, 99, 235, .15);
+
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation:
+    correction-spin .7s linear infinite;
+}
+
+
+@keyframes correction-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   DARK SAVE BAR
+========================================================= */
+
+html[data-theme="dark"] .save-review-box,
+body.dark-mode .save-review-box {
+
+  background:
+    rgba(17, 24, 39, .82);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.30);
+}
+
+
+/* =========================================================
+   DARK CARD SHADOWS
+========================================================= */
+
+html[data-theme="dark"] .correction-header,
+html[data-theme="dark"] .student-card,
+html[data-theme="dark"] .essay-card,
+body.dark-mode .correction-header,
+body.dark-mode .student-card,
+body.dark-mode .essay-card {
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.20);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .essay-correction-page {
+
+    padding: 25px;
+  }
+
+
+  .correction-header {
+
+    flex-direction: column;
+
+  }
+
+
+  .student-card {
+
+    min-width: 0;
+
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .essay-correction-page {
+
+    padding: 16px 13px 45px;
+  }
+
+
+  .correction-header {
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    gap: 20px;
+  }
+
+
+  .correction-header h1 {
+
+    font-size: 23px;
+  }
+
+
+  .correction-header h1::before {
+
+    width: 38px;
+    height: 38px;
+
+    margin-left: 9px;
+
+    font-size: 18px;
+  }
+
+
+  .correction-header > div:first-child > p {
+
+    font-size: 12px;
+  }
+
+
+  .student-card {
+
+    padding: 15px;
+
+    border-radius: 17px;
+  }
+
+
+  .student-avatar {
+
+    width: 53px;
+    height: 53px;
+
+    border-radius: 15px;
+
+    font-size: 22px;
+  }
+
+
+  .student-card h3 {
+
+    font-size: 15px;
+  }
+
+
+  .essay-card {
+
+    padding: 18px;
+
+    border-radius: 19px;
+  }
+
+
+  .essay-card-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+
+  .essay-card-header h2 {
+
+    font-size: 17px;
+  }
+
+
+  .question-mark {
+
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+
+  .question-text {
+
+    padding: 16px;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+  }
+
+
+  .answer-content {
+
+    min-height: 100px;
+
+    padding: 16px;
+
+    font-size: 14px;
+  }
+
+
+  .grade-row {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+
+  .grade-input {
+
+    width: 100%;
+  }
+
+
+  .grade-input input {
+
+    width: 100%;
+  }
+
+
+  .save-review {
+
+    width: 100%;
+
+    min-width: 0;
+  }
+
+
+  .save-review-box {
+
+    bottom: 10px;
+
+    padding: 10px;
+
+    border-radius: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .essay-correction-page {
+
+    padding: 12px 9px 40px;
+  }
+
+
+  .correction-header {
+
+    padding: 16px;
+  }
+
+
+  .correction-header h1 {
+
+    font-size: 20px;
+  }
+
+
+  .essay-card {
+
+    padding: 15px;
+  }
+
+
+  .student-card {
+
+    gap: 11px;
+  }
+
+
+  .student-card span {
+
+    font-size: 11px;
+  }
+
+}

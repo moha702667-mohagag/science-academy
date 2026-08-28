@@ -1,0 +1,1672 @@
+/* =========================================================
+   MANAGE COURSES
+   PREMIUM TEACHER DASHBOARD
+   LIGHT / DARK MODE
+========================================================= */
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+.course-dashboard {
+
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #60a5fa;
+
+  --purple: #7c3aed;
+
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --bg: #f4f7fb;
+
+  --surface: #ffffff;
+
+  --surface-soft: #f8fafc;
+
+  --surface-hover: #f1f5f9;
+
+  --text: #111827;
+
+  --text-secondary: #64748b;
+
+  --border: #e2e8f0;
+
+  --border-strong: #cbd5e1;
+
+  --primary-soft: rgba(37, 99, 235, 0.09);
+
+  --danger-soft: rgba(239, 68, 68, 0.08);
+
+  --success-soft: rgba(16, 185, 129, 0.08);
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  padding: 35px 45px 70px;
+
+  direction: rtl;
+
+  background:
+
+    radial-gradient(
+      circle at 5% 5%,
+      rgba(37, 99, 235, 0.08),
+      transparent 27%
+    ),
+
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(124, 58, 237, 0.07),
+      transparent 28%
+    ),
+
+    var(--bg);
+
+  color: var(--text);
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] .course-dashboard,
+body.dark-mode .course-dashboard {
+
+  --primary: #60a5fa;
+
+  --primary-dark: #3b82f6;
+
+  --primary-light: #93c5fd;
+
+  --purple: #a78bfa;
+
+  --bg: #080d18;
+
+  --surface: #111827;
+
+  --surface-soft: #172033;
+
+  --surface-hover: #1d293b;
+
+  --text: #f8fafc;
+
+  --text-secondary: #94a3b8;
+
+  --border: rgba(148, 163, 184, 0.16);
+
+  --border-strong: rgba(148, 163, 184, 0.25);
+
+  --primary-soft: rgba(96, 165, 250, 0.11);
+
+  --danger-soft: rgba(248, 113, 113, 0.10);
+
+  --success-soft: rgba(52, 211, 153, 0.10);
+
+  background:
+
+    radial-gradient(
+      circle at 5% 5%,
+      rgba(37, 99, 235, 0.14),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(124, 58, 237, 0.12),
+      transparent 30%
+    ),
+
+    var(--bg);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+
+  position: relative;
+
+  width: 100%;
+
+  margin-bottom: 30px;
+
+  padding: 25px 28px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface),
+      var(--surface-soft)
+    );
+
+  box-shadow:
+    0 15px 45px rgba(15, 23, 42, 0.07);
+
+  overflow: hidden;
+
+  transition:
+    background 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* Decorative circles */
+
+.page-header::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+
+  height: 220px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  opacity: 0.045;
+
+  left: -90px;
+
+  top: -120px;
+
+  pointer-events: none;
+}
+
+
+.page-header::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 130px;
+
+  height: 130px;
+
+  border-radius: 50%;
+
+  border: 20px solid var(--purple);
+
+  opacity: 0.04;
+
+  right: 70px;
+
+  bottom: -90px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER CONTENT
+========================================================= */
+
+.header-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+
+/* =========================================================
+   HEADER TITLE
+========================================================= */
+
+.header-title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+
+.header-icon {
+
+  width: 60px;
+
+  height: 60px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--purple)
+    );
+
+  color: white;
+
+  font-size: 27px;
+
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, 0.25);
+}
+
+
+.header-title h1 {
+
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.5px;
+}
+
+
+.header-title p {
+
+  margin: 6px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+
+  position: relative;
+
+  z-index: 3;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  min-width: 112px;
+
+  height: 46px;
+
+  padding: 0 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.back-btn svg {
+
+  font-size: 18px;
+
+  transition:
+    transform 0.2s ease;
+}
+
+
+.back-btn:hover {
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #4f46e5
+    );
+
+  color: white;
+
+  border-color: transparent;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.25);
+}
+
+
+.back-btn:hover svg {
+
+  transform: translateX(4px);
+}
+
+
+.back-btn:active {
+
+  transform: translateY(0) scale(0.98);
+}
+
+
+/* =========================================================
+   DARK HEADER
+========================================================= */
+
+html[data-theme="dark"] .page-header,
+body.dark-mode .page-header {
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.course-layout {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(320px, 390px)
+    minmax(0, 1fr);
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   COMMON CARDS
+========================================================= */
+
+.add-card,
+.list-card {
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  background: var(--surface);
+
+  box-shadow:
+    0 12px 40px rgba(15, 23, 42, 0.055);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
+}
+
+
+.add-card:hover,
+.list-card:hover {
+
+  box-shadow:
+    0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+
+html[data-theme="dark"] .add-card,
+html[data-theme="dark"] .list-card,
+body.dark-mode .add-card,
+body.dark-mode .list-card {
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   ADD CARD
+========================================================= */
+
+.add-card {
+
+  position: sticky;
+
+  top: 25px;
+
+  padding: 28px;
+}
+
+
+/* =========================================================
+   CARD HEADINGS
+========================================================= */
+
+.add-card h2,
+.list-card h2 {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin: 0 0 25px;
+
+  color: var(--text);
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+
+.add-card h2 svg {
+
+  width: 40px;
+
+  height: 40px;
+
+  padding: 9px;
+
+  border-radius: 12px;
+
+  color: var(--primary);
+
+  background: var(--primary-soft);
+}
+
+
+.list-card h2 {
+
+  position: relative;
+
+  padding-right: 13px;
+}
+
+
+.list-card h2::before {
+
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+
+  width: 5px;
+
+  height: 27px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--primary),
+      var(--purple)
+    );
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.add-card form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+
+.add-card label {
+
+  margin-top: 8px;
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.add-card input,
+.add-card textarea,
+.add-card select {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  outline: none;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  padding: 13px 14px;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.add-card input::placeholder,
+.add-card textarea::placeholder {
+
+  color: var(--text-secondary);
+
+  opacity: 0.7;
+}
+
+
+.add-card input:hover,
+.add-card textarea:hover,
+.add-card select:hover {
+
+  border-color: var(--border-strong);
+}
+
+
+.add-card input:focus,
+.add-card textarea:focus,
+.add-card select:focus {
+
+  border-color: var(--primary);
+
+  background: var(--surface);
+
+  box-shadow:
+    0 0 0 4px var(--primary-soft);
+}
+
+
+.add-card textarea {
+
+  min-height: 120px;
+
+  resize: vertical;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   SELECT BOX
+========================================================= */
+
+.select-box {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+}
+
+
+.select-box svg {
+
+  position: absolute;
+
+  right: 14px;
+
+  z-index: 2;
+
+  color: var(--primary);
+
+  pointer-events: none;
+}
+
+
+.select-box select {
+
+  appearance: none;
+
+  padding-right: 43px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PUBLISH BUTTON
+========================================================= */
+
+.publish-btn {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  width: 100%;
+
+  min-height: 49px;
+
+  margin-top: 15px;
+
+  padding: 13px 20px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #4f46e5
+    );
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.23);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.publish-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 32px rgba(37, 99, 235, 0.30);
+}
+
+
+.publish-btn:active {
+
+  transform: scale(0.98);
+}
+
+
+.publish-btn:disabled {
+
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   LIST CARD
+========================================================= */
+
+.list-card {
+
+  min-width: 0;
+
+  padding: 28px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 24px;
+
+  padding: 14px 16px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  background: var(--surface-soft);
+}
+
+
+.filter-box label {
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.filter-box select {
+
+  min-width: 190px;
+
+  padding: 9px 13px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.filter-box select:focus {
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px var(--primary-soft);
+}
+
+
+/* =========================================================
+   COURSE GRID
+========================================================= */
+
+.course-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(245px, 1fr)
+    );
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   COURSE CARD
+========================================================= */
+
+.course-box {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 21px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--surface),
+      var(--surface-soft)
+    );
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Top gradient */
+
+.course-box::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  width: 100%;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--purple)
+    );
+}
+
+
+.course-box:hover {
+
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(37, 99, 235, 0.25);
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.10);
+}
+
+
+html[data-theme="dark"] .course-box:hover,
+body.dark-mode .course-box:hover {
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   COURSE ICON
+========================================================= */
+
+.course-icon {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 58px;
+
+  height: 58px;
+
+  margin-bottom: 16px;
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary-soft),
+      rgba(124, 58, 237, 0.10)
+    );
+
+  color: var(--primary);
+
+  font-size: 27px;
+}
+
+
+/* =========================================================
+   COURSE ACTIONS
+========================================================= */
+
+.course-actions {
+
+  position: absolute;
+
+  top: 18px;
+
+  left: 18px;
+
+  z-index: 10;
+
+  display: flex;
+
+  gap: 7px;
+}
+
+
+.course-actions button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  height: 34px;
+
+  padding: 0 10px;
+
+  border-radius: 9px;
+
+  border: 1px solid transparent;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+.course-actions button:first-child {
+
+  color: #2563eb;
+
+  background: rgba(37, 99, 235, 0.09);
+
+  border-color:
+    rgba(37, 99, 235, 0.15);
+}
+
+
+.course-actions button:first-child:hover {
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5
+    );
+
+  border-color: transparent;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.course-actions button:last-child {
+
+  color: #dc2626;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  border-color:
+    rgba(239, 68, 68, 0.15);
+}
+
+
+.course-actions button:last-child:hover {
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444,
+      #dc2626
+    );
+
+  border-color: transparent;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(239, 68, 68, 0.25);
+}
+
+
+.course-actions button:active {
+
+  transform: scale(0.96);
+}
+
+
+/* =========================================================
+   DARK ACTION BUTTONS
+========================================================= */
+
+html[data-theme="dark"] .course-actions button:first-child,
+body.dark-mode .course-actions button:first-child {
+
+  color: #60a5fa;
+
+  background:
+    rgba(96, 165, 250, 0.10);
+
+  border-color:
+    rgba(96, 165, 250, 0.16);
+}
+
+
+html[data-theme="dark"] .course-actions button:last-child,
+body.dark-mode .course-actions button:last-child {
+
+  color: #f87171;
+
+  background:
+    rgba(248, 113, 113, 0.10);
+
+  border-color:
+    rgba(248, 113, 113, 0.16);
+}
+
+
+/* =========================================================
+   COURSE TITLE
+========================================================= */
+
+.course-box h3 {
+
+  margin: 0 0 9px;
+
+  color: var(--text);
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  line-height: 1.5;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+}
+
+
+/* =========================================================
+   GRADE
+========================================================= */
+
+.course-box > span {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  margin-bottom: 11px;
+
+  padding: 5px 9px;
+
+  border-radius: 8px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.course-box p {
+
+  flex: 1;
+
+  margin: 0 0 18px;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+}
+
+
+/* =========================================================
+   WATCH BUTTON
+========================================================= */
+
+.course-box > a {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px;
+
+  border-radius: 11px;
+
+  text-decoration: none;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 13px;
+
+  font-weight: 850;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.course-box > a:hover {
+
+  background:
+    rgba(37, 99, 235, 0.16);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.10);
+}
+
+
+.course-box > a svg {
+
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 260px;
+
+  padding: 20px;
+
+  border: 1px dashed var(--border-strong);
+
+  border-radius: 18px;
+
+  background: var(--surface-soft);
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   DARK EMPTY
+========================================================= */
+
+html[data-theme="dark"] .empty,
+body.dark-mode .empty {
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.course-dashboard ::-webkit-scrollbar {
+
+  width: 7px;
+
+  height: 7px;
+}
+
+
+.course-dashboard ::-webkit-scrollbar-track {
+
+  background: transparent;
+}
+
+
+.course-dashboard ::-webkit-scrollbar-thumb {
+
+  background: var(--border-strong);
+
+  border-radius: 20px;
+}
+
+
+.course-dashboard ::-webkit-scrollbar-thumb:hover {
+
+  background: var(--text-secondary);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .course-dashboard {
+
+    padding: 25px;
+  }
+
+
+  .course-layout {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .add-card {
+
+    position: relative;
+
+    top: auto;
+  }
+
+
+  .course-grid {
+
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(220px, 1fr)
+      );
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .course-dashboard {
+
+    padding: 18px 14px 45px;
+  }
+
+
+  .page-header {
+
+    padding: 20px;
+
+    border-radius: 20px;
+  }
+
+
+  .header-content {
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+
+  .header-title {
+
+    gap: 12px;
+  }
+
+
+  .header-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 15px;
+
+    font-size: 22px;
+  }
+
+
+  .header-title h1 {
+
+    font-size: 21px;
+  }
+
+
+  .header-title p {
+
+    max-width: 230px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  .back-btn {
+
+    min-width: 45px;
+
+    width: 45px;
+
+    height: 45px;
+
+    padding: 0;
+
+    border-radius: 12px;
+  }
+
+
+  .back-btn span {
+
+    display: none;
+  }
+
+
+  .course-layout {
+
+    gap: 18px;
+  }
+
+
+  .add-card,
+  .list-card {
+
+    padding: 20px;
+
+    border-radius: 20px;
+  }
+
+
+  .add-card h2,
+  .list-card h2 {
+
+    font-size: 18px;
+  }
+
+
+  .filter-box {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 8px;
+  }
+
+
+  .filter-box select {
+
+    width: 100%;
+
+    min-width: 0;
+  }
+
+
+  .course-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .course-box {
+
+    padding: 18px;
+  }
+
+
+  .course-actions {
+
+    position: static;
+
+    width: 100%;
+
+    margin-bottom: 15px;
+  }
+
+
+  .course-actions button {
+
+    flex: 1;
+
+    height: 38px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .course-dashboard {
+
+    padding: 14px 10px 35px;
+  }
+
+
+  .page-header {
+
+    padding: 17px;
+
+    border-radius: 18px;
+  }
+
+
+  .header-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    font-size: 20px;
+  }
+
+
+  .header-title h1 {
+
+    font-size: 18px;
+  }
+
+
+  .header-title p {
+
+    font-size: 11px;
+
+    max-width: 190px;
+  }
+
+
+  .back-btn {
+
+    width: 42px;
+
+    height: 42px;
+  }
+
+
+  .add-card,
+  .list-card {
+
+    padding: 16px;
+
+    border-radius: 18px;
+  }
+
+
+  .course-box {
+
+    padding: 16px;
+  }
+
+
+  .course-actions {
+
+    gap: 6px;
+  }
+
+
+  .course-actions button {
+
+    font-size: 11px;
+
+    padding: 0 7px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .header-content {
+
+    flex-direction: column;
+  }
+
+
+  .back-btn {
+
+    width: 100%;
+
+    height: 42px;
+  }
+
+
+  .back-btn span {
+
+    display: inline;
+  }
+
+}

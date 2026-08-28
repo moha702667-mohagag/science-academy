@@ -1,0 +1,891 @@
+/* =========================================================
+   SCIENCE ACADEMY — CLASSES
+   Premium Educational UI
+========================================================= */
+
+.classes-section {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: rgba(15, 23, 42, 0.08);
+
+  width: 100%;
+  min-height: 100%;
+  padding: 110px 24px 125px;
+
+  direction: rtl;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(37, 99, 235, 0.09),
+      transparent 38%
+    ),
+    #f8fafc;
+
+  font-family: "Cairo", "Tajawal", sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.classes-header {
+  width: min(760px, 100%);
+  margin: 0 auto 62px;
+  text-align: center;
+}
+
+
+/* Small Label */
+
+.classes-eyebrow {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 14px;
+  padding: 7px 14px;
+
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: 999px;
+
+  background: rgba(37, 99, 235, 0.055);
+
+  color: var(--primary);
+
+   font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* Dot */
+
+.classes-eyebrow::before {
+  content: "";
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.09);
+}
+
+
+/* Main Title */
+
+.classes-header .title {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 900;
+
+  line-height: 1.25;
+  letter-spacing: -1.2px;
+}
+
+
+/* Blue Accent */
+
+.classes-header .title::after {
+  content: "";
+
+  display: block;
+
+  width: 54px;
+  height: 4px;
+
+  margin: 17px auto 16px;
+
+  border-radius: 999px;
+
+  background: var(--primary);
+}
+
+
+/* Description */
+
+.classes-description {
+  width: min(600px, 100%);
+  margin: auto;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  font-weight: 500;
+
+  line-height: 2;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.classes-grid {
+  width: min(1180px, 100%);
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.class-card {
+  position: relative;
+
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.02),
+    0 10px 35px rgba(15, 23, 42, 0.045);
+
+  transition:
+    transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 450ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease;
+}
+
+
+/* Card Hover */
+
+.class-card:hover {
+  transform: translateY(-9px);
+
+  border-color: rgba(37, 99, 235, 0.16);
+
+  box-shadow:
+    0 22px 55px rgba(15, 23, 42, 0.11),
+    0 8px 25px rgba(37, 99, 235, 0.055);
+}
+
+
+/* =========================================================
+   IMAGE AREA
+========================================================= */
+
+.class-image-wrapper {
+  position: relative;
+
+  height: 265px;
+
+  overflow: hidden;
+
+  background: #e2e8f0;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.class-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transform: scale(1.001);
+
+  transition:
+    transform 800ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+
+/* Image Hover */
+
+.class-card:hover .class-image {
+  transform: scale(1.075);
+}
+
+
+/* =========================================================
+   IMAGE LIGHTING
+========================================================= */
+
+.class-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.03) 0%,
+      transparent 45%,
+      rgba(15, 23, 42, 0.42) 100%
+    );
+
+  opacity: 0.75;
+
+  transition:
+    opacity 450ms ease;
+}
+
+
+.class-card:hover .class-image-overlay {
+  opacity: 0.95;
+}
+
+
+/* =========================================================
+   CLASS NUMBER
+========================================================= */
+
+.class-number {
+  position: absolute;
+
+  top: 17px;
+  right: 17px;
+
+  z-index: 3;
+
+  width: 47px;
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  color: var(--primary);
+
+  font-size: 18px;
+  font-weight: 900;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.15);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 300ms ease,
+    color 300ms ease;
+}
+
+
+.class-card:hover .class-number {
+  transform: translateY(-2px) scale(1.05);
+
+  background: var(--primary);
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.class-content {
+  position: relative;
+
+  padding: 24px 24px 25px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.class-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.class-content h3 {
+  margin: 0 0 21px;
+
+  color: var(--text);
+
+  font-size: 21px;
+  font-weight: 900;
+
+  line-height: 1.45;
+
+  letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.class-btn {
+  position: relative;
+
+  width: 100%;
+  height: 51px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 8px 0 17px;
+
+  border: 1px solid rgba(37, 99, 235, 0.9);
+  border-radius: 13px;
+
+  background: var(--primary);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.18);
+
+  transition:
+    background 250ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
+}
+
+
+.class-btn:hover {
+  background: var(--primary-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 11px 26px rgba(37, 99, 235, 0.25);
+}
+
+
+.class-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   BUTTON SHINE
+========================================================= */
+
+.class-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: -80px;
+
+  width: 45px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  transform: skewX(-20deg);
+
+  transition: left 600ms ease;
+}
+
+
+.class-btn:hover::before {
+  left: calc(100% + 80px);
+}
+
+
+/* =========================================================
+   BUTTON ARROW
+========================================================= */
+
+.class-btn-arrow {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.13);
+
+  font-size: 17px;
+  font-weight: 500;
+
+  transition:
+    transform 350ms ease,
+    background 250ms ease;
+}
+
+
+.class-btn:hover .class-btn-arrow {
+  transform: translateX(-4px);
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* =========================================================
+   FALLBACK
+========================================================= */
+
+.class-image-fallback {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #dbeafe
+    );
+
+  color: var(--primary);
+
+  text-align: center;
+
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   DARK MODE — CLASSES
+========================================================= */
+
+html[data-theme="dark"] .classes-section {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.12);
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(37, 99, 235, 0.14),
+      transparent 38%
+    ),
+    #0b1120;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+html[data-theme="dark"] .classes-header .title {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .classes-description {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .classes-eyebrow {
+  background: rgba(59, 130, 246, 0.10);
+  border-color: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+}
+
+html[data-theme="dark"] .classes-eyebrow::before {
+  background: #3b82f6;
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+
+/* =========================================================
+   CLASS CARD
+========================================================= */
+
+html[data-theme="dark"] .class-card {
+  background: #111827;
+
+  border-color: rgba(148, 163, 184, 0.10);
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    0 12px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+html[data-theme="dark"] .class-card:hover {
+  border-color: rgba(59, 130, 246, 0.28);
+
+  box-shadow:
+    0 24px 55px rgba(0, 0, 0, 0.35),
+    0 8px 28px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   IMAGE AREA
+========================================================= */
+
+html[data-theme="dark"] .class-image-wrapper {
+  background: #1e293b;
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+html[data-theme="dark"] .class-image-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 6, 23, 0.05) 0%,
+      transparent 40%,
+      rgba(2, 6, 23, 0.58) 100%
+    );
+}
+
+
+/* =========================================================
+   CLASS NUMBER
+========================================================= */
+
+html[data-theme="dark"] .class-number {
+  background: rgba(15, 23, 42, 0.88);
+
+  color: #60a5fa;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.30);
+}
+
+html[data-theme="dark"] .class-card:hover .class-number {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+html[data-theme="dark"] .class-content {
+  background: #111827;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+html[data-theme="dark"] .class-label {
+  color: #64748b;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+html[data-theme="dark"] .class-content h3 {
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+html[data-theme="dark"] .class-btn {
+  background: #2563eb;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 8px 22px rgba(37, 99, 235, 0.22);
+}
+
+html[data-theme="dark"] .class-btn:hover {
+  background: #3b82f6;
+
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 12px 28px rgba(37, 99, 235, 0.30);
+}
+
+
+/* =========================================================
+   FALLBACK IMAGE
+========================================================= */
+
+html[data-theme="dark"] .class-image-fallback {
+  background:
+    linear-gradient(
+      135deg,
+      #172554,
+      #1e3a8a
+    );
+
+  color: #93c5fd;
+}
+
+
+/* =========================================================
+   MOBILE DARK MODE
+========================================================= */
+
+@media (max-width: 680px) {
+
+  html[data-theme="dark"] .classes-section {
+    background:
+      radial-gradient(
+        circle at 50% -5%,
+        rgba(37, 99, 235, 0.13),
+        transparent 42%
+      ),
+      #0b1120;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .classes-section {
+    padding: 90px 20px 105px;
+  }
+
+  .classes-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    max-width: 820px;
+
+    gap: 24px;
+  }
+
+  .class-image-wrapper {
+    height: 250px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 680px) {
+
+  .classes-section {
+    padding: 70px 15px 85px;
+  }
+
+
+  .classes-header {
+    margin-bottom: 42px;
+  }
+
+
+  .classes-eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+  }
+
+
+  .classes-header .title {
+    font-size: 29px;
+
+    letter-spacing: -0.7px;
+  }
+
+
+  .classes-description {
+    font-size: 13px;
+
+    line-height: 1.9;
+  }
+
+
+  .classes-grid {
+    grid-template-columns: 1fr;
+
+    width: min(420px, 100%);
+
+    gap: 20px;
+  }
+
+
+  .class-image-wrapper {
+    height: 240px;
+  }
+
+
+  .class-content {
+    padding: 21px;
+  }
+
+
+  .class-content h3 {
+    font-size: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .classes-section {
+    padding: 60px 12px 70px;
+  }
+
+
+  .classes-header .title {
+    font-size: 26px;
+  }
+
+
+  .classes-description {
+    font-size: 12.5px;
+  }
+
+
+  .class-image-wrapper {
+    height: 215px;
+  }
+
+
+  .class-number {
+    top: 13px;
+    right: 13px;
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 13px;
+
+    font-size: 16px;
+  }
+
+
+  .class-content {
+    padding: 19px;
+  }
+
+
+  .class-content h3 {
+    margin-bottom: 18px;
+
+    font-size: 18px;
+  }
+
+
+  .class-btn {
+    height: 48px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.class-btn:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.2);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .class-card,
+  .class-image,
+  .class-number,
+  .class-btn,
+  .class-btn-arrow,
+  .class-image-overlay {
+    transition: none;
+  }
+
+  .class-card:hover,
+  .class-btn:hover {
+    transform: none;
+  }
+
+  .class-card:hover .class-image {
+    transform: none;
+  }
+
+}
