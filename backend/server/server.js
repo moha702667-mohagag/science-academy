@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 
 console.log("===== SERVER FILE STARTED =====");
 
@@ -96,7 +97,6 @@ mongoose
     console.error("❌ MongoDB connection error:", err.message);
   });
 
-const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Science Academy Backend running on port ${PORT}`);
