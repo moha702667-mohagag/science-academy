@@ -221,26 +221,32 @@ const sendVerificationEmail = async (
    MONGODB CONNECTION
 ================================================== */
 
-mongoose
-  .connect(process.env.MONGO_URI)
+const startServer = async () => {
+  try {
+    if (!process.env.MONGO_URI) {
+      throw new Error("MONGO_URI is missing");
+    }
 
-  .then(() => {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is missing");
+    }
 
-    console.log(
-      "MongoDB connected successfully"
-    );
+    await mongoose.connect(process.env.MONGO_URI);
 
-  })
+    console.log("✅ MongoDB connected successfully");
 
-  .catch((err) => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
 
-    console.log(
-      "MongoDB connection error:",
-      err.message
-    );
+  } catch (error) {
+    console.error("❌ Server startup failed:");
+    console.error(error);
+    process.exit(1);
+  }
+};
 
-  });
-
+startServer();
 
 /* ==================================================
    CRON
@@ -290,14 +296,6 @@ cron.schedule("* * * * *", async () => {
 
   }
 
-});
-
-// ==================================================
-// CHECK EXPIRED UNVERIFIED ACCOUNTS DAILY
-// ==================================================
-
-cron.schedule("0 3 * * *", async () => {
-  await deleteExpiredUnverifiedAccounts();
 });
 
 // ==================================================
@@ -2713,8 +2711,6 @@ app.get(
    SERVER
 ================================================== */
 
-const HOST = "0.0.0.0";
-
-app.listen(PORT, HOST, () => {
-  console.log(`🚀 Server running on ${HOST}:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
