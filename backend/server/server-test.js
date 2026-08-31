@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import User from "./models/User.js";
+
 dotenv.config();
 
 const app = express();
@@ -15,9 +17,10 @@ console.log("==========================================");
 console.log("Express: ✅");
 console.log("dotenv: ✅");
 console.log("mongoose: ✅");
-console.log("PORT:", PORT);
-console.log("MONGO_URI:", MONGO_URI ? "SET" : "NOT SET");
+console.log("User Model: loading...");
 console.log("==========================================");
+
+console.log("👤 User Model:", User ? "LOADED ✅" : "FAILED ❌");
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -30,6 +33,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
     status: "ok",
+    userModel: !!User,
     database:
       mongoose.connection.readyState === 1
         ? "connected"
@@ -57,6 +61,7 @@ app.listen(PORT, "0.0.0.0", async () => {
     });
 
     console.log("🟢 MongoDB connected successfully");
+    console.log("👤 User Model test completed successfully");
   } catch (error) {
     console.error("🔴 MongoDB CONNECTION ERROR:");
     console.error(error.message);
