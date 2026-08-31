@@ -1,4 +1,3 @@
-
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -11,7 +10,6 @@ import courseRoutes from "./routes/courseRoutes.js";
 import homeworkRoutes from "./routes/homeworkRoutes.js";
 import classRoutes from "./routes/classRoutes.js";
 import examRoutes from "./routes/examRoutes.js";
-import progressRoutes from "./routes/progressRoutes.js";
 
 dotenv.config();
 
@@ -97,12 +95,27 @@ try {
   console.log(
     "📚 Course Routes: LOADED ✅"
   );
+
 } catch (error) {
+
   console.error(
     "❌ COURSE ROUTES ERROR:"
   );
 
-  console.error(error);
+  console.error(
+    "Name:",
+    error?.name
+  );
+
+  console.error(
+    "Message:",
+    error?.message
+  );
+
+  console.error(
+    "Stack:",
+    error?.stack
+  );
 
   process.exit(1);
 }
@@ -125,12 +138,27 @@ try {
   console.log(
     "📝 Homework Routes: LOADED ✅"
   );
+
 } catch (error) {
+
   console.error(
     "❌ HOMEWORK ROUTES ERROR:"
   );
 
-  console.error(error);
+  console.error(
+    "Name:",
+    error?.name
+  );
+
+  console.error(
+    "Message:",
+    error?.message
+  );
+
+  console.error(
+    "Stack:",
+    error?.stack
+  );
 
   process.exit(1);
 }
@@ -153,12 +181,27 @@ try {
   console.log(
     "👥 Class Routes: LOADED ✅"
   );
+
 } catch (error) {
+
   console.error(
     "❌ CLASS ROUTES ERROR:"
   );
 
-  console.error(error);
+  console.error(
+    "Name:",
+    error?.name
+  );
+
+  console.error(
+    "Message:",
+    error?.message
+  );
+
+  console.error(
+    "Stack:",
+    error?.stack
+  );
 
   process.exit(1);
 }
@@ -181,12 +224,27 @@ try {
   console.log(
     "📝 Exam Routes: LOADED ✅"
   );
+
 } catch (error) {
+
   console.error(
     "❌ EXAM ROUTES ERROR:"
   );
 
-  console.error(error);
+  console.error(
+    "Name:",
+    error?.name
+  );
+
+  console.error(
+    "Message:",
+    error?.message
+  );
+
+  console.error(
+    "Stack:",
+    error?.stack
+  );
 
   process.exit(1);
 }
@@ -194,6 +252,7 @@ try {
 
 // ==========================================
 // PROGRESS ROUTES
+// DYNAMIC IMPORT FOR DEBUGGING
 // ==========================================
 
 console.log("==========================================");
@@ -201,6 +260,35 @@ console.log("📈 Progress Routes: loading...");
 console.log("==========================================");
 
 try {
+
+  console.log(
+    "📈 Importing progressRoutes.js..."
+  );
+
+  const progressModule =
+    await import(
+      "./routes/progressRoutes.js"
+    );
+
+  console.log(
+    "📈 progressRoutes.js imported successfully ✅"
+  );
+
+  const progressRoutes =
+    progressModule.default;
+
+  if (!progressRoutes) {
+
+    throw new Error(
+      "progressRoutes.js does not export a default router."
+    );
+
+  }
+
+  console.log(
+    "📈 Progress Router found ✅"
+  );
+
   app.use(
     "/api/progress",
     progressRoutes
@@ -209,12 +297,46 @@ try {
   console.log(
     "📈 Progress Routes: LOADED ✅"
   );
+
 } catch (error) {
+
+  console.error("");
   console.error(
-    "❌ PROGRESS ROUTES ERROR:"
+    "=========================================="
+  );
+  console.error(
+    "❌❌❌ PROGRESS ROUTES FAILED ❌❌❌"
+  );
+  console.error(
+    "=========================================="
   );
 
-  console.error(error);
+  console.error(
+    "Error Name:",
+    error?.name
+  );
+
+  console.error(
+    "Error Message:",
+    error?.message
+  );
+
+  console.error(
+    "Error Code:",
+    error?.code
+  );
+
+  console.error(
+    "Error Stack:"
+  );
+
+  console.error(
+    error?.stack
+  );
+
+  console.error(
+    "=========================================="
+  );
 
   process.exit(1);
 }
@@ -333,30 +455,31 @@ console.log("==========================================");
 console.log("🚀 TEST SERVER STARTING");
 console.log("==========================================");
 
-const server = app.listen(
-  PORT,
-  "0.0.0.0",
-  () => {
+const server =
+  app.listen(
+    PORT,
+    "0.0.0.0",
+    () => {
 
-    console.log(
-      "=========================================="
-    );
+      console.log(
+        "=========================================="
+      );
 
-    console.log(
-      "🚀 TEST SERVER STARTED"
-    );
+      console.log(
+        "🚀 TEST SERVER STARTED"
+      );
 
-    console.log(
-      "📡 PORT:",
-      PORT
-    );
+      console.log(
+        "📡 PORT:",
+        PORT
+      );
 
-    console.log(
-      "=========================================="
-    );
+      console.log(
+        "=========================================="
+      );
 
-  }
-);
+    }
+  );
 
 
 server.on(
@@ -368,7 +491,18 @@ server.on(
     );
 
     console.error(
-      error
+      "Name:",
+      error?.name
+    );
+
+    console.error(
+      "Message:",
+      error?.message
+    );
+
+    console.error(
+      "Stack:",
+      error?.stack
     );
 
   }
@@ -459,7 +593,18 @@ const connectDatabase =
       );
 
       console.error(
-        error.message
+        "Name:",
+        error?.name
+      );
+
+      console.error(
+        "Message:",
+        error?.message
+      );
+
+      console.error(
+        "Stack:",
+        error?.stack
       );
 
     }
@@ -492,7 +637,7 @@ mongoose.connection.on(
     );
 
     console.error(
-      error.message
+      error?.message
     );
 
   }
