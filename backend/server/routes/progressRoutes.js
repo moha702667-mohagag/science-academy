@@ -16,7 +16,7 @@ getDashboardProgress,
 
 getWatchProgress
 
-} from "../controllers/progressController.js";
+} from "../controllers/ProgressController.js";
 
 const router = express.Router();
 
