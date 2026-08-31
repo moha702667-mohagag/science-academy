@@ -1,3 +1,4 @@
+
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -10,6 +11,7 @@ import courseRoutes from "./routes/courseRoutes.js";
 import homeworkRoutes from "./routes/homeworkRoutes.js";
 import classRoutes from "./routes/classRoutes.js";
 import examRoutes from "./routes/examRoutes.js";
+import progressRoutes from "./routes/progressRoutes.js";
 
 dotenv.config();
 
@@ -182,6 +184,34 @@ try {
 } catch (error) {
   console.error(
     "❌ EXAM ROUTES ERROR:"
+  );
+
+  console.error(error);
+
+  process.exit(1);
+}
+
+
+// ==========================================
+// PROGRESS ROUTES
+// ==========================================
+
+console.log("==========================================");
+console.log("📈 Progress Routes: loading...");
+console.log("==========================================");
+
+try {
+  app.use(
+    "/api/progress",
+    progressRoutes
+  );
+
+  console.log(
+    "📈 Progress Routes: LOADED ✅"
+  );
+} catch (error) {
+  console.error(
+    "❌ PROGRESS ROUTES ERROR:"
   );
 
   console.error(error);
@@ -412,6 +442,10 @@ const connectDatabase =
 
       console.log(
         "📝 Exam Routes test: SUCCESS ✅"
+      );
+
+      console.log(
+        "📈 Progress Routes test: SUCCESS ✅"
       );
 
       console.log(
