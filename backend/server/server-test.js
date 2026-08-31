@@ -85,10 +85,11 @@ const testStatus = {
   homeworkRoutes: false,
   classRoutes: false,
   examRoutes: false,
-
   progressRoutes: false,
+  questionRoutes: false,
 
   progressError: null,
+  questionError: null,
 
   database: false,
 };
@@ -296,12 +297,14 @@ app.get(
   (req, res) => {
 
     res.status(200).json({
+
       success: true,
 
       message:
         "Science Academy Test Server is running 🚀",
 
       testStatus,
+
     });
 
   }
@@ -332,6 +335,11 @@ app.get(
 
       progressRoutes:
         testStatus.progressRoutes
+          ? "loaded"
+          : "not loaded",
+
+      questionRoutes:
+        testStatus.questionRoutes
           ? "loaded"
           : "not loaded",
 
@@ -376,15 +384,37 @@ const server = app.listen(
   () => {
 
     console.log("");
-    console.log("==========================================");
-    console.log("🚀 TEST SERVER STARTED");
-    console.log("📡 PORT:", PORT);
-    console.log("==========================================");
+
+    console.log(
+      "=========================================="
+    );
+
+    console.log(
+      "🚀 TEST SERVER STARTED"
+    );
+
+    console.log(
+      "📡 PORT:",
+      PORT
+    );
+
+    console.log(
+      "=========================================="
+    );
 
     console.log("");
-    console.log("🌐 Server is now listening");
-    console.log("❤️ Health: /health");
-    console.log("🧪 Status: /test-status");
+
+    console.log(
+      "🌐 Server is now listening"
+    );
+
+    console.log(
+      "❤️ Health: /health"
+    );
+
+    console.log(
+      "🧪 Status: /test-status"
+    );
 
   }
 );
@@ -399,9 +429,18 @@ server.on(
   (error) => {
 
     console.error("");
-    console.error("==========================================");
-    console.error("❌ SERVER ERROR");
-    console.error("==========================================");
+
+    console.error(
+      "=========================================="
+    );
+
+    console.error(
+      "❌ SERVER ERROR"
+    );
+
+    console.error(
+      "=========================================="
+    );
 
     console.error(error);
 
@@ -418,7 +457,10 @@ const connectDatabase = async () => {
   if (!MONGO_URI) {
 
     console.error("");
-    console.error("❌ MONGO_URI is missing");
+
+    console.error(
+      "❌ MONGO_URI is missing"
+    );
 
     return;
 
@@ -427,9 +469,18 @@ const connectDatabase = async () => {
   try {
 
     console.log("");
-    console.log("==========================================");
-    console.log("⏳ CONNECTING TO MONGODB...");
-    console.log("==========================================");
+
+    console.log(
+      "=========================================="
+    );
+
+    console.log(
+      "⏳ CONNECTING TO MONGODB..."
+    );
+
+    console.log(
+      "=========================================="
+    );
 
     await mongoose.connect(
       MONGO_URI,
@@ -442,61 +493,107 @@ const connectDatabase = async () => {
     testStatus.database = true;
 
     console.log("");
-    console.log("🟢 MongoDB connected successfully");
+
+    console.log(
+      "🟢 MongoDB connected successfully"
+    );
 
     console.log("");
-    console.log("==========================================");
-    console.log("🧪 CURRENT TEST STATUS");
-    console.log("==========================================");
+
+    console.log(
+      "=========================================="
+    );
+
+    console.log(
+      "🧪 CURRENT TEST STATUS"
+    );
+
+    console.log(
+      "=========================================="
+    );
 
     console.log(
       "👤 User Model:",
-      testStatus.userModel ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.userModel
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "👨‍🏫 Teacher Model:",
-      testStatus.teacherModel ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.teacherModel
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "📝 Homework Model:",
-      testStatus.homeworkModel ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.homeworkModel
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "📚 Course Routes:",
-      testStatus.courseRoutes ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.courseRoutes
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "📝 Homework Routes:",
-      testStatus.homeworkRoutes ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.homeworkRoutes
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "👥 Class Routes:",
-      testStatus.classRoutes ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.classRoutes
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "📝 Exam Routes:",
-      testStatus.examRoutes ? "SUCCESS ✅" : "FAILED ❌"
+      testStatus.examRoutes
+        ? "SUCCESS ✅"
+        : "FAILED ❌"
     );
 
     console.log(
       "📈 Progress Routes:",
-      testStatus.progressRoutes ? "SUCCESS ✅" : "NOT TESTED ❌"
+      testStatus.progressRoutes
+        ? "SUCCESS ✅"
+        : "NOT TESTED ❌"
     );
 
-    console.log("==========================================");
+    console.log(
+      "❓ Question Routes:",
+      testStatus.questionRoutes
+        ? "SUCCESS ✅"
+        : "NOT TESTED ❌"
+    );
+
+    console.log(
+      "=========================================="
+    );
 
   } catch (error) {
 
     console.error("");
-    console.error("==========================================");
-    console.error("❌ MONGODB CONNECTION ERROR");
-    console.error("==========================================");
+
+    console.error(
+      "=========================================="
+    );
+
+    console.error(
+      "❌ MONGODB CONNECTION ERROR"
+    );
+
+    console.error(
+      "=========================================="
+    );
 
     console.error(error.message);
 
@@ -526,8 +623,14 @@ mongoose.connection.on(
   (error) => {
 
     console.error("");
-    console.error("🔴 MONGODB ERROR:");
-    console.error(error.message);
+
+    console.error(
+      "🔴 MONGODB ERROR:"
+    );
+
+    console.error(
+      error.message
+    );
 
   }
 );
@@ -553,13 +656,24 @@ mongoose.connection.on(
 const loadProgressRoutes = async () => {
 
   console.log("");
-  console.log("==========================================");
-  console.log("📈 PROGRESS ROUTES: loading...");
-  console.log("==========================================");
+
+  console.log(
+    "=========================================="
+  );
+
+  console.log(
+    "📈 PROGRESS ROUTES: loading..."
+  );
+
+  console.log(
+    "=========================================="
+  );
 
   try {
 
-    console.log("📈 Importing progressRoutes.js...");
+    console.log(
+      "📈 Importing progressRoutes.js..."
+    );
 
     const module =
       await import("./routes/progressRoutes.js");
@@ -609,9 +723,18 @@ const loadProgressRoutes = async () => {
       String(error);
 
     console.error("");
-    console.error("==========================================");
-    console.error("❌ PROGRESS ROUTES ERROR");
-    console.error("==========================================");
+
+    console.error(
+      "=========================================="
+    );
+
+    console.error(
+      "❌ PROGRESS ROUTES ERROR"
+    );
+
+    console.error(
+      "=========================================="
+    );
 
     console.error(
       "Message:",
@@ -619,7 +742,10 @@ const loadProgressRoutes = async () => {
     );
 
     console.error("");
-    console.error("FULL ERROR:");
+
+    console.error(
+      "FULL ERROR:"
+    );
 
     console.error(
       error?.stack ||
@@ -627,12 +753,136 @@ const loadProgressRoutes = async () => {
     );
 
     console.error("");
+
     console.error(
       "⚠️ Server will remain ONLINE so we can inspect the error."
     );
 
     console.error(
       "⚠️ Progress Routes were NOT registered."
+    );
+
+    console.error(
+      "=========================================="
+    );
+
+  }
+
+};
+
+
+// ======================================================
+// QUESTION ROUTES
+// LOAD AFTER SERVER STARTS
+// ======================================================
+
+const loadQuestionRoutes = async () => {
+
+  console.log("");
+
+  console.log(
+    "=========================================="
+  );
+
+  console.log(
+    "❓ QUESTION ROUTES: loading..."
+  );
+
+  console.log(
+    "=========================================="
+  );
+
+  try {
+
+    console.log(
+      "❓ Importing questionRoutes.js..."
+    );
+
+    const module =
+      await import("./routes/questionRoutes.js");
+
+    console.log(
+      "❓ questionRoutes.js imported successfully"
+    );
+
+    const questionRoutes =
+      module.default;
+
+    if (!questionRoutes) {
+
+      throw new Error(
+        "questionRoutes.js does not have a default export"
+      );
+
+    }
+
+    console.log(
+      "❓ Registering /api/questions..."
+    );
+
+    app.use(
+      "/api/questions",
+      questionRoutes
+    );
+
+    testStatus.questionRoutes = true;
+    testStatus.questionError = null;
+
+    console.log(
+      "❓ Question Routes: LOADED ✅"
+    );
+
+    console.log(
+      "=========================================="
+    );
+
+  } catch (error) {
+
+    testStatus.questionRoutes = false;
+
+    testStatus.questionError =
+      error?.stack ||
+      error?.message ||
+      String(error);
+
+    console.error("");
+
+    console.error(
+      "=========================================="
+    );
+
+    console.error(
+      "❌ QUESTION ROUTES ERROR"
+    );
+
+    console.error(
+      "=========================================="
+    );
+
+    console.error(
+      "Message:",
+      error?.message
+    );
+
+    console.error("");
+
+    console.error(
+      "FULL ERROR:"
+    );
+
+    console.error(
+      error?.stack ||
+      error
+    );
+
+    console.error("");
+
+    console.error(
+      "⚠️ Server will remain ONLINE so we can inspect the error."
+    );
+
+    console.error(
+      "⚠️ Question Routes were NOT registered."
     );
 
     console.error(
@@ -674,3 +924,5 @@ app.use(
 connectDatabase();
 
 loadProgressRoutes();
+
+loadQuestionRoutes();
