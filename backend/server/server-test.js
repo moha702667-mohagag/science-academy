@@ -7,6 +7,7 @@ import Teacher from "./models/Teacher.js";
 import Homework from "./models/Homework.js";
 
 import courseRoutes from "./routes/courseRoutes.js";
+import homeworkRoutes from "./routes/homeworkRoutes.js";
 
 dotenv.config();
 
@@ -84,7 +85,10 @@ console.log("📚 Course Routes: loading...");
 console.log("==========================================");
 
 try {
-  app.use("/api/courses", courseRoutes);
+  app.use(
+    "/api/courses",
+    courseRoutes
+  );
 
   console.log(
     "📚 Course Routes: LOADED ✅"
@@ -92,6 +96,34 @@ try {
 } catch (error) {
   console.error(
     "❌ COURSE ROUTES ERROR:"
+  );
+
+  console.error(error);
+
+  process.exit(1);
+}
+
+
+// ==========================================
+// HOMEWORK ROUTES
+// ==========================================
+
+console.log("==========================================");
+console.log("📝 Homework Routes: loading...");
+console.log("==========================================");
+
+try {
+  app.use(
+    "/api/homeworks",
+    homeworkRoutes
+  );
+
+  console.log(
+    "📝 Homework Routes: LOADED ✅"
+  );
+} catch (error) {
+  console.error(
+    "❌ HOMEWORK ROUTES ERROR:"
   );
 
   console.error(error);
@@ -146,12 +178,14 @@ app.use(
 app.get(
   "/",
   (req, res) => {
+
     res.status(200).json({
       success: true,
 
       message:
         "Science Academy Test Server is running 🚀",
     });
+
   }
 );
 
@@ -163,6 +197,7 @@ app.get(
 app.get(
   "/health",
   (req, res) => {
+
     res.status(200).json({
       success: true,
 
@@ -176,6 +211,7 @@ app.get(
           ? "connected"
           : "disconnected",
     });
+
   }
 );
 
@@ -186,6 +222,7 @@ app.get(
 
 app.use(
   (req, res) => {
+
     res.status(404).json({
       success: false,
 
@@ -195,6 +232,7 @@ app.use(
       path:
         req.originalUrl,
     });
+
   }
 );
 
@@ -211,6 +249,7 @@ const server = app.listen(
   PORT,
   "0.0.0.0",
   () => {
+
     console.log(
       "=========================================="
     );
@@ -227,6 +266,7 @@ const server = app.listen(
     console.log(
       "=========================================="
     );
+
   }
 );
 
@@ -234,6 +274,7 @@ const server = app.listen(
 server.on(
   "error",
   (error) => {
+
     console.error(
       "❌ SERVER ERROR:"
     );
@@ -241,6 +282,7 @@ server.on(
     console.error(
       error
     );
+
   }
 );
 
@@ -303,6 +345,10 @@ const connectDatabase =
       );
 
       console.log(
+        "📝 Homework Routes test: SUCCESS ✅"
+      );
+
+      console.log(
         "=========================================="
       );
 
@@ -315,7 +361,9 @@ const connectDatabase =
       console.error(
         error.message
       );
+
     }
+
   };
 
 
