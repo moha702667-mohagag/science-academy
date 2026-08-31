@@ -18,6 +18,12 @@ const app = express();
 const PORT = Number(process.env.PORT) || 5000;
 const MONGO_URI = process.env.MONGO_URI || "";
 
+
+// ======================================================
+// HEADER
+// ======================================================
+
+console.log("");
 console.log("==========================================");
 console.log("🧪 SCIENCE ACADEMY DEPLOYMENT TEST");
 console.log("==========================================");
@@ -27,345 +33,28 @@ console.log("dotenv: ✅");
 console.log("mongoose: ✅");
 
 
-// ==========================================
-// USER MODEL
-// ==========================================
-
-console.log("==========================================");
-console.log("👤 User Model: loading...");
-console.log("==========================================");
-
-try {
-  console.log("👤 User Model: LOADED ✅");
-} catch (error) {
-  console.error("❌ USER MODEL ERROR:");
-  console.error(error);
-  process.exit(1);
-}
-
-
-// ==========================================
-// TEACHER MODEL
-// ==========================================
-
-console.log("==========================================");
-console.log("👨‍🏫 Teacher Model: loading...");
-console.log("==========================================");
-
-try {
-  console.log("👨‍🏫 Teacher Model: LOADED ✅");
-} catch (error) {
-  console.error("❌ TEACHER MODEL ERROR:");
-  console.error(error);
-  process.exit(1);
-}
-
-
-// ==========================================
-// HOMEWORK MODEL
-// ==========================================
-
-console.log("==========================================");
-console.log("📝 Homework Model: loading...");
-console.log("==========================================");
-
-try {
-  console.log("📝 Homework Model: LOADED ✅");
-} catch (error) {
-  console.error("❌ HOMEWORK MODEL ERROR:");
-  console.error(error);
-  process.exit(1);
-}
-
-
-// ==========================================
-// COURSE ROUTES
-// ==========================================
-
-console.log("==========================================");
-console.log("📚 Course Routes: loading...");
-console.log("==========================================");
-
-try {
-  app.use(
-    "/api/courses",
-    courseRoutes
-  );
-
-  console.log(
-    "📚 Course Routes: LOADED ✅"
-  );
-
-} catch (error) {
-
-  console.error(
-    "❌ COURSE ROUTES ERROR:"
-  );
-
-  console.error(
-    "Name:",
-    error?.name
-  );
-
-  console.error(
-    "Message:",
-    error?.message
-  );
-
-  console.error(
-    "Stack:",
-    error?.stack
-  );
-
-  process.exit(1);
-}
-
-
-// ==========================================
-// HOMEWORK ROUTES
-// ==========================================
-
-console.log("==========================================");
-console.log("📝 Homework Routes: loading...");
-console.log("==========================================");
-
-try {
-  app.use(
-    "/api/homeworks",
-    homeworkRoutes
-  );
-
-  console.log(
-    "📝 Homework Routes: LOADED ✅"
-  );
-
-} catch (error) {
-
-  console.error(
-    "❌ HOMEWORK ROUTES ERROR:"
-  );
-
-  console.error(
-    "Name:",
-    error?.name
-  );
-
-  console.error(
-    "Message:",
-    error?.message
-  );
-
-  console.error(
-    "Stack:",
-    error?.stack
-  );
-
-  process.exit(1);
-}
-
-
-// ==========================================
-// CLASS ROUTES
-// ==========================================
-
-console.log("==========================================");
-console.log("👥 Class Routes: loading...");
-console.log("==========================================");
-
-try {
-  app.use(
-    "/api/classes",
-    classRoutes
-  );
-
-  console.log(
-    "👥 Class Routes: LOADED ✅"
-  );
-
-} catch (error) {
-
-  console.error(
-    "❌ CLASS ROUTES ERROR:"
-  );
-
-  console.error(
-    "Name:",
-    error?.name
-  );
-
-  console.error(
-    "Message:",
-    error?.message
-  );
-
-  console.error(
-    "Stack:",
-    error?.stack
-  );
-
-  process.exit(1);
-}
-
-
-// ==========================================
-// EXAM ROUTES
-// ==========================================
-
-console.log("==========================================");
-console.log("📝 Exam Routes: loading...");
-console.log("==========================================");
-
-try {
-  app.use(
-    "/api/exams",
-    examRoutes
-  );
-
-  console.log(
-    "📝 Exam Routes: LOADED ✅"
-  );
-
-} catch (error) {
-
-  console.error(
-    "❌ EXAM ROUTES ERROR:"
-  );
-
-  console.error(
-    "Name:",
-    error?.name
-  );
-
-  console.error(
-    "Message:",
-    error?.message
-  );
-
-  console.error(
-    "Stack:",
-    error?.stack
-  );
-
-  process.exit(1);
-}
-
-
-// ==========================================
-// PROGRESS ROUTES
-// DYNAMIC IMPORT FOR DEBUGGING
-// ==========================================
-
-console.log("==========================================");
-console.log("📈 Progress Routes: loading...");
-console.log("==========================================");
-
-try {
-
-  console.log(
-    "📈 Importing progressRoutes.js..."
-  );
-
-  const progressModule =
-    await import(
-      "./routes/progressRoutes.js"
-    );
-
-  console.log(
-    "📈 progressRoutes.js imported successfully ✅"
-  );
-
-  const progressRoutes =
-    progressModule.default;
-
-  if (!progressRoutes) {
-
-    throw new Error(
-      "progressRoutes.js does not export a default router."
-    );
-
-  }
-
-  console.log(
-    "📈 Progress Router found ✅"
-  );
-
-  app.use(
-    "/api/progress",
-    progressRoutes
-  );
-
-  console.log(
-    "📈 Progress Routes: LOADED ✅"
-  );
-
-} catch (error) {
-
-  console.error("");
-  console.error(
-    "=========================================="
-  );
-  console.error(
-    "❌❌❌ PROGRESS ROUTES FAILED ❌❌❌"
-  );
-  console.error(
-    "=========================================="
-  );
-
-  console.error(
-    "Error Name:",
-    error?.name
-  );
-
-  console.error(
-    "Error Message:",
-    error?.message
-  );
-
-  console.error(
-    "Error Code:",
-    error?.code
-  );
-
-  console.error(
-    "Error Stack:"
-  );
-
-  console.error(
-    error?.stack
-  );
-
-  console.error(
-    "=========================================="
-  );
-
-  process.exit(1);
-}
-
-
-// ==========================================
+// ======================================================
 // ENVIRONMENT
-// ==========================================
+// ======================================================
 
+console.log("");
 console.log("==========================================");
-console.log("📋 Environment");
+console.log("📋 ENVIRONMENT");
 console.log("==========================================");
 
-console.log(
-  "PORT:",
-  PORT
-);
+console.log("PORT:", PORT);
 
 console.log(
   "MONGO_URI:",
-  MONGO_URI
-    ? "SET ✅"
-    : "NOT SET ❌"
+  MONGO_URI ? "SET ✅" : "NOT SET ❌"
 );
 
+console.log("==========================================");
 
-// ==========================================
+
+// ======================================================
 // BODY PARSER
-// ==========================================
+// ======================================================
 
 app.use(
   express.json({
@@ -381,9 +70,226 @@ app.use(
 );
 
 
-// ==========================================
+// ======================================================
+// TEST STATUS
+// ======================================================
+
+const testStatus = {
+  server: true,
+
+  userModel: false,
+  teacherModel: false,
+  homeworkModel: false,
+
+  courseRoutes: false,
+  homeworkRoutes: false,
+  classRoutes: false,
+  examRoutes: false,
+
+  progressRoutes: false,
+
+  progressError: null,
+
+  database: false,
+};
+
+
+// ======================================================
+// USER MODEL
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("👤 User Model: loading...");
+console.log("==========================================");
+
+try {
+
+  if (!User) {
+    throw new Error("User model is undefined");
+  }
+
+  testStatus.userModel = true;
+
+  console.log("👤 User Model: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ USER MODEL ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// TEACHER MODEL
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("👨‍🏫 Teacher Model: loading...");
+console.log("==========================================");
+
+try {
+
+  if (!Teacher) {
+    throw new Error("Teacher model is undefined");
+  }
+
+  testStatus.teacherModel = true;
+
+  console.log("👨‍🏫 Teacher Model: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ TEACHER MODEL ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// HOMEWORK MODEL
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("📝 Homework Model: loading...");
+console.log("==========================================");
+
+try {
+
+  if (!Homework) {
+    throw new Error("Homework model is undefined");
+  }
+
+  testStatus.homeworkModel = true;
+
+  console.log("📝 Homework Model: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ HOMEWORK MODEL ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// COURSE ROUTES
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("📚 Course Routes: loading...");
+console.log("==========================================");
+
+try {
+
+  app.use(
+    "/api/courses",
+    courseRoutes
+  );
+
+  testStatus.courseRoutes = true;
+
+  console.log("📚 Course Routes: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ COURSE ROUTES ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// HOMEWORK ROUTES
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("📝 Homework Routes: loading...");
+console.log("==========================================");
+
+try {
+
+  app.use(
+    "/api/homeworks",
+    homeworkRoutes
+  );
+
+  testStatus.homeworkRoutes = true;
+
+  console.log("📝 Homework Routes: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ HOMEWORK ROUTES ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// CLASS ROUTES
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("👥 Class Routes: loading...");
+console.log("==========================================");
+
+try {
+
+  app.use(
+    "/api/classes",
+    classRoutes
+  );
+
+  testStatus.classRoutes = true;
+
+  console.log("👥 Class Routes: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ CLASS ROUTES ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
+// EXAM ROUTES
+// ======================================================
+
+console.log("");
+console.log("==========================================");
+console.log("📝 Exam Routes: loading...");
+console.log("==========================================");
+
+try {
+
+  app.use(
+    "/api/exams",
+    examRoutes
+  );
+
+  testStatus.examRoutes = true;
+
+  console.log("📝 Exam Routes: LOADED ✅");
+
+} catch (error) {
+
+  console.error("❌ EXAM ROUTES ERROR:");
+  console.error(error);
+
+}
+
+
+// ======================================================
 // ROOT
-// ==========================================
+// ======================================================
 
 app.get(
   "/",
@@ -394,21 +300,24 @@ app.get(
 
       message:
         "Science Academy Test Server is running 🚀",
+
+      testStatus,
     });
 
   }
 );
 
 
-// ==========================================
+// ======================================================
 // HEALTH
-// ==========================================
+// ======================================================
 
 app.get(
   "/health",
   (req, res) => {
 
     res.status(200).json({
+
       success: true,
 
       status: "ok",
@@ -420,201 +329,185 @@ app.get(
         mongoose.connection.readyState === 1
           ? "connected"
           : "disconnected",
+
+      progressRoutes:
+        testStatus.progressRoutes
+          ? "loaded"
+          : "not loaded",
+
     });
 
   }
 );
 
 
-// ==========================================
-// 404
-// ==========================================
+// ======================================================
+// TEST STATUS
+// ======================================================
 
-app.use(
+app.get(
+  "/test-status",
   (req, res) => {
 
-    res.status(404).json({
-      success: false,
+    res.status(200).json({
 
-      message:
-        "Route not found",
+      success: true,
 
-      path:
-        req.originalUrl,
+      ...testStatus,
+
     });
 
   }
 );
 
 
-// ==========================================
-// START SERVER
-// ==========================================
+// ======================================================
+// START SERVER FIRST
+// ======================================================
 
+console.log("");
 console.log("==========================================");
 console.log("🚀 TEST SERVER STARTING");
 console.log("==========================================");
 
-const server =
-  app.listen(
-    PORT,
-    "0.0.0.0",
-    () => {
+const server = app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
 
-      console.log(
-        "=========================================="
-      );
+    console.log("");
+    console.log("==========================================");
+    console.log("🚀 TEST SERVER STARTED");
+    console.log("📡 PORT:", PORT);
+    console.log("==========================================");
 
-      console.log(
-        "🚀 TEST SERVER STARTED"
-      );
+    console.log("");
+    console.log("🌐 Server is now listening");
+    console.log("❤️ Health: /health");
+    console.log("🧪 Status: /test-status");
 
-      console.log(
-        "📡 PORT:",
-        PORT
-      );
+  }
+);
 
-      console.log(
-        "=========================================="
-      );
 
-    }
-  );
-
+// ======================================================
+// SERVER ERROR
+// ======================================================
 
 server.on(
   "error",
   (error) => {
 
-    console.error(
-      "❌ SERVER ERROR:"
-    );
+    console.error("");
+    console.error("==========================================");
+    console.error("❌ SERVER ERROR");
+    console.error("==========================================");
 
-    console.error(
-      "Name:",
-      error?.name
-    );
-
-    console.error(
-      "Message:",
-      error?.message
-    );
-
-    console.error(
-      "Stack:",
-      error?.stack
-    );
+    console.error(error);
 
   }
 );
 
 
-// ==========================================
+// ======================================================
 // DATABASE
-// ==========================================
+// ======================================================
 
-const connectDatabase =
-  async () => {
+const connectDatabase = async () => {
 
-    if (!MONGO_URI) {
+  if (!MONGO_URI) {
 
-      console.error(
-        "❌ MONGO_URI is missing"
-      );
+    console.error("");
+    console.error("❌ MONGO_URI is missing");
 
-      return;
-    }
+    return;
 
-    try {
+  }
 
-      console.log(
-        "⏳ Connecting to MongoDB..."
-      );
+  try {
 
-      await mongoose.connect(
-        MONGO_URI,
-        {
-          serverSelectionTimeoutMS:
-            10000,
+    console.log("");
+    console.log("==========================================");
+    console.log("⏳ CONNECTING TO MONGODB...");
+    console.log("==========================================");
 
-          connectTimeoutMS:
-            10000,
-        }
-      );
+    await mongoose.connect(
+      MONGO_URI,
+      {
+        serverSelectionTimeoutMS: 10000,
+        connectTimeoutMS: 10000,
+      }
+    );
 
-      console.log(
-        "🟢 MongoDB connected successfully"
-      );
+    testStatus.database = true;
 
-      console.log(
-        "=========================================="
-      );
+    console.log("");
+    console.log("🟢 MongoDB connected successfully");
 
-      console.log(
-        "👤 User Model test: SUCCESS ✅"
-      );
+    console.log("");
+    console.log("==========================================");
+    console.log("🧪 CURRENT TEST STATUS");
+    console.log("==========================================");
 
-      console.log(
-        "👨‍🏫 Teacher Model test: SUCCESS ✅"
-      );
+    console.log(
+      "👤 User Model:",
+      testStatus.userModel ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "📝 Homework Model test: SUCCESS ✅"
-      );
+    console.log(
+      "👨‍🏫 Teacher Model:",
+      testStatus.teacherModel ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "📚 Course Routes test: SUCCESS ✅"
-      );
+    console.log(
+      "📝 Homework Model:",
+      testStatus.homeworkModel ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "📝 Homework Routes test: SUCCESS ✅"
-      );
+    console.log(
+      "📚 Course Routes:",
+      testStatus.courseRoutes ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "👥 Class Routes test: SUCCESS ✅"
-      );
+    console.log(
+      "📝 Homework Routes:",
+      testStatus.homeworkRoutes ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "📝 Exam Routes test: SUCCESS ✅"
-      );
+    console.log(
+      "👥 Class Routes:",
+      testStatus.classRoutes ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "📈 Progress Routes test: SUCCESS ✅"
-      );
+    console.log(
+      "📝 Exam Routes:",
+      testStatus.examRoutes ? "SUCCESS ✅" : "FAILED ❌"
+    );
 
-      console.log(
-        "=========================================="
-      );
+    console.log(
+      "📈 Progress Routes:",
+      testStatus.progressRoutes ? "SUCCESS ✅" : "NOT TESTED ❌"
+    );
 
-    } catch (error) {
+    console.log("==========================================");
 
-      console.error(
-        "❌ MongoDB CONNECTION ERROR:"
-      );
+  } catch (error) {
 
-      console.error(
-        "Name:",
-        error?.name
-      );
+    console.error("");
+    console.error("==========================================");
+    console.error("❌ MONGODB CONNECTION ERROR");
+    console.error("==========================================");
 
-      console.error(
-        "Message:",
-        error?.message
-      );
+    console.error(error.message);
 
-      console.error(
-        "Stack:",
-        error?.stack
-      );
+  }
 
-    }
-
-  };
+};
 
 
-// ==========================================
+// ======================================================
 // MONGOOSE EVENTS
-// ==========================================
+// ======================================================
 
 mongoose.connection.on(
   "connected",
@@ -632,13 +525,9 @@ mongoose.connection.on(
   "error",
   (error) => {
 
-    console.error(
-      "🔴 MongoDB ERROR:"
-    );
-
-    console.error(
-      error?.message
-    );
+    console.error("");
+    console.error("🔴 MONGODB ERROR:");
+    console.error(error.message);
 
   }
 );
@@ -656,8 +545,132 @@ mongoose.connection.on(
 );
 
 
-// ==========================================
-// CONNECT DATABASE
-// ==========================================
+// ======================================================
+// PROGRESS ROUTES
+// LOAD AFTER SERVER STARTS
+// ======================================================
+
+const loadProgressRoutes = async () => {
+
+  console.log("");
+  console.log("==========================================");
+  console.log("📈 PROGRESS ROUTES: loading...");
+  console.log("==========================================");
+
+  try {
+
+    console.log("📈 Importing progressRoutes.js...");
+
+    const module =
+      await import("./routes/progressRoutes.js");
+
+    console.log(
+      "📈 progressRoutes.js imported successfully"
+    );
+
+    const progressRoutes =
+      module.default;
+
+    if (!progressRoutes) {
+
+      throw new Error(
+        "progressRoutes.js does not have a default export"
+      );
+
+    }
+
+    console.log(
+      "📈 Registering /api/progress..."
+    );
+
+    app.use(
+      "/api/progress",
+      progressRoutes
+    );
+
+    testStatus.progressRoutes = true;
+    testStatus.progressError = null;
+
+    console.log(
+      "📈 Progress Routes: LOADED ✅"
+    );
+
+    console.log(
+      "=========================================="
+    );
+
+  } catch (error) {
+
+    testStatus.progressRoutes = false;
+
+    testStatus.progressError =
+      error?.stack ||
+      error?.message ||
+      String(error);
+
+    console.error("");
+    console.error("==========================================");
+    console.error("❌ PROGRESS ROUTES ERROR");
+    console.error("==========================================");
+
+    console.error(
+      "Message:",
+      error?.message
+    );
+
+    console.error("");
+    console.error("FULL ERROR:");
+
+    console.error(
+      error?.stack ||
+      error
+    );
+
+    console.error("");
+    console.error(
+      "⚠️ Server will remain ONLINE so we can inspect the error."
+    );
+
+    console.error(
+      "⚠️ Progress Routes were NOT registered."
+    );
+
+    console.error(
+      "=========================================="
+    );
+
+  }
+
+};
+
+
+// ======================================================
+// 404
+// ======================================================
+
+app.use(
+  (req, res) => {
+
+    res.status(404).json({
+
+      success: false,
+
+      message:
+        "Route not found",
+
+      path:
+        req.originalUrl,
+
+    });
+
+  }
+);
+
+
+// ======================================================
+// START TESTS
+// ======================================================
 
 connectDatabase();
+
+loadProgressRoutes();
