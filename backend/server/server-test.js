@@ -9,6 +9,7 @@ import Homework from "./models/Homework.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import homeworkRoutes from "./routes/homeworkRoutes.js";
 import classRoutes from "./routes/classRoutes.js";
+import examRoutes from "./routes/examRoutes.js";
 
 dotenv.config();
 
@@ -153,6 +154,34 @@ try {
 } catch (error) {
   console.error(
     "❌ CLASS ROUTES ERROR:"
+  );
+
+  console.error(error);
+
+  process.exit(1);
+}
+
+
+// ==========================================
+// EXAM ROUTES
+// ==========================================
+
+console.log("==========================================");
+console.log("📝 Exam Routes: loading...");
+console.log("==========================================");
+
+try {
+  app.use(
+    "/api/exams",
+    examRoutes
+  );
+
+  console.log(
+    "📝 Exam Routes: LOADED ✅"
+  );
+} catch (error) {
+  console.error(
+    "❌ EXAM ROUTES ERROR:"
   );
 
   console.error(error);
@@ -379,6 +408,10 @@ const connectDatabase =
 
       console.log(
         "👥 Class Routes test: SUCCESS ✅"
+      );
+
+      console.log(
+        "📝 Exam Routes test: SUCCESS ✅"
       );
 
       console.log(
