@@ -6,6 +6,8 @@ import User from "./models/User.js";
 import Teacher from "./models/Teacher.js";
 import Homework from "./models/Homework.js";
 
+import courseRoutes from "./routes/courseRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -74,6 +76,31 @@ try {
 
 
 // ==========================================
+// COURSE ROUTES
+// ==========================================
+
+console.log("==========================================");
+console.log("📚 Course Routes: loading...");
+console.log("==========================================");
+
+try {
+  app.use("/api/courses", courseRoutes);
+
+  console.log(
+    "📚 Course Routes: LOADED ✅"
+  );
+} catch (error) {
+  console.error(
+    "❌ COURSE ROUTES ERROR:"
+  );
+
+  console.error(error);
+
+  process.exit(1);
+}
+
+
+// ==========================================
 // ENVIRONMENT
 // ==========================================
 
@@ -81,41 +108,95 @@ console.log("==========================================");
 console.log("📋 Environment");
 console.log("==========================================");
 
-console.log("PORT:", PORT);
+console.log(
+  "PORT:",
+  PORT
+);
 
 console.log(
   "MONGO_URI:",
-  MONGO_URI ? "SET ✅" : "NOT SET ❌"
+  MONGO_URI
+    ? "SET ✅"
+    : "NOT SET ❌"
 );
 
 
 // ==========================================
-// ROUTES
+// BODY PARSER
 // ==========================================
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message:
-      "Science Academy Test Server is running 🚀",
-  });
-});
+app.use(
+  express.json({
+    limit: "10mb",
+  })
+);
+
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "10mb",
+  })
+);
 
 
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    status: "ok",
+// ==========================================
+// ROOT
+// ==========================================
 
-    message:
-      "Science Academy Test Server is healthy 🚀",
+app.get(
+  "/",
+  (req, res) => {
+    res.status(200).json({
+      success: true,
 
-    database:
-      mongoose.connection.readyState === 1
-        ? "connected"
-        : "disconnected",
-  });
-});
+      message:
+        "Science Academy Test Server is running 🚀",
+    });
+  }
+);
+
+
+// ==========================================
+// HEALTH
+// ==========================================
+
+app.get(
+  "/health",
+  (req, res) => {
+    res.status(200).json({
+      success: true,
+
+      status: "ok",
+
+      message:
+        "Science Academy Test Server is healthy 🚀",
+
+      database:
+        mongoose.connection.readyState === 1
+          ? "connected"
+          : "disconnected",
+    });
+  }
+);
+
+
+// ==========================================
+// 404
+// ==========================================
+
+app.use(
+  (req, res) => {
+    res.status(404).json({
+      success: false,
+
+      message:
+        "Route not found",
+
+      path:
+        req.originalUrl,
+    });
+  }
+);
 
 
 // ==========================================
@@ -130,56 +211,112 @@ const server = app.listen(
   PORT,
   "0.0.0.0",
   () => {
-    console.log("==========================================");
-    console.log("🚀 TEST SERVER STARTED");
-    console.log("📡 PORT:", PORT);
-    console.log("==========================================");
+    console.log(
+      "=========================================="
+    );
+
+    console.log(
+      "🚀 TEST SERVER STARTED"
+    );
+
+    console.log(
+      "📡 PORT:",
+      PORT
+    );
+
+    console.log(
+      "=========================================="
+    );
   }
 );
 
 
-server.on("error", (error) => {
-  console.error("❌ SERVER ERROR:");
-  console.error(error);
-});
+server.on(
+  "error",
+  (error) => {
+    console.error(
+      "❌ SERVER ERROR:"
+    );
+
+    console.error(
+      error
+    );
+  }
+);
 
 
 // ==========================================
 // DATABASE
 // ==========================================
 
-const connectDatabase = async () => {
-  if (!MONGO_URI) {
-    console.error("❌ MONGO_URI is missing");
-    return;
-  }
+const connectDatabase =
+  async () => {
 
-  try {
-    console.log("⏳ Connecting to MongoDB...");
+    if (!MONGO_URI) {
 
-    await mongoose.connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 10000,
-      connectTimeoutMS: 10000,
-    });
+      console.error(
+        "❌ MONGO_URI is missing"
+      );
 
-    console.log(
-      "🟢 MongoDB connected successfully"
-    );
+      return;
+    }
 
-    console.log("==========================================");
-    console.log("👤 User Model test: SUCCESS ✅");
-    console.log("👨‍🏫 Teacher Model test: SUCCESS ✅");
-    console.log("📝 Homework Model test: SUCCESS ✅");
-    console.log("==========================================");
+    try {
 
-  } catch (error) {
-    console.error(
-      "❌ MongoDB CONNECTION ERROR:"
-    );
+      console.log(
+        "⏳ Connecting to MongoDB..."
+      );
 
-    console.error(error.message);
-  }
-};
+      await mongoose.connect(
+        MONGO_URI,
+        {
+          serverSelectionTimeoutMS:
+            10000,
+
+          connectTimeoutMS:
+            10000,
+        }
+      );
+
+      console.log(
+        "🟢 MongoDB connected successfully"
+      );
+
+      console.log(
+        "=========================================="
+      );
+
+      console.log(
+        "👤 User Model test: SUCCESS ✅"
+      );
+
+      console.log(
+        "👨‍🏫 Teacher Model test: SUCCESS ✅"
+      );
+
+      console.log(
+        "📝 Homework Model test: SUCCESS ✅"
+      );
+
+      console.log(
+        "📚 Course Routes test: SUCCESS ✅"
+      );
+
+      console.log(
+        "=========================================="
+      );
+
+    } catch (error) {
+
+      console.error(
+        "❌ MongoDB CONNECTION ERROR:"
+      );
+
+      console.error(
+        error.message
+      );
+    }
+  };
 
 
 // ==========================================
@@ -189,9 +326,11 @@ const connectDatabase = async () => {
 mongoose.connection.on(
   "connected",
   () => {
+
     console.log(
       "🟢 MongoDB connection established"
     );
+
   }
 );
 
@@ -199,6 +338,7 @@ mongoose.connection.on(
 mongoose.connection.on(
   "error",
   (error) => {
+
     console.error(
       "🔴 MongoDB ERROR:"
     );
@@ -206,6 +346,7 @@ mongoose.connection.on(
     console.error(
       error.message
     );
+
   }
 );
 
@@ -213,15 +354,17 @@ mongoose.connection.on(
 mongoose.connection.on(
   "disconnected",
   () => {
+
     console.log(
       "🟡 MongoDB disconnected"
     );
+
   }
 );
 
 
 // ==========================================
-// CONNECT
+// CONNECT DATABASE
 // ==========================================
 
 connectDatabase();
