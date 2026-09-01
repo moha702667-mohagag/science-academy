@@ -83,424 +83,344 @@ const normalizeRemainingTime = (value) => {
 // ======================================================
 
 export const startExam = async (req, res) => {
-
   try {
-
     const { examId } = req.params;
-
     const studentId = req.user.id;
 
-
-    // ==================================================
-    // جلب الامتحان
-    // ==================================================
-
-    const exam = await Exam.findById(
-      examId
-    );
-
+    const exam = await Exam.findById(examId);
 
     if (!exam) {
-
       return res.status(404).json({
-
         success: false,
-
-        message: "Exam not found",
-
+        message: "الامتحان غير موجود",
       });
-
     }
 
+    if (exam.status !== "published") {
+      return res.status(400).json({
+        success: false,
+        message: "الامتحان غير منشور",
+      });
+    }
 
-    // ==================================================
-    // التأكد أن الامتحان منشور
-    // ==================================================
+    // ================================
+    // CHECK EXAM DURATION
+    // ================================
+
+    const durationMinutes = Number(exam.duration);
 
     if (
-      exam.status !== "published"
+      !Number.isFinite(durationMinutes) ||
+      durationMinutes <= 0
     ) {
+      console.error("INVALID EXAM DURATION:", {
+        examId,
+        examTitle: exam.title,
+        duration: exam.duration,
+      });
 
       return res.status(400).json({
-
         success: false,
-
-        message: "Exam not available",
-
-      });
-
-    }
-
-
-    // ==================================================
-    // البحث عن محاولة مفتوحة أو متوقفة
-    // ==================================================
-
-    let oldAttempt =
-      await ExamAttempt.findOne({
-
-        studentId,
-
-        examId,
-
-        status: {
-          $in: [
-            "in_progress",
-            "paused",
-          ],
-        },
-
-      });
-
-
-    // ==================================================
-    // لو فيه محاولة قديمة
-    // ==================================================
-
-    if (oldAttempt) {
-
-      // ----------------------------------------------
-      // لو Paused
-      // ----------------------------------------------
-
-      if (
-        oldAttempt.status === "paused"
-      ) {
-
-        return res.json({
-
-          success: true,
-
-          resumed: false,
-
-          paused: true,
-
-          expired: false,
-
-          attempt: oldAttempt,
-
-        });
-
-      }
-
-
-      // ----------------------------------------------
-      // لو In Progress
-      // ----------------------------------------------
-
-      if (
-        oldAttempt.status ===
-        "in_progress"
-      ) {
-
-        const now = new Date();
-
-
-        // ------------------------------------------
-        // التأكد من انتهاء الوقت
-        // ------------------------------------------
-
-        if (
-          oldAttempt.expiresAt &&
-          now >= oldAttempt.expiresAt
-        ) {
-
-          oldAttempt.remainingTime = 0;
-
-          oldAttempt.status =
-            "submitted";
-
-          oldAttempt.finishedAt =
-            now;
-
-          oldAttempt.timeTaken =
-            oldAttempt.startedAt
-              ? Math.floor(
-                  (
-                    now -
-                    oldAttempt.startedAt
-                  ) / 1000
-                )
-              : 0;
-
-          oldAttempt.isAutoSubmitted =
-            true;
-
-          oldAttempt.expiresAt =
-            null;
-
-          await oldAttempt.save();
-
-
-          return res.json({
-
-            success: true,
-
-            resumed: false,
-
-            paused: false,
-
-            expired: true,
-
-            attempt: oldAttempt,
-
-          });
-
-        }
-
-
-        // ------------------------------------------
-        // المحاولة ما زالت شغالة
-        // ------------------------------------------
-
-        return res.json({
-
-          success: true,
-
-          resumed: true,
-
-          paused: false,
-
-          expired: false,
-
-          attempt: oldAttempt,
-
-        });
-
-      }
-
-    }
-
-
-    // ==================================================
-    // مفيش محاولة مفتوحة
-    // نحسب عدد المحاولات السابقة
-    // ==================================================
-
-    const attemptsCount =
-      await ExamAttempt.countDocuments({
-
-        studentId,
-
-        examId,
-
-      });
-
-
-    const maxAttempts =
-      exam.maxAttempts || 1;
-
-
-    // ==================================================
-    // هل استنفد المحاولات؟
-    // ==================================================
-
-    if (
-      attemptsCount >= maxAttempts
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
         message:
-          "Maximum attempts reached",
-
+          "مدة الامتحان غير صحيحة. من فضلك تأكد أن مدة الامتحان أكبر من صفر دقيقة.",
       });
-
     }
 
+    const durationSeconds = Math.floor(durationMinutes * 60);
 
-    // ==================================================
-    // جلب الأسئلة
-    // ==================================================
+    console.log("========== START EXAM ==========");
+    console.log({
+      examId,
+      studentId,
+      examTitle: exam.title,
+      durationMinutes,
+      durationSeconds,
+    });
 
-    let questions =
-      await Question.find({
+    // ================================
+    // CHECK EXISTING ATTEMPT
+    // ================================
 
-        examId,
+    let attempt = await ExamAttempt.findOne({
+      studentId,
+      examId,
+      status: { $in: ["in_progress", "paused"] },
+    }).sort({ createdAt: -1 });
 
-        isActive: true,
-
-      }).sort({
-
-        order: 1,
-
+    if (attempt) {
+      console.log("EXISTING ATTEMPT FOUND:", {
+        attemptId: attempt._id,
+        status: attempt.status,
+        remainingTime: attempt.remainingTime,
+        expiresAt: attempt.expiresAt,
+        startedAt: attempt.startedAt,
       });
 
+      // =================================
+      // PAUSED ATTEMPT
+      // =================================
 
-    // ==================================================
-    // حماية من امتحان بدون أسئلة
-    // ==================================================
-
-    if (
-      !questions.length
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          "لا توجد أسئلة في هذا الامتحان",
-
-      });
-
-    }
-
-
-    // ==================================================
-    // Shuffle Questions
-    // ==================================================
-
-    if (
-      exam.shuffleQuestions
-    ) {
-
-      questions =
-        questions.sort(
-          () => Math.random() - 0.5
+      if (attempt.status === "paused") {
+        const remainingTime = Math.max(
+          0,
+          Math.floor(Number(attempt.remainingTime) || 0)
         );
 
-    }
+        if (remainingTime <= 0) {
+          attempt.status = "submitted";
+          attempt.finishedAt = new Date();
+          attempt.isAutoSubmitted = true;
+          attempt.remainingTime = 0;
+          attempt.expiresAt = null;
 
+          await attempt.save();
 
-    // ==================================================
-    // إنشاء ترتيب الأسئلة والاختيارات
-    // ==================================================
-
-    const questionOrder =
-      questions.map((q) => {
-
-        let optionsOrder =
-          q.options.map(
-            (_, index) => index
-          );
-
-
-        if (
-          exam.shuffleOptions
-        ) {
-
-          optionsOrder.sort(
-            () =>
-              Math.random() - 0.5
-          );
-
+          return res.json({
+            success: true,
+            expired: true,
+            attempt,
+          });
         }
 
+        console.log("RESUMING PAUSED ATTEMPT:", {
+          attemptId: attempt._id,
+          remainingTime,
+        });
 
-        return {
+        return res.json({
+          success: true,
+          attempt,
+        });
+      }
 
-          questionId:
-            q._id,
+      // =================================
+      // IN-PROGRESS ATTEMPT
+      // =================================
 
-          optionsOrder,
+      const now = new Date();
 
-        };
+      if (attempt.expiresAt) {
+        const expiresAt = new Date(attempt.expiresAt);
 
-      });
+        const remainingFromExpiry = Math.max(
+          0,
+          Math.ceil(
+            (expiresAt.getTime() - now.getTime()) / 1000
+          )
+        );
 
+        console.log("TIME CHECK:", {
+          now,
+          expiresAt,
+          remainingFromExpiry,
+          savedRemainingTime: attempt.remainingTime,
+        });
 
-    // ==================================================
-    // الوقت
-    // ==================================================
+        // الوقت انتهى فعلًا
+        if (remainingFromExpiry <= 0) {
+          attempt.status = "submitted";
+          attempt.finishedAt = now;
+          attempt.isAutoSubmitted = true;
+          attempt.remainingTime = 0;
+          attempt.expiresAt = null;
 
-    const durationSeconds =
-      Math.max(
+          await attempt.save();
+
+          console.log("ATTEMPT EXPIRED:", attempt._id);
+
+          return res.json({
+            success: true,
+            expired: true,
+            attempt,
+          });
+        }
+
+        // Sync remainingTime with expiresAt
+        attempt.remainingTime = remainingFromExpiry;
+
+        await attempt.save();
+
+        console.log("RETURNING EXISTING ATTEMPT:", {
+          attemptId: attempt._id,
+          remainingTime: attempt.remainingTime,
+          expiresAt: attempt.expiresAt,
+        });
+
+        return res.json({
+          success: true,
+          attempt,
+        });
+      }
+
+      // =================================
+      // OLD ATTEMPT WITHOUT expiresAt
+      // =================================
+
+      const savedRemainingTime = Math.max(
         0,
-        Math.floor(
-          Number(exam.duration || 0) *
-          60
-        )
+        Math.floor(Number(attempt.remainingTime) || 0)
       );
 
+      if (savedRemainingTime <= 0) {
+        attempt.status = "submitted";
+        attempt.finishedAt = now;
+        attempt.isAutoSubmitted = true;
+        attempt.remainingTime = 0;
+        attempt.expiresAt = null;
 
-    const startedAt =
-      new Date();
+        await attempt.save();
 
+        return res.json({
+          success: true,
+          expired: true,
+          attempt,
+        });
+      }
 
-    const expiresAt =
-      new Date(
-        startedAt.getTime() +
-        durationSeconds * 1000
+      // إصلاح Attempt قديم مفيهوش expiresAt
+      attempt.expiresAt = new Date(
+        now.getTime() + savedRemainingTime * 1000
       );
 
+      attempt.remainingTime = savedRemainingTime;
 
-    // ==================================================
-    // إنشاء المحاولة
-    // ==================================================
+      await attempt.save();
 
-    const attempt =
-      await ExamAttempt.create({
-
-        studentId,
-
-        examId,
-
-        attemptNumber:
-          attemptsCount + 1,
-
-        status:
-          "in_progress",
-
-        startedAt,
-
-        expiresAt,
-
-        remainingTime:
-          durationSeconds,
-
-        pausedAt:
-          null,
-
-        answers: [],
-
-        questionOrder,
-
+      console.log("REPAIRED OLD ATTEMPT:", {
+        attemptId: attempt._id,
+        remainingTime: savedRemainingTime,
+        expiresAt: attempt.expiresAt,
       });
 
+      return res.json({
+        success: true,
+        attempt,
+      });
+    }
 
-    // ==================================================
-    // Response
-    // ==================================================
+    // ================================
+    // CHECK MAX ATTEMPTS
+    // ================================
 
-    return res.json({
-
-      success: true,
-
-      resumed: false,
-
-      paused: false,
-
-      expired: false,
-
-      attempt,
-
+    const attemptsCount = await ExamAttempt.countDocuments({
+      studentId,
+      examId,
+      status: { $in: ["submitted", "reviewed"] },
     });
 
+    const maxAttempts = Number(exam.maxAttempts || 1);
 
-  } catch (error) {
+    if (attemptsCount >= maxAttempts) {
+      return res.status(400).json({
+        success: false,
+        message: "لقد استنفدت عدد المحاولات المسموح بها",
+      });
+    }
 
-    console.log(
-      "START EXAM ERROR:",
-      error
+    // ================================
+    // GET QUESTIONS
+    // ================================
+
+    let questions = await Question.find({
+      examId,
+    }).lean();
+
+    if (!questions || questions.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "لا توجد أسئلة في هذا الامتحان",
+      });
+    }
+
+    // ================================
+    // SHUFFLE QUESTIONS
+    // ================================
+
+    if (exam.shuffleQuestions) {
+      questions = questions.sort(() => Math.random() - 0.5);
+    }
+
+    // ================================
+    // SHUFFLE OPTIONS
+    // ================================
+
+    if (exam.shuffleOptions) {
+      questions = questions.map((question) => {
+        if (
+          Array.isArray(question.options) &&
+          question.options.length > 1
+        ) {
+          question.options = [...question.options].sort(
+            () => Math.random() - 0.5
+          );
+        }
+
+        return question;
+      });
+    }
+
+    // ================================
+    // CREATE NEW ATTEMPT
+    // ================================
+
+    const startedAt = new Date();
+
+    const expiresAt = new Date(
+      startedAt.getTime() + durationSeconds * 1000
     );
 
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        "Server Error",
-
+    console.log("CREATING NEW ATTEMPT:", {
+      startedAt,
+      expiresAt,
+      durationMinutes,
+      durationSeconds,
     });
 
+    attempt = await ExamAttempt.create({
+      studentId,
+      examId,
+
+      status: "in_progress",
+
+      startedAt,
+
+      expiresAt,
+
+      remainingTime: durationSeconds,
+
+      answers: [],
+
+      score: 0,
+
+      totalScore: 0,
+
+      percentage: 0,
+
+      timeTaken: 0,
+
+      isAutoSubmitted: false,
+    });
+
+    console.log("NEW ATTEMPT CREATED:", {
+      attemptId: attempt._id,
+      remainingTime: attempt.remainingTime,
+      expiresAt: attempt.expiresAt,
+    });
+
+    return res.status(201).json({
+      success: true,
+      attempt,
+      questions,
+    });
+  } catch (error) {
+    console.error("START EXAM ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "حدث خطأ أثناء بدء الامتحان",
+    });
   }
-
 };
-
 
 // ======================================================
 // Get Attempt
