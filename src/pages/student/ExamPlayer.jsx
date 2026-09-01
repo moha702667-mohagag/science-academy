@@ -788,12 +788,6 @@ export default function ExamPlayer() {
               : 0;
 
 
-          /*
-            لو الـLocal Backup أحدث من السيرفر
-            نستخدمه لأنه ممكن يحتوي على آخر إجابة
-            الطالب كتبها قبل Refresh / Close.
-          */
-
           if (
             localSavedAt >
             serverUpdatedAt
@@ -912,14 +906,6 @@ export default function ExamPlayer() {
               : 0;
 
 
-          /*
-            لو الـLocal Backup أحدث
-            نستخدم الوقت المحلي أيضًا.
-
-            لكن لا نزيد الوقت عن الوقت الموجود
-            في السيرفر لو السيرفر عنده وقت صحيح.
-          */
-
           if (
             localSavedAt >
             serverUpdatedAt
@@ -964,12 +950,6 @@ export default function ExamPlayer() {
           paused
         ) {
 
-          /*
-            في حالة Pause نعتمد على
-            remainingTime الموجود في السيرفر
-            لأنه هو الوقت الذي توقف عنده الامتحان.
-          */
-
           remainingTime =
             Number(
               serverAttempt.remainingTime
@@ -984,11 +964,6 @@ export default function ExamPlayer() {
           timeRef.current =
             remainingTime;
 
-
-          /*
-            نحفظ النسخة المسترجعة مرة أخرى
-            ولكن بعد انتهاء عملية الاسترجاع.
-          */
 
           saveLocalBackup(
             finalAnswers,
@@ -1031,13 +1006,6 @@ export default function ExamPlayer() {
               );
 
 
-            /*
-              لو Local Backup أحدث من السيرفر
-              لا نسمح أبدًا بزيادة الوقت.
-
-              نأخذ الأقل بين الاثنين.
-            */
-
             if (
               localIsNewer &&
               localBackup &&
@@ -1074,12 +1042,6 @@ export default function ExamPlayer() {
           timeRef.current =
             remainingTime;
 
-
-          /*
-            مهم:
-            نحفظ الـBackup بعد الاسترجاع
-            حتى يصبح عندنا نسخة مؤكدة.
-          */
 
           saveLocalBackup(
             finalAnswers,
@@ -1252,10 +1214,6 @@ export default function ExamPlayer() {
             updated;
 
 
-          // ==================================================
-          // SAVE LOCAL IMMEDIATELY
-          // ==================================================
-
           saveLocalBackup(
             updated,
             timeRef.current,
@@ -1313,10 +1271,6 @@ export default function ExamPlayer() {
             updated;
 
 
-          // ==================================================
-          // SAVE LOCAL IMMEDIATELY
-          // ==================================================
-
           saveLocalBackup(
             updated,
             timeRef.current,
@@ -1369,12 +1323,6 @@ export default function ExamPlayer() {
           safeIndex
         );
 
-
-        /*
-          نحفظ رقم السؤال الحالي
-          حتى بعد Refresh يرجع الطالب
-          لنفس السؤال.
-        */
 
         saveLocalBackup(
           answersRef.current,
@@ -1562,11 +1510,6 @@ export default function ExamPlayer() {
           );
 
 
-          /*
-            حتى لو السيرفر فشل،
-            الإجابات موجودة محليًا.
-          */
-
           return false;
 
         }
@@ -1742,11 +1685,6 @@ export default function ExamPlayer() {
           );
 
 
-          /*
-            Local Backup موجود بالفعل،
-            لذلك لو السيرفر فشل لا نضيع الإجابات.
-          */
-
           isPausedRef.current =
             false;
 
@@ -1759,6 +1697,7 @@ export default function ExamPlayer() {
 
 
           return false;
+
 
         } finally {
 
@@ -1978,6 +1917,7 @@ export default function ExamPlayer() {
             error.response?.data?.message ||
             "حدث خطأ أثناء استكمال الامتحان"
           );
+
 
         } finally {
 
@@ -2463,8 +2403,11 @@ export default function ExamPlayer() {
         submittingRef.current ||
         examLockedRef.current
       ) {
+
         return;
+
       }
+
 
       const remainingTime =
         Math.max(
@@ -2476,8 +2419,10 @@ export default function ExamPlayer() {
           )
         );
 
+
       const formattedAnswers =
         getFormattedAnswers();
+
 
       // ==========================================
       // LOCAL BACKUP
@@ -2490,19 +2435,50 @@ export default function ExamPlayer() {
         currentRef.current
       );
 
+
       // ==========================================
       // SERVER BACKUP
       // ==========================================
 
       const token =
-        localStorage.getItem("token");
+        localStorage.getItem(
+          "token"
+        );
 
-      const apiUrl =
+      const rawApiUrl =
         import.meta.env.VITE_API_URL;
 
-      if (!token || !apiUrl) {
+
+      if (
+        !token ||
+        !rawApiUrl
+      ) {
+
         return;
+
       }
+
+
+      /*
+        fetch هنا مقصود وليس api.
+
+        السبب:
+        beforeunload يحتاج keepalive
+        حتى يتم إرسال الطلب أثناء Refresh
+        أو إغلاق الصفحة.
+
+        VITE_API_URL يجب أن يكون مثل:
+        https://your-backend.abasthan.app
+
+        بدون /api.
+      */
+
+      const apiUrl =
+        rawApiUrl.replace(
+          /\/+$/,
+          ""
+        );
+
 
       try {
 
@@ -2528,6 +2504,7 @@ export default function ExamPlayer() {
               }),
 
             keepalive: true,
+
           }
         );
 
@@ -2542,10 +2519,12 @@ export default function ExamPlayer() {
 
     };
 
+
     window.addEventListener(
       "beforeunload",
       handleBeforeUnload
     );
+
 
     return () => {
 
@@ -2560,6 +2539,7 @@ export default function ExamPlayer() {
     getFormattedAnswers,
     saveLocalBackup
   ]);
+
 
   // ==================================================
   // Submit Exam
@@ -2713,11 +2693,6 @@ export default function ExamPlayer() {
         submittingRef.current =
           false;
 
-
-        /*
-          لو Auto Submit فشل،
-          لا نحذف الـLocal Backup.
-        */
 
         if (
           !autoSubmit

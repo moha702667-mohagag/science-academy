@@ -8,6 +8,8 @@ import {
   FiUsers
 } from "react-icons/fi";
 
+import api from "../../api/axios";
+
 import "./TeacherExamResults.css";
 
 export default function ExamResults() {
@@ -15,8 +17,6 @@ export default function ExamResults() {
   const { examId } = useParams();
 
   const navigate = useNavigate();
-
-  const token = localStorage.getItem("token");
 
   const [results, setResults] = useState([]);
 
@@ -34,17 +34,12 @@ export default function ExamResults() {
 
     try {
 
-      const res = await fetch(
-        `/api/exam-attempt/exam/${examId}/results`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+      const res = await api.get(
+        `/exam-attempt/exam/${examId}/results`
       );
 
 
-      const data = await res.json();
+      const data = res.data;
 
       console.log("RESULTS DATA:", data);
 

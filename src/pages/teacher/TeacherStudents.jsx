@@ -11,9 +11,9 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 
-import "./TeacherStudents.css";
+import api from "../../api/axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+import "./TeacherStudents.css";
 
 export default function TeacherStudents() {
 
@@ -39,18 +39,11 @@ export default function TeacherStudents() {
 
     try {
 
-      const token = localStorage.getItem("token");
-
-      const res = await fetch(
-        `${API_URL}/api/teacher/students`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const res = await api.get(
+        "/teacher/students"
       );
 
-      const data = await res.json();
+      const data = res.data;
 
       console.log("TEACHER STUDENTS:", data);
 
@@ -384,7 +377,9 @@ export default function TeacherStudents() {
                         <button
                           className="open-student-dashboard"
                           onClick={() =>
-                            navigate(`/teacher/students/${student._id}/dashboard`)
+                            navigate(
+                              `/teacher/students/${student._id}/dashboard`
+                            )
                           }
                         >
 

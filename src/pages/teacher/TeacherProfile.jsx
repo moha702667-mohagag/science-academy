@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./TeacherProfile.css";
+import api from "../../api/axios";
 
 export default function TeacherProfile() {
 
@@ -12,15 +13,10 @@ export default function TeacherProfile() {
 
   useEffect(() => {
 
-    const token = localStorage.getItem("token");
+    api
+      .get("/teacher")
 
-    fetch("/api/teacher", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-      .then(res => res.json())
+      .then(res => res.data)
 
       .then(data => {
         setTeacher(data);
@@ -47,27 +43,16 @@ export default function TeacherProfile() {
 
       setLoading(true);
 
-      const token = localStorage.getItem("token");
-
-      const res = await fetch(
-        "/api/teacher/profile",
-        {
-          method: "PUT",
-
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-
-          body: JSON.stringify(teacher)
-        }
+      const res = await api.put(
+        "/teacher/profile",
+        teacher
       );
 
 
-      const data = await res.json();
+      const data = res.data;
 
 
-      if (res.ok) {
+      if (res.status >= 200 && res.status < 300) {
 
         setMessage("تم حفظ البيانات بنجاح ✅");
 
@@ -82,7 +67,10 @@ export default function TeacherProfile() {
 
       console.log(error);
 
-      setMessage("حدث خطأ");
+      setMessage(
+        error.response?.data?.message ||
+        "حدث خطأ"
+      );
 
     } finally {
 

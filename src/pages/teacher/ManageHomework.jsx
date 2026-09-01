@@ -11,11 +11,11 @@ import {
 
 import { motion } from "framer-motion";
 
+import api from "../../api/axios";
+
 import "./ManageHomework.css";
 
 export default function ManageHomework() {
-  const token = localStorage.getItem("token");
-
   const [classes, setClasses] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -41,31 +41,23 @@ export default function ManageHomework() {
 
   const loadClasses = async () => {
     try {
-      const res = await fetch("/api/classes");
+      const res = await api.get("/classes");
 
-      const data = await res.json();
-
-      setClasses(data);
+      setClasses(res.data);
     } catch (error) {
-      console.log(error);
+      console.log("Error loading classes:", error);
     }
   };
 
   const loadHomeworks = async () => {
     try {
-      const res = await fetch("/api/homeworks/teacher", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.get("/homeworks/teacher");
 
-      const data = await res.json();
+      setHomeworks(res.data);
 
-      setHomeworks(data);
-
-      console.log(data);
+      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.log("Error loading homeworks:", error);
     }
   };
 
@@ -97,21 +89,12 @@ export default function ManageHomework() {
 
     if (editId) {
       try {
-        const res = await fetch(
-          `/api/homeworks/${editId}`,
-          {
-            method: "PUT",
-
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-
-            body: JSON.stringify(homework),
-          }
+        const res = await api.put(
+          `/homeworks/${editId}`,
+          homework
         );
 
-        const data = await res.json();
+        const data = res.data;
 
         if (data.success) {
           alert("تم تعديل الواجب");
@@ -127,9 +110,16 @@ export default function ManageHomework() {
             formUrl: "",
             dueDate: "",
           });
+        } else {
+          alert(data.message || "حدث خطأ أثناء تعديل الواجب");
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error editing homework:", error);
+
+        alert(
+          error.response?.data?.message ||
+            "حدث خطأ أثناء تعديل الواجب"
+        );
       }
 
       setLoading(false);
@@ -142,21 +132,12 @@ export default function ManageHomework() {
     // ==============================
 
     try {
-      const res = await fetch(
-        "/api/homeworks",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-
-          body: JSON.stringify(homework),
-        }
+      const res = await api.post(
+        "/homeworks",
+        homework
       );
 
-      const data = await res.json();
+      const data = res.data;
 
       console.log(data);
 
@@ -176,7 +157,12 @@ export default function ManageHomework() {
         alert(data.message || "حدث خطأ");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error adding homework:", error);
+
+      alert(
+        error.response?.data?.message ||
+          "حدث خطأ أثناء نشر الواجب"
+      );
     }
 
     setLoading(false);
@@ -186,26 +172,26 @@ export default function ManageHomework() {
     if (!window.confirm("هل تريد حذف الواجب؟")) return;
 
     try {
-      const res = await fetch(
-        `/api/homeworks/${id}`,
-        {
-          method: "DELETE",
-
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const res = await api.delete(
+        `/homeworks/${id}`
       );
 
-      const data = await res.json();
+      const data = res.data;
 
       if (data.success) {
         alert("تم حذف الواجب");
 
         loadHomeworks();
+      } else {
+        alert(data.message || "حدث خطأ أثناء حذف الواجب");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error deleting homework:", error);
+
+      alert(
+        error.response?.data?.message ||
+          "حدث خطأ أثناء حذف الواجب"
+      );
     }
   };
 

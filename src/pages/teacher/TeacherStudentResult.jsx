@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   FiArrowRight,
   FiAward,
-  FiUser,
   FiBookOpen,
   FiPhone,
   FiCheckCircle,
@@ -12,15 +11,13 @@ import {
   FiXCircle,
 } from "react-icons/fi";
 
-import "./TeacherStudentResult.css";
+import api from "../../api/axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+import "./TeacherStudentResult.css";
 
 export default function TeacherStudentResult() {
   const { attemptId } = useParams();
   const navigate = useNavigate();
-
-  const token = localStorage.getItem("token");
 
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,16 +28,11 @@ export default function TeacherStudentResult() {
 
   const loadResult = async () => {
     try {
-      const res = await fetch(
-        `${API_URL}/api/exam-attempt/student-result/${attemptId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const res = await api.get(
+        `/exam-attempt/student-result/${attemptId}`
       );
 
-      const data = await res.json();
+      const data = res.data;
 
       if (data.success) {
         setResult(data.result);
