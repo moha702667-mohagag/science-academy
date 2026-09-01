@@ -37,7 +37,10 @@ const app = express();
   منصات الاستضافة بتحدد PORT تلقائيًا.
 */
 
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = process.env.PORT || 3000;
+
+console.log("🔥 ABASHTAN PORT:", process.env.PORT);
+console.log("🔥 USING PORT:", PORT);
 
 /* ==================================================
    ENVIRONMENT
