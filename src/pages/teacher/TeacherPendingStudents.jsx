@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import {
   FaUserGraduate,
   FaEnvelope,
@@ -11,6 +12,8 @@ import {
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
+
+import api from "../api/axios";
 
 import "./TeacherPendingStudents.css";
 
@@ -35,32 +38,24 @@ export default function TeacherPendingStudents() {
 
       if (!token) {
         setError("يجب تسجيل الدخول أولاً");
+        setLoading(false);
         return;
       }
 
-      const res = await fetch(
-        "/api/teacher/pending-students",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await api.get(
+        "/teacher/pending-students"
       );
 
-      const data = await res.json();
+      const data = response.data;
 
       console.log("PENDING STUDENTS:", data);
 
-      if (!res.ok) {
+      if (data.success) {
+        setStudents(data.students || []);
+      } else {
         throw new Error(
           data.message || "فشل تحميل طلبات التسجيل"
         );
-      }
-
-      if (data.success) {
-        setStudents(data.students || []);
       }
     } catch (err) {
       console.error(
@@ -68,10 +63,12 @@ export default function TeacherPendingStudents() {
         err
       );
 
-      setError(
+      const message =
+        err.response?.data?.message ||
         err.message ||
-        "حدث خطأ أثناء تحميل الطلبات"
-      );
+        "حدث خطأ أثناء تحميل الطلبات";
+
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -93,37 +90,25 @@ export default function TeacherPendingStudents() {
     try {
       setActionLoading(studentId);
 
-      const token = localStorage.getItem("token");
-
-      const res = await fetch(
-        `/api/teacher/students/${studentId}/approve`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await api.put(
+        `/teacher/students/${studentId}/approve`
       );
 
-      const data = await res.json();
+      const data = response.data;
 
       console.log("APPROVE RESPONSE:", data);
 
-      if (!res.ok) {
+      if (!data.success) {
         throw new Error(
           data.message || "فشل قبول الطالب"
         );
       }
 
-      if (data.success) {
-        setStudents((prev) =>
-          prev.filter(
-            (student) =>
-              student._id !== studentId
-          )
-        );
-      }
+      setStudents((prev) =>
+        prev.filter(
+          (student) => student._id !== studentId
+        )
+      );
     } catch (err) {
       console.error(
         "APPROVE STUDENT ERROR:",
@@ -131,8 +116,9 @@ export default function TeacherPendingStudents() {
       );
 
       alert(
-        err.message ||
-        "حدث خطأ أثناء قبول الطالب"
+        err.response?.data?.message ||
+          err.message ||
+          "حدث خطأ أثناء قبول الطالب"
       );
     } finally {
       setActionLoading(null);
@@ -155,37 +141,25 @@ export default function TeacherPendingStudents() {
     try {
       setActionLoading(studentId);
 
-      const token = localStorage.getItem("token");
-
-      const res = await fetch(
-        `/api/teacher/students/${studentId}/reject`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await api.put(
+        `/teacher/students/${studentId}/reject`
       );
 
-      const data = await res.json();
+      const data = response.data;
 
       console.log("REJECT RESPONSE:", data);
 
-      if (!res.ok) {
+      if (!data.success) {
         throw new Error(
           data.message || "فشل رفض الطالب"
         );
       }
 
-      if (data.success) {
-        setStudents((prev) =>
-          prev.filter(
-            (student) =>
-              student._id !== studentId
-          )
-        );
-      }
+      setStudents((prev) =>
+        prev.filter(
+          (student) => student._id !== studentId
+        )
+      );
     } catch (err) {
       console.error(
         "REJECT STUDENT ERROR:",
@@ -193,8 +167,9 @@ export default function TeacherPendingStudents() {
       );
 
       alert(
-        err.message ||
-        "حدث خطأ أثناء رفض الطالب"
+        err.response?.data?.message ||
+          err.message ||
+          "حدث خطأ أثناء رفض الطالب"
       );
     } finally {
       setActionLoading(null);
@@ -209,7 +184,6 @@ export default function TeacherPendingStudents() {
     return (
       <section className="pending-students-page">
         <div className="pending-loading">
-
           <div className="pending-spinner"></div>
 
           <h3>
@@ -219,7 +193,6 @@ export default function TeacherPendingStudents() {
           <p>
             لحظات ونجيب لك الطلاب المنتظرين
           </p>
-
         </div>
       </section>
     );
@@ -240,9 +213,7 @@ export default function TeacherPendingStudents() {
 
         <button
           className="pending-back-btn"
-          onClick={() =>
-            navigate("/teacher")
-          }
+          onClick={() => navigate("/teacher")}
         >
           <FaArrowRight />
 
