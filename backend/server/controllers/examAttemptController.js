@@ -424,6 +424,8 @@ export const startExam = async (req, res) => {
 
 // ======================================================
 // Get Attempt
+// Student: own attempt
+// Teacher: attempt from his own exam
 // ======================================================
 
 export const getAttempt = async (
@@ -432,6 +434,10 @@ export const getAttempt = async (
 ) => {
 
   try {
+
+    // ==================================================
+    // جلب المحاولة
+    // ==================================================
 
     const attempt =
       await ExamAttempt.findById(
@@ -443,9 +449,13 @@ export const getAttempt = async (
       )
       .populate(
         "examId",
-        "title duration totalMarks passingMarks"
+        "title duration totalMarks passingMarks teacherId"
       );
 
+
+    // ==================================================
+    // المحاولة غير موجودة
+    // ==================================================
 
     if (!attempt) {
 
@@ -462,12 +472,52 @@ export const getAttempt = async (
 
 
     // ==================================================
-    // حماية: الطالب لازم يكون صاحب المحاولة
+    // IDs
+    // ==================================================
+
+    const currentUserId =
+      String(req.user.id);
+
+    const attemptStudentId =
+      String(
+        attempt.studentId?._id ||
+        attempt.studentId
+      );
+
+    const examTeacherId =
+      String(
+        attempt.examId?.teacherId ||
+        ""
+      );
+
+
+    // ==================================================
+    // هل المستخدم هو الطالب صاحب المحاولة؟
+    // ==================================================
+
+    const isStudentOwner =
+      attemptStudentId ===
+      currentUserId;
+
+
+    // ==================================================
+    // هل المستخدم هو مدرس الامتحان؟
+    // ==================================================
+
+    const isExamTeacher =
+      examTeacherId ===
+      currentUserId;
+
+
+    // ==================================================
+    // السماح:
+    // الطالب صاحب المحاولة
+    // أو مدرس الامتحان
     // ==================================================
 
     if (
-      String(attempt.studentId._id) !==
-      String(req.user.id)
+      !isStudentOwner &&
+      !isExamTeacher
     ) {
 
       return res.status(403).json({
@@ -475,11 +525,31 @@ export const getAttempt = async (
         success: false,
 
         message:
-          "غير مسموح",
+          "غير مسموح لك بالوصول إلى هذه المحاولة",
 
       });
 
     }
+
+
+    console.log(
+      "GET ATTEMPT ACCESS:",
+      {
+        attemptId:
+          attempt._id,
+
+        currentUserId,
+
+        attemptStudentId,
+
+        examTeacherId,
+
+        isStudentOwner,
+
+        isExamTeacher,
+
+      }
+    );
 
 
     // ==================================================
@@ -592,6 +662,10 @@ export const getAttempt = async (
             q.correctAnswers || [];
 
 
+          // ----------------------------------------
+          // إعادة ترتيب الاختيارات
+          // ----------------------------------------
+
           q.options =
             item.optionsOrder
               .map(
@@ -601,9 +675,9 @@ export const getAttempt = async (
               .filter(Boolean);
 
 
-          // ========================================
+          // ----------------------------------------
           // تحديث correctAnswers
-          // ========================================
+          // ----------------------------------------
 
           q.correctAnswers =
             originalCorrectAnswers
@@ -675,7 +749,6 @@ export const getAttempt = async (
   }
 
 };
-
 
 // ======================================================
 // Pause Exam
