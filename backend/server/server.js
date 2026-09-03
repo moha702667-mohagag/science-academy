@@ -566,16 +566,25 @@ app.post(
          CHECK USER
       ========================= */
 
-      const existingUser =
-        await User.findOne({
-          email: normalizedEmail,
-        });
+      const existingUser = await User.findOne({
+        email: normalizedEmail,
+      });
 
       if (existingUser) {
+        if (!existingUser.emailVerified) {
+          return res.status(400).json({
+            success: false,
+            emailNotVerified: true,
+            message:
+              "هذا البريد مسجل بالفعل لكنه غير مؤكد.",
+          });
+        }
+
         return res.status(400).json({
           success: false,
+          emailExists: true,
           message:
-            "هذا البريد مسجل بالفعل",
+            "هذا البريد مسجل بالفعل.",
         });
       }
 
