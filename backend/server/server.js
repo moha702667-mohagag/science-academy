@@ -27,20 +27,28 @@ import { verifyToken } from "./middleware/auth.js";
 dotenv.config();
 
 /* ==================================================
+   MONGOOSE CONFIGURATION
+================================================== */
+
+/*
+  Disable Mongoose buffering.
+
+  This is important in production because if MongoDB
+  is disconnected, queries should fail immediately
+  instead of waiting 10 seconds and producing:
+
+  Operation `classes.find()` buffering timed out
+*/
+
+mongoose.set("bufferCommands", false);
+
+/* ==================================================
    APP
 ================================================== */
 
 const app = express();
 
-/*
-  مهم جدًا:
-  منصات الاستضافة بتحدد PORT تلقائيًا.
-*/
-
-const PORT = process.env.PORT || 3000;
-
-console.log("🔥 ABASHTAN PORT:", process.env.PORT);
-console.log("🔥 USING PORT:", PORT);
+const PORT = Number(process.env.PORT) || 3000;
 
 /* ==================================================
    ENVIRONMENT
@@ -52,8 +60,20 @@ const NODE_ENV =
 const FRONTEND_URL =
   process.env.FRONTEND_URL || "";
 
+/*
+  Support both names temporarily.
+
+  Preferred:
+  MONGODB_URI
+
+  Legacy:
+  MONGO_URI
+*/
+
 const MONGO_URI =
-  process.env.MONGO_URI || "";
+  process.env.MONGODB_URI ||
+  process.env.MONGO_URI ||
+  "";
 
 const JWT_SECRET =
   process.env.JWT_SECRET || "";
@@ -68,40 +88,48 @@ const TEACHER_REGISTRATION_CODE =
   process.env.TEACHER_REGISTRATION_CODE || "";
 
 /* ==================================================
-   LOG STARTUP INFO
+   STARTUP LOGS
 ================================================== */
 
 console.log("==========================================");
 console.log("🚀 SCIENCE ACADEMY BACKEND");
 console.log("==========================================");
+
 console.log("Environment:", NODE_ENV);
 console.log("PORT:", PORT);
+
 console.log(
   "FRONTEND_URL:",
   FRONTEND_URL || "NOT SET"
 );
+
 console.log(
-  "MONGO_URI:",
+  "MONGODB_URI:",
   MONGO_URI ? "SET" : "NOT SET"
 );
+
 console.log(
   "JWT_SECRET:",
   JWT_SECRET ? "SET" : "NOT SET"
 );
+
 console.log(
   "EMAIL_USER:",
   EMAIL_USER ? "SET" : "NOT SET"
 );
+
 console.log(
   "EMAIL_PASS:",
   EMAIL_PASS ? "SET" : "NOT SET"
 );
+
 console.log(
   "TEACHER_REGISTRATION_CODE:",
   TEACHER_REGISTRATION_CODE
     ? "SET"
     : "NOT SET"
 );
+
 console.log("==========================================");
 
 /* ==================================================
@@ -116,12 +144,12 @@ if (!JWT_SECRET) {
 
 if (!MONGO_URI) {
   console.error(
-    "⚠️ WARNING: MONGO_URI is missing."
+    "❌ MONGODB_URI / MONGO_URI is missing."
   );
 }
 
 if (!EMAIL_USER || !EMAIL_PASS) {
-  console.error(
+  console.warn(
     "⚠️ WARNING: EMAIL_USER or EMAIL_PASS is missing."
   );
 }
@@ -153,19 +181,11 @@ app.use(
         return callback(null, true);
       }
 
-      /*
-        Allow configured frontend URLs
-      */
-
       if (
         allowedOrigins.includes(origin)
       ) {
         return callback(null, true);
       }
-
-      /*
-        في production نرفض origin غير معروف
-      */
 
       console.log(
         "❌ CORS blocked:",
@@ -199,21 +219,45 @@ app.use(
 );
 
 /* ==================================================
+   DATABASE STATE
+================================================== */
+
+let databaseConnected = false;
+
+/* ==================================================
    HEALTH CHECK
 ================================================== */
 
 app.get(
   "/health",
   (req, res) => {
-    res.status(200).json({
-      success: true,
-      status: "ok",
+    const dbState =
+      mongoose.connection.readyState;
+
+    const connected =
+      dbState === 1;
+
+    return res.status(
+      connected ? 200 : 503
+    ).json({
+      success: connected,
+      status: connected
+        ? "ok"
+        : "database_unavailable",
+
       message:
-        "Science Academy Backend is running 🚀",
-      uptime: process.uptime(),
-      timestamp: new Date().toISOString(),
+        connected
+          ? "Science Academy Backend is running 🚀"
+          : "Backend is running but MongoDB is unavailable.",
+
+      uptime:
+        process.uptime(),
+
+      timestamp:
+        new Date().toISOString(),
+
       database:
-        mongoose.connection.readyState === 1
+        connected
           ? "connected"
           : "disconnected",
     });
@@ -229,9 +273,12 @@ app.get(
   (req, res) => {
     res.status(200).json({
       success: true,
+
       message:
         "Science Academy Backend is running 🚀",
-      health: "/health",
+
+      health:
+        "/health",
     });
   }
 );
@@ -243,14 +290,15 @@ app.get(
 let transporter = null;
 
 if (EMAIL_USER && EMAIL_PASS) {
-  transporter = nodemailer.createTransport({
-    service: "gmail",
+  transporter =
+    nodemailer.createTransport({
+      service: "gmail",
 
-    auth: {
-      user: EMAIL_USER,
-      pass: EMAIL_PASS,
-    },
-  });
+      auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
+      },
+    });
 
   console.log(
     "📧 Gmail transporter initialized"
@@ -330,7 +378,7 @@ console.log(
 const generateVerificationCode = () => {
   return Math.floor(
     100000 +
-      Math.random() * 900000
+    Math.random() * 900000
   ).toString();
 };
 
@@ -504,10 +552,6 @@ app.post(
         bio,
       } = req.body;
 
-      /* =========================
-         VALIDATION
-      ========================= */
-
       if (
         !fullName ||
         !email ||
@@ -523,9 +567,7 @@ app.post(
       }
 
       if (
-        !["student", "teacher"].includes(
-          role
-        )
+        !["student", "teacher"].includes(role)
       ) {
         return res.status(400).json({
           success: false,
@@ -553,35 +595,34 @@ app.post(
         });
       }
 
-      /* =========================
-         NORMALIZE EMAIL
-      ========================= */
-
       const normalizedEmail =
         email
           .toLowerCase()
           .trim();
 
-      /* =========================
-         CHECK USER
-      ========================= */
-
       const existingUser =
         await User.findOne({
-          email: normalizedEmail,
+          email:
+            normalizedEmail,
         });
 
       if (existingUser) {
+        if (!existingUser.emailVerified) {
+          return res.status(400).json({
+            success: false,
+            emailNotVerified: true,
+            message:
+              "هذا البريد مسجل بالفعل لكنه غير مؤكد.",
+          });
+        }
+
         return res.status(400).json({
           success: false,
+          emailExists: true,
           message:
-            "هذا البريد مسجل بالفعل",
+            "هذا البريد مسجل بالفعل.",
         });
       }
-
-      /* =========================
-         TEACHER
-      ========================= */
 
       if (role === "teacher") {
         if (!registrationCode) {
@@ -625,28 +666,16 @@ app.post(
         }
       }
 
-      /* =========================
-         PASSWORD
-      ========================= */
-
       const hashedPassword =
         await bcrypt.hash(
           password,
           10
         );
 
-      /* =========================
-         ACCOUNT STATUS
-      ========================= */
-
       const accountStatus =
         role === "teacher"
           ? "approved"
           : "pending";
-
-      /* =========================
-         VERIFICATION
-      ========================= */
 
       const verificationCode =
         generateVerificationCode();
@@ -654,12 +683,8 @@ app.post(
       const verificationExpires =
         new Date(
           Date.now() +
-            10 * 60 * 1000
+          10 * 60 * 1000
         );
-
-      /* =========================
-         CREATE USER
-      ========================= */
 
       const newUser =
         await User.create({
@@ -703,7 +728,8 @@ app.post(
 
           accountStatus,
 
-          emailVerified: false,
+          emailVerified:
+            false,
 
           emailVerificationCode:
             verificationCode,
@@ -711,12 +737,9 @@ app.post(
           emailVerificationExpires:
             verificationExpires,
 
-          approvedAt: null,
+          approvedAt:
+            null,
         });
-
-      /* =========================
-         SEND EMAIL
-      ========================= */
 
       try {
         await sendVerificationEmail(
@@ -740,10 +763,6 @@ app.post(
             "تعذر إرسال كود التحقق. تأكد من إعدادات البريد الإلكتروني.",
         });
       }
-
-      /* =========================
-         TEACHER PROFILE
-      ========================= */
 
       if (role === "teacher") {
         try {
@@ -974,7 +993,8 @@ app.post(
         });
       }
 
-      user.emailVerified = true;
+      user.emailVerified =
+        true;
 
       user.emailVerificationCode =
         null;
@@ -994,10 +1014,6 @@ app.post(
 
       await user.save();
 
-      /* =========================
-         TEACHER
-      ========================= */
-
       if (
         user.role === "teacher"
       ) {
@@ -1012,13 +1028,18 @@ app.post(
         const token =
           jwt.sign(
             {
-              id: user._id,
+              id:
+                user._id,
+
               email:
                 user.email,
+
               role:
                 user.role,
             },
+
             JWT_SECRET,
+
             {
               expiresIn: "7d",
             }
@@ -1026,6 +1047,7 @@ app.post(
 
         return res.status(200).json({
           success: true,
+
           verified: true,
 
           message:
@@ -1066,10 +1088,6 @@ app.post(
           },
         });
       }
-
-      /* =========================
-         STUDENT
-      ========================= */
 
       return res.status(200).json({
         success: true,
@@ -1124,7 +1142,8 @@ app.post(
   "/api/auth/resend-verification",
   async (req, res) => {
     try {
-      const { email } = req.body;
+      const { email } =
+        req.body;
 
       if (!email) {
         return res.status(400).json({
@@ -1167,7 +1186,7 @@ app.post(
       const verificationExpires =
         new Date(
           Date.now() +
-            10 * 60 * 1000
+          10 * 60 * 1000
         );
 
       user.emailVerificationCode =
@@ -1962,9 +1981,12 @@ app.use(
   (req, res) => {
     res.status(404).json({
       success: false,
+
       message:
         "Route not found",
-      path: req.originalUrl,
+
+      path:
+        req.originalUrl,
     });
   }
 );
@@ -2003,13 +2025,11 @@ app.use(
    DATABASE CONNECTION
 ================================================== */
 
-let databaseConnected = false;
-
 const connectDatabase =
   async () => {
     if (!MONGO_URI) {
       console.error(
-        "❌ MONGO_URI is missing. Database connection skipped."
+        "❌ MONGODB_URI / MONGO_URI is missing."
       );
 
       return false;
@@ -2017,17 +2037,29 @@ const connectDatabase =
 
     try {
       console.log(
-        "⏳ Connecting to MongoDB..."
+        "⏳ Connecting to MongoDB Atlas..."
       );
 
       await mongoose.connect(
         MONGO_URI,
         {
           serverSelectionTimeoutMS:
-            10000,
+            15000,
 
           connectTimeoutMS:
-            10000,
+            15000,
+
+          socketTimeoutMS:
+            45000,
+
+          maxPoolSize:
+            10,
+
+          minPoolSize:
+            0,
+
+          family:
+            4,
         }
       );
 
@@ -2035,7 +2067,25 @@ const connectDatabase =
         true;
 
       console.log(
-        "✅ MongoDB connected successfully"
+        "=========================================="
+      );
+
+      console.log(
+        "✅ MongoDB Atlas connected successfully"
+      );
+
+      console.log(
+        "📦 Database:",
+        mongoose.connection.name
+      );
+
+      console.log(
+        "🌐 Host:",
+        mongoose.connection.host
+      );
+
+      console.log(
+        "=========================================="
       );
 
       return true;
@@ -2044,15 +2094,38 @@ const connectDatabase =
         false;
 
       console.error(
-        "❌ MongoDB connection failed:"
+        "=========================================="
       );
 
       console.error(
+        "❌ MONGODB CONNECTION FAILED"
+      );
+
+      console.error(
+        "=========================================="
+      );
+
+      console.error(
+        "Name:",
+        error.name
+      );
+
+      console.error(
+        "Message:",
         error.message
       );
 
+      if (
+        error.reason
+      ) {
+        console.error(
+          "Reason:",
+          error.reason
+        );
+      }
+
       console.error(
-        "⚠️ Server will continue running."
+        "=========================================="
       );
 
       return false;
@@ -2066,7 +2139,8 @@ const connectDatabase =
 mongoose.connection.on(
   "connected",
   () => {
-    databaseConnected = true;
+    databaseConnected =
+      true;
 
     console.log(
       "🟢 MongoDB connection established"
@@ -2077,7 +2151,8 @@ mongoose.connection.on(
 mongoose.connection.on(
   "disconnected",
   () => {
-    databaseConnected = false;
+    databaseConnected =
+      false;
 
     console.log(
       "🟡 MongoDB disconnected"
@@ -2088,7 +2163,8 @@ mongoose.connection.on(
 mongoose.connection.on(
   "error",
   (error) => {
-    databaseConnected = false;
+    databaseConnected =
+      false;
 
     console.error(
       "🔴 MongoDB error:",
@@ -2123,12 +2199,15 @@ cron.schedule(
         await Homework.deleteMany({
           dueDate: {
             $ne: null,
-            $lt: today,
+
+            $lt:
+              today,
           },
         });
 
       if (
-        result.deletedCount > 0
+        result.deletedCount >
+        0
       ) {
         console.log(
           `🗑️ Deleted ${result.deletedCount} expired homeworks`
@@ -2157,11 +2236,11 @@ const deleteExpiredUnverifiedAccounts =
       const expirationDate =
         new Date(
           Date.now() -
-            14 *
-              24 *
-              60 *
-              60 *
-              1000
+          14 *
+          24 *
+          60 *
+          60 *
+          1000
         );
 
       const expiredUsers =
@@ -2256,15 +2335,48 @@ cron.schedule(
    START SERVER
 ================================================== */
 
+let httpServer = null;
+
 const startServer =
   async () => {
     try {
       /*
         IMPORTANT:
-        Open the HTTP port FIRST.
+
+        MongoDB must be connected BEFORE
+        accepting API requests.
+
+        This prevents Mongoose buffering
+        errors such as:
+
+        Operation `classes.find()`
+        buffering timed out
       */
 
-      const server =
+      const connected =
+        await connectDatabase();
+
+      if (!connected) {
+        console.error(
+          "❌ Server startup aborted because MongoDB is unavailable."
+        );
+
+        /*
+          Exit with a non-zero code.
+
+          Production hosting platforms can
+          restart the service automatically.
+        */
+
+        process.exit(1);
+      }
+
+      /*
+        Start HTTP server only after
+        MongoDB is ready.
+      */
+
+      httpServer =
         app.listen(
           PORT,
           "0.0.0.0",
@@ -2274,7 +2386,7 @@ const startServer =
             );
 
             console.log(
-              `🚀 Science Academy server running`
+              "🚀 Science Academy server running"
             );
 
             console.log(
@@ -2282,11 +2394,15 @@ const startServer =
             );
 
             console.log(
-              `🏠 Root: /`
+              "🏠 Root: /"
             );
 
             console.log(
-              `❤️ Health: /health`
+              "❤️ Health: /health"
+            );
+
+            console.log(
+              "🟢 Database: connected"
             );
 
             console.log(
@@ -2295,11 +2411,7 @@ const startServer =
           }
         );
 
-      /*
-        Listen error
-      */
-
-      server.on(
+      httpServer.on(
         "error",
         (error) => {
           console.error(
@@ -2308,28 +2420,71 @@ const startServer =
           );
         }
       );
-
-      /*
-        Connect MongoDB AFTER server starts
-      */
-
-      await connectDatabase();
-
-      console.log(
-        "✅ Startup sequence completed"
-      );
     } catch (error) {
       console.error(
         "❌ START SERVER ERROR:",
         error
       );
 
-      /*
-        Do NOT intentionally crash
-        the application here.
-      */
+      process.exit(1);
     }
   };
+
+/* ==================================================
+   GRACEFUL SHUTDOWN
+================================================== */
+
+const shutdown =
+  async (signal) => {
+    console.log(
+      `\n🛑 ${signal} received. Shutting down...`
+    );
+
+    try {
+      if (httpServer) {
+        await new Promise(
+          (resolve) => {
+            httpServer.close(
+              () => {
+                console.log(
+                  "✅ HTTP server closed"
+                );
+
+                resolve();
+              }
+            );
+          }
+        );
+      }
+
+      await mongoose.connection.close();
+
+      console.log(
+        "✅ MongoDB connection closed"
+      );
+
+      process.exit(0);
+    } catch (error) {
+      console.error(
+        "❌ Shutdown error:",
+        error
+      );
+
+      process.exit(1);
+    }
+  };
+
+process.on(
+  "SIGTERM",
+  () =>
+    shutdown("SIGTERM")
+);
+
+process.on(
+  "SIGINT",
+  () =>
+    shutdown("SIGINT")
+);
 
 /* ==================================================
    PROCESS ERROR HANDLERS
@@ -2342,6 +2497,18 @@ process.on(
       "❌ UNCAUGHT EXCEPTION:",
       error
     );
+
+    /*
+      An uncaught exception can leave the
+      Node.js process in an unsafe state.
+
+      Shutdown and let the hosting platform
+      restart the service.
+    */
+
+    shutdown(
+      "uncaughtException"
+    );
   }
 );
 
@@ -2351,6 +2518,10 @@ process.on(
     console.error(
       "❌ UNHANDLED REJECTION:",
       reason
+    );
+
+    shutdown(
+      "unhandledRejection"
     );
   }
 );
