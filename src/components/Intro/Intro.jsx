@@ -167,7 +167,6 @@ export default function Intro() {
 
         gsap.set(
           [
-            ".final-logo",
             ".final-copy",
             ".final-teacher",
           ],
@@ -1034,70 +1033,128 @@ export default function Intro() {
             SCENE 05 — FINAL BRAND REVEAL
         ========================================= */}
 
+                
+        {/* =========================================
+            SCENE 05 — SCIENCE WORLD REVEAL
+        ========================================= */}
+
         <section className="film-scene scene-final">
 
           <div className="final-scene">
 
+            {/* CINEMATIC BACKGROUND */}
+            <div className="final-science-glow" />
             <div className="light-burst" />
 
+            {/* SCIENCE ORBITS */}
+            <div className="science-orbit orbit-one" aria-hidden="true">
+              <i className="orbit-planet planet-blue" />
+            </div>
+
+            <div className="science-orbit orbit-two" aria-hidden="true">
+              <i className="orbit-planet planet-white" />
+            </div>
+
+            <div className="science-orbit orbit-three" aria-hidden="true">
+              <i className="orbit-planet planet-gold" />
+            </div>
+
+            {/* FLOATING ATOM */}
+            <div className="floating-atom" aria-hidden="true">
+              <div className="floating-atom-core" />
+              <span className="atom-ring ring-one" />
+              <span className="atom-ring ring-two" />
+              <span className="atom-ring ring-three" />
+            </div>
+
+            {/* DNA STRUCTURE */}
+            <div className="floating-dna" aria-hidden="true">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <span
+                  className="floating-dna-rung"
+                  key={i}
+                  style={{ "--i": i }}
+                />
+              ))}
+            </div>
+
+            {/* PERIODIC ELEMENTS */}
+            <div className="floating-elements" aria-hidden="true">
+              {[
+                ["H", "1"],
+                ["O", "8"],
+                ["Fe", "26"],
+                ["Au", "79"],
+                ["C", "6"],
+                ["Na", "11"],
+                ["He", "2"],
+                ["Ag", "47"],
+              ].map(([symbol, number], i) => (
+                <div
+                  className={`science-element element-${i + 1}`}
+                  key={symbol}
+                >
+                  <small>{number}</small>
+                  <strong>{symbol}</strong>
+                </div>
+              ))}
+            </div>
+
+            {/* SCIENCE PARTICLES */}
+            <div className="science-particles" aria-hidden="true">
+              {Array.from({ length: 24 }).map((_, i) => (
+                <i key={i} style={{ "--i": i }} />
+              ))}
+            </div>
+
+            {/* MAIN CONTENT */}
             <div className="final-content">
 
               <span className="final-overline">
                 هنا تبدأ رحلة الفهم والاكتشاف
               </span>
 
-              <div className="final-brand-lockup">
+              {/* TEACHER HERO */}
+              <div className="final-teacher-stage">
 
-                {/* OFFICIAL ACADEMY LOGO */}
+                <div className="teacher-energy-ring" />
+                <div className="teacher-energy-ring ring-secondary" />
 
-                <div className="final-logo-wrap">
+                <div className="teacher-halo" />
 
-                  <img
-                    className="final-logo"
-                    src={officialLogo}
-                    alt="شعار أكاديمية مستر أحمد حجاج"
-                    draggable="false"
-                  />
-
-                </div>
-
-                {/* TEACHER PORTRAIT */}
-
-                <div className="final-teacher-wrap">
-
-                  <div className="teacher-light" />
-
-                  <img
-                    className="final-teacher"
-                    src={teacherImage}
-                    alt="مستر أحمد حجاج مدرس العلوم"
-                    draggable="false"
-                  />
-
-                </div>
+                <img
+                  className="final-teacher"
+                  src={teacherImage}
+                  alt="مستر أحمد حجاج مدرس العلوم"
+                  draggable="false"
+                />
 
               </div>
 
-              <div className="final-divider" />
+              {/* BRAND TEXT */}
+              <div className="final-brand-copy">
 
-              <h2 className="final-copy">
-                أكاديمية مستر أحمد حجاج
-              </h2>
+                <div className="final-divider" />
 
-              <p className="final-copy">
-                العلم مش مجرد معلومات... العلم فهم واكتشاف
-              </p>
+                <h2 className="final-copy">
+                  أكاديمية مستر أحمد حجاج
+                </h2>
 
-              <span className="final-tagline final-copy">
-                اتعلم • افهم • اكتشف
-              </span>
+                <p className="final-copy">
+                  العلم مش مجرد معلومات... العلم فهم واكتشاف
+                </p>
+
+                <span className="final-tagline final-copy">
+                  اتعلم • افهم • اكتشف
+                </span>
+
+              </div>
 
             </div>
 
           </div>
 
         </section>
-
       </main>
 
       {/* FOOTER */}
