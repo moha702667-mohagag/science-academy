@@ -1,0 +1,1165 @@
+
+/* ======================================================
+   MR.HAGAG — CINEMATIC SCIENCE INTRO
+   Filmic / Atmospheric / Arabic / Premium
+====================================================== */
+
+.cinema-intro {
+  --blue: #4da3ff;
+  --blue-bright: #8ac7ff;
+  --gold: #e7c47c;
+  --white: #f7faff;
+
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #030916;
+  color: var(--white);
+  font-family: "Cairo", "Tajawal", "Segoe UI", sans-serif;
+}
+
+.cinema-intro *,
+.cinema-intro *::before,
+.cinema-intro *::after {
+  box-sizing: border-box;
+}
+
+body.intro-is-active {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+/* BACKGROUND */
+
+.cinema-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 50%, #10284b 0%, #07152c 42%, #020711 100%);
+}
+
+.cinema-stars {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.65;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #fff 99%, transparent),
+    radial-gradient(2px 2px at 70% 25%, #8ac7ff 99%, transparent),
+    radial-gradient(1px 1px at 36% 72%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 85% 81%, #fff 99%, transparent),
+    radial-gradient(2px 2px at 55% 52%, #8ac7ff 99%, transparent),
+    radial-gradient(1px 1px at 20% 85%, #fff 99%, transparent);
+  background-size: 270px 270px;
+  animation: star-drift 80s linear infinite;
+}
+
+@keyframes star-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(120px, 90px, 0); }
+}
+
+.cinema-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+}
+
+.cinema-grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.055;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.cinema-blue-glow {
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  top: 15%;
+  left: 17%;
+  border-radius: 50%;
+  background: rgba(23, 100, 190, 0.12);
+  filter: blur(130px);
+  pointer-events: none;
+}
+
+/* HEADER */
+
+.cinema-topbar {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 76px;
+  padding: 0 clamp(20px, 5vw, 75px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.25),
+    transparent
+  );
+}
+
+.cinema-brand-mark {
+  color: #e7f2ff;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.cinema-top-caption {
+  color: rgba(220, 235, 255, 0.55);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.cinema-skip {
+  position: absolute;
+  z-index: 40;
+  top: 92px;
+  right: clamp(20px, 5vw, 75px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 40px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(4, 15, 32, 0.55);
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  transition: 0.3s ease;
+}
+
+.cinema-skip:hover {
+  border-color: var(--blue);
+  color: white;
+  background: rgba(37, 99, 235, 0.2);
+}
+
+.cinema-skip span {
+  color: var(--blue-bright);
+}
+
+/* STAGE */
+
+.cinema-stage {
+  position: absolute;
+  inset: 76px 0 70px;
+  overflow: hidden;
+}
+
+.film-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.scene-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dna-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(35, 113, 213, 0.2), transparent 52%);
+}
+
+.atom-atmosphere {
+  background:
+    radial-gradient(circle at center, rgba(33, 117, 222, 0.2), transparent 55%);
+}
+
+.scene-copy {
+  position: absolute;
+  z-index: 10;
+  top: 9%;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.scene-eyebrow {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--blue-bright);
+  font-size: clamp(10px, 1.2vw, 13px);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.scene-copy h1,
+.scene-copy h2 {
+  margin: 0;
+  color: #f6f9ff;
+  font-size: clamp(25px, 4.2vw, 49px);
+  font-weight: 900;
+  line-height: 1.45;
+  text-shadow: 0 5px 35px rgba(0, 0, 0, 0.5);
+}
+
+.scene-copy p {
+  margin: 12px 0 0;
+  color: rgba(223, 237, 255, 0.7);
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* DNA */
+
+.dna-world {
+  position: relative;
+  width: min(260px, 55vw);
+  height: min(390px, 55vh);
+  margin-top: 90px;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 0 30px rgba(42, 142, 255, 0.3));
+}
+
+.dna-helix {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transform: rotate(-10deg);
+}
+
+.dna-rung {
+  position: relative;
+  width: 100%;
+  height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dna-bead {
+  position: relative;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e1f3ff, #55aaff 45%, #1766c5);
+  box-shadow:
+    0 0 12px rgba(67, 160, 255, 0.9),
+    0 0 30px rgba(37, 99, 235, 0.35);
+}
+
+.dna-bead-right {
+  background: radial-gradient(circle at 35% 30%, #fff, #8bceff 45%, #347fe5);
+}
+
+.dna-bridge {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  height: 3px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(78, 164, 255, 0.9),
+    rgba(211, 237, 255, 0.85),
+    rgba(52, 127, 229, 0.9)
+  );
+  box-shadow: 0 0 12px rgba(82, 170, 255, 0.4);
+}
+
+.dna-rung:nth-child(odd) .dna-bead-left {
+  transform: translateX(35px);
+}
+
+.dna-rung:nth-child(odd) .dna-bead-right {
+  transform: translateX(-35px);
+}
+
+.dna-rung:nth-child(even) .dna-bead-left {
+  transform: translateX(-35px);
+}
+
+.dna-rung:nth-child(even) .dna-bead-right {
+  transform: translateX(35px);
+}
+
+.dna-glow {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.17);
+  filter: blur(100px);
+  opacity: 0;
+}
+
+/* ATOM */
+
+.atom-world {
+  position: relative;
+  width: min(370px, 68vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin-top: 40px;
+  filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.2));
+}
+
+.atom-core {
+  position: relative;
+  z-index: 5;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, #e6f6ff, #65b7ff 35%, #1765c5 75%);
+  box-shadow:
+    0 0 25px rgba(60, 161, 255, 0.7),
+    0 0 80px rgba(37, 99, 235, 0.45);
+}
+
+.atom-core::after {
+  content: "";
+  position: absolute;
+  inset: 17px;
+  border-radius: 50%;
+  background: white;
+  filter: blur(8px);
+}
+
+.atom-orbit {
+  position: absolute;
+  width: 100%;
+  height: 39%;
+  border: 1px solid rgba(100, 184, 255, 0.75);
+  border-radius: 50%;
+  box-shadow:
+    0 0 15px rgba(37, 99, 235, 0.12),
+    inset 0 0 12px rgba(37, 99, 235, 0.08);
+}
+
+.atom-orbit-a {
+  transform: rotate(0deg);
+}
+
+.atom-orbit-b {
+  transform: rotate(60deg);
+}
+
+.atom-orbit-c {
+  transform: rotate(120deg);
+}
+
+.atom-electron {
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #b5e4ff;
+  box-shadow:
+    0 0 12px #65b7ff,
+    0 0 25px #2563eb;
+  transform: translateY(-50%);
+}
+
+/* SPACE */
+
+.scene-space {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(10, 44, 87, 0.45), transparent 65%);
+}
+
+.space-nebula {
+  position: absolute;
+  width: 90vw;
+  height: 90vw;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse, rgba(42, 91, 185, 0.16), transparent 65%);
+  filter: blur(50px);
+}
+
+.space-world {
+  position: relative;
+  width: min(510px, 85vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin-top: 70px;
+}
+
+.sun-core {
+  position: absolute;
+  z-index: 5;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #fff9d6, #ffd66b 45%, #e88c23);
+  box-shadow:
+    0 0 35px rgba(255, 190, 72, 0.7),
+    0 0 100px rgba(255, 157, 39, 0.35);
+}
+
+.sun-core span {
+  position: absolute;
+  inset: -17px;
+  border: 1px solid rgba(255, 210, 120, 0.2);
+  border-radius: 50%;
+}
+
+.solar-orbit {
+  position: absolute;
+  border: 1px solid rgba(125, 185, 255, 0.18);
+  border-radius: 50%;
+}
+
+.solar-orbit-one {
+  width: 23%;
+  height: 23%;
+}
+
+.solar-orbit-two {
+  width: 39%;
+  height: 39%;
+}
+
+.solar-orbit-three {
+  width: 55%;
+  height: 55%;
+}
+
+.solar-orbit-four {
+  width: 73%;
+  height: 73%;
+}
+
+.solar-orbit-five {
+  width: 95%;
+  height: 95%;
+}
+
+.planet {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 18px currentColor;
+}
+
+.planet-one {
+  width: 9px;
+  height: 9px;
+  background: #b6bdc8;
+  color: #b6bdc8;
+}
+
+.planet-two {
+  width: 15px;
+  height: 15px;
+  background: #d7a36d;
+  color: #d7a36d;
+}
+
+.planet-three {
+  width: 19px;
+  height: 19px;
+  background: radial-gradient(circle at 35% 30%, #8ed7ff, #2872dc 65%, #12418e);
+  color: #2872dc;
+}
+
+.planet-four {
+  width: 15px;
+  height: 15px;
+  background: #d87960;
+  color: #d87960;
+}
+
+.planet-five {
+  width: 27px;
+  height: 27px;
+  background: linear-gradient(180deg, #e6c19b, #a66d4c 45%, #e7c5a2);
+  color: #c18c68;
+}
+
+/* ELEMENTS */
+
+.scene-elements {
+  background:
+    radial-gradient(ellipse at center, rgba(24, 75, 135, 0.22), transparent 65%);
+}
+
+.elements-world {
+  width: min(520px, 84vw);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 90px;
+  perspective: 900px;
+}
+
+.element-tile {
+  position: relative;
+  min-height: 83px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(115, 182, 255, 0.32);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(35, 83, 140, 0.52), rgba(7, 22, 44, 0.8));
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.15),
+    inset 0 0 20px rgba(88, 161, 255, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.element-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #7cc7ff, transparent);
+}
+
+.element-tile span {
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  color: rgba(190, 221, 255, 0.55);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 9px;
+}
+
+.element-tile strong {
+  color: #d7edff;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(77, 163, 255, 0.45);
+}
+
+.element-tile small {
+  margin-top: 3px;
+  color: rgba(220, 237, 255, 0.65);
+  font-size: 9px;
+}
+
+/* FINAL BRAND */
+
+.scene-final {
+  background:
+    radial-gradient(ellipse at center, #122c4e 0%, #07162c 58%, #020711 100%);
+}
+
+.final-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.98);
+}
+
+.final-content {
+  position: relative;
+  z-index: 5;
+  width: min(650px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.light-burst {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(450px, 75vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(83, 170, 255, 0.5) 0%,
+    rgba(37, 99, 235, 0.16) 35%,
+    transparent 70%
+  );
+  filter: blur(35px);
+}
+
+.final-overline {
+  margin-bottom: 28px;
+  color: rgba(195, 221, 255, 0.72);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.final-logo {
+  display: block;
+  width: min(320px, 68vw);
+  max-height: 190px;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0 20px rgba(74, 157, 255, 0.16));
+}
+
+.final-divider {
+  width: 120px;
+  height: 2px;
+  margin: 29px 0 20px;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, transparent, #83c5ff, transparent);
+}
+
+.final-copy {
+  opacity: 0;
+  visibility: hidden;
+}
+
+h2.final-copy {
+  margin: 0;
+  color: #f4f8ff;
+  font-size: clamp(17px, 2.5vw, 24px);
+  font-weight: 900;
+}
+
+p.final-copy {
+  margin: 13px 0 0;
+  color: rgba(222, 237, 255, 0.72);
+  font-size: clamp(11px, 1.4vw, 14px);
+}
+
+.final-tagline {
+  margin-top: 20px;
+  color: #86c6ff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+
+/* =========================================
+   FINAL BRAND + TEACHER PORTRAIT
+========================================= */
+
+.final-brand-lockup {
+  width: min(580px, 90vw);
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 65px);
+  direction: ltr;
+}
+
+.final-logo-wrap {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.final-logo {
+  width: min(270px, 100%);
+  max-height: 170px;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(30px) scale(.9);
+  filter:
+    drop-shadow(0 15px 35px rgba(0, 0, 0, .4))
+    drop-shadow(0 0 20px rgba(74, 157, 255, .2));
+}
+
+.final-teacher-wrap {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: clamp(145px, 23vw, 220px);
+  height: clamp(205px, 31vw, 285px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.final-teacher {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0;
+  transform: translateY(35px) scale(.94);
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .4));
+}
+
+.teacher-light {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 90%;
+  height: 75%;
+  border-radius: 50%;
+  background: rgba(58, 145, 255, .3);
+  filter: blur(45px);
+  opacity: .8;
+}
+
+.final-divider {
+  transform: scaleX(0);
+}
+
+/* Mobile composition */
+
+@media (max-width: 600px) {
+  .final-brand-lockup {
+    width: 94vw;
+    min-height: 175px;
+    gap: 12px;
+  }
+
+  .final-logo {
+    width: 100%;
+    max-height: 125px;
+  }
+
+  .final-teacher-wrap {
+    width: 125px;
+    height: 185px;
+  }
+
+  .final-overline {
+    margin-bottom: 15px;
+    font-size: 9px;
+  }
+
+  .final-divider {
+    margin: 17px 0 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .final-brand-lockup {
+    gap: 5px;
+  }
+
+  .final-teacher-wrap {
+    width: 110px;
+    height: 165px;
+  }
+
+  .final-logo {
+    max-height: 110px;
+  }
+}
+
+
+/* FOOTER */
+
+.cinema-footer {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 clamp(20px, 5vw, 75px) 20px;
+}
+
+.cinema-progress {
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cinema-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #2d79d9, #9bd7ff);
+  box-shadow: 0 0 12px rgba(83, 170, 255, 0.8);
+  transition: width 0.12s linear;
+}
+
+.cinema-footer-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: rgba(212, 230, 255, 0.45);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.cinema-footer-info span:last-child {
+  color: #83c5ff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* INTRO START OVERLAY */
+
+.intro-start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background: rgba(3, 8, 20, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.intro-start-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 17px 32px;
+
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  border-radius: 50px;
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 0 35px rgba(37, 99, 235, 0.4);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.intro-start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 55px rgba(37, 99, 235, 0.65);
+}
+
+.intro-start-icon {
+  font-size: 14px;
+}
+
+.intro-audio-error {
+  color: #fca5a5;
+  font-size: 13px;
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .cinema-topbar {
+    height: 62px;
+    padding: 0 20px;
+  }
+
+  .cinema-stage {
+    inset: 62px 0 65px;
+  }
+
+  .cinema-skip {
+    top: 75px;
+    right: 18px;
+  }
+
+  .scene-copy {
+    top: 11%;
+  }
+
+  .dna-world {
+    width: 210px;
+    height: min(330px, 48vh);
+    margin-top: 90px;
+  }
+
+  .atom-world {
+    width: min(310px, 76vw);
+  }
+
+  .space-world {
+    width: min(400px, 88vw);
+    margin-top: 90px;
+  }
+
+  .elements-world {
+    width: min(440px, 88vw);
+    gap: 8px;
+    margin-top: 100px;
+  }
+
+  .element-tile {
+    min-height: 72px;
+  }
+
+  .element-tile strong {
+    font-size: 23px;
+  }
+
+  .final-logo {
+    width: min(280px, 70vw);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+  .cinema-topbar {
+    padding: 0 16px;
+  }
+
+  .cinema-brand-mark {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .cinema-top-caption {
+    font-size: 9px;
+  }
+
+  .cinema-skip {
+    top: 72px;
+    right: 15px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+
+  .scene-copy {
+    top: 13%;
+    padding: 0 15px;
+  }
+
+  .scene-copy h1,
+  .scene-copy h2 {
+    font-size: clamp(23px, 7vw, 30px);
+    line-height: 1.5;
+  }
+
+  .scene-copy p {
+    font-size: 11px;
+  }
+
+  .scene-eyebrow {
+    font-size: 9px;
+  }
+
+  .dna-world {
+    width: 175px;
+    height: min(290px, 43vh);
+    margin-top: 90px;
+  }
+
+  .dna-bead {
+    width: 11px;
+    height: 11px;
+    flex-basis: 11px;
+  }
+
+  .atom-world {
+    width: min(270px, 78vw);
+    margin-top: 35px;
+  }
+
+  .atom-core {
+    width: 52px;
+    height: 52px;
+  }
+
+  .atom-core::after {
+    inset: 13px;
+  }
+
+  .space-world {
+    width: min(325px, 88vw);
+    margin-top: 95px;
+  }
+
+  .sun-core {
+    width: 48px;
+    height: 48px;
+  }
+
+  .planet-five {
+    width: 21px;
+    height: 21px;
+  }
+
+  .elements-world {
+    width: min(340px, 88vw);
+    gap: 6px;
+    margin-top: 105px;
+  }
+
+  .element-tile {
+    min-height: 61px;
+    border-radius: 8px;
+  }
+
+  .element-tile strong {
+    font-size: 20px;
+  }
+
+  .element-tile small {
+    font-size: 7px;
+  }
+
+  .element-tile span {
+    top: 4px;
+    left: 5px;
+    font-size: 7px;
+  }
+
+  .final-overline {
+    font-size: 9px;
+    margin-bottom: 22px;
+  }
+
+  .final-logo {
+    width: min(240px, 72vw);
+    max-height: 150px;
+  }
+
+  .final-divider {
+    margin: 23px 0 16px;
+  }
+
+  h2.final-copy {
+    font-size: 17px;
+  }
+
+  p.final-copy {
+    font-size: 10px;
+  }
+
+  .final-tagline {
+    font-size: 10px;
+  }
+
+  .cinema-footer {
+    padding: 0 17px 16px;
+  }
+
+  .cinema-footer-info {
+    font-size: 8px;
+  }
+}
+
+/* SHORT SCREENS */
+
+@media (max-height: 650px) {
+  .cinema-stage {
+    inset: 58px 0 58px;
+  }
+
+  .scene-copy {
+    top: 2%;
+  }
+
+  .dna-world {
+    height: 48vh;
+    max-height: 230px;
+    margin-top: 75px;
+  }
+
+  .atom-world {
+    width: min(240px, 42vh);
+  }
+
+  .space-world {
+    width: min(290px, 47vh);
+    margin-top: 55px;
+  }
+
+  .elements-world {
+    width: min(350px, 65vw);
+    gap: 5px;
+    margin-top: 65px;
+  }
+
+  .element-tile {
+    min-height: 48px;
+  }
+
+  .element-tile strong {
+    font-size: 17px;
+  }
+
+  .final-logo {
+    max-height: 125px;
+  }
+
+  .final-overline {
+    margin-bottom: 12px;
+  }
+
+  .final-divider {
+    margin: 14px 0;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-intro *,
+  .cinema-intro *::before,
+  .cinema-intro *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

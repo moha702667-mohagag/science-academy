@@ -1,6 +1,8 @@
+
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 
+import Intro from "./components/Intro/Intro";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Classes from "./components/Classes";
@@ -20,7 +22,6 @@ import ExamResult from "./pages/student/ExamResult";
 import MyResults from "./pages/student/MyResults";
 import Profile from "./pages/student/Profile";
 
-
 import TeacherDashboard from "./pages/TeacherDashboard";
 import TeacherProfile from "./pages/teacher/TeacherProfile.jsx";
 import ManageCourses from "./pages/teacher/ManageCourses";
@@ -34,39 +35,51 @@ import TeacherStudentResult from "./pages/teacher/TeacherStudentResult";
 import TeacherStudents from "./pages/teacher/TeacherStudents";
 import StudentRequests from "./pages/teacher/TeacherPendingStudents.jsx";
 
-
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleRoute from "./components/RoleRoute";
 import AuthPage from "./pages/AuthPage";
 import EmailVerification from "./pages/EmailVerification";
 
-
 function AppLayout() {
   const location = useLocation();
-
   const path = location.pathname;
 
-const shouldHideNavbar =
-  // Auth
-  path === "/auth" ||
+  const shouldHideNavbar =
+    // Auth
+    path === "/auth" ||
 
-  // Email Verification
-  path === "/verify-email" ||
+    // Email Verification
+    path === "/verify-email" ||
 
-  // كل صفحات الطالب
-  path.startsWith("/class/") ||
+    // Student Pages
+    path.startsWith("/class/") ||
 
-  // تشغيل الكورس
-  path.startsWith("/course/") ||
+    // Course Player
+    path.startsWith("/course/") ||
 
-  // حل الامتحان
-  path.startsWith("/exam/") ||
+    // Exam Player
+    path.startsWith("/exam/") ||
 
-  // كل صفحات المدرس
-  path.startsWith("/teacher");
+    // Teacher Pages
+    path.startsWith("/teacher");
+
   return (
     <>
+      {/* =========================================
+          GLOBAL INTRO
+      ========================================= */}
+
+      <Intro />
+
+      {/* =========================================
+          NAVBAR
+      ========================================= */}
+
       {!shouldHideNavbar && <Navbar />}
+
+      {/* =========================================
+          APPLICATION ROUTES
+      ========================================= */}
 
       <Routes>
 
@@ -78,102 +91,65 @@ const shouldHideNavbar =
           path="/"
           element={
             <>
-
-              {/* =====================================
-                  HERO
-              ===================================== */}
-
               <section
                 id="home"
                 className="home-section"
               >
-
                 <ScienceBackground variant="hero" />
 
                 <div className="home-content">
                   <Hero />
                 </div>
-
               </section>
-
-
-              {/* =====================================
-                  FEATURES
-              ===================================== */}
 
               <section
                 id="features"
                 className="features-section"
               >
-
                 <ScienceBackground variant="features" />
 
                 <div className="features-content">
                   <Features />
                 </div>
-
               </section>
-
-
-              {/* =====================================
-                  CLASSES
-              ===================================== */}
 
               <section
                 id="classes"
                 className="classes-section"
               >
-
                 <ScienceBackground variant="classes" />
 
                 <div className="classes-content">
                   <Classes />
                 </div>
-
               </section>
-
-
-              {/* =====================================
-                  TESTIMONIALS
-              ===================================== */}
 
               <section
                 id="testimonials"
                 className="testimonials-section"
               >
-
                 <ScienceBackground variant="default" />
 
                 <div className="testimonials-content">
                   <Testimonials />
                 </div>
-
               </section>
-
-
-              {/* =====================================
-                  CONTACT
-              ===================================== */}
 
               <section
                 id="contact"
                 className="contact-section"
               >
-
                 <ScienceBackground variant="contact" />
 
                 <div className="contact-content">
                   <Contact />
                 </div>
-
               </section>
 
               <Footer />
-
             </>
           }
         />
-
 
         {/* =========================================
             AUTH
@@ -184,7 +160,6 @@ const shouldHideNavbar =
           element={<AuthPage />}
         />
 
-
         {/* =========================================
             EMAIL VERIFICATION
         ========================================= */}
@@ -193,7 +168,6 @@ const shouldHideNavbar =
           path="/verify-email"
           element={<EmailVerification />}
         />
-
 
         {/* =========================================
             STUDENT DASHBOARD
@@ -208,7 +182,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             STUDENT COURSES
         ========================================= */}
@@ -221,7 +194,6 @@ const shouldHideNavbar =
             </ProtectedRoute>
           }
         />
-
 
         {/* =========================================
             STUDENT HOMEWORK
@@ -236,7 +208,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             STUDENT EXAMS
         ========================================= */}
@@ -249,7 +220,6 @@ const shouldHideNavbar =
             </ProtectedRoute>
           }
         />
-
 
         {/* =========================================
             COURSE PLAYER
@@ -264,7 +234,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             EXAM PLAYER
         ========================================= */}
@@ -277,7 +246,6 @@ const shouldHideNavbar =
             </RoleRoute>
           }
         />
-
 
         {/* =========================================
             EXAM RESULT
@@ -292,7 +260,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             MY RESULTS
         ========================================= */}
@@ -306,7 +273,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             STUDENT PROFILE
         ========================================= */}
@@ -317,7 +283,6 @@ const shouldHideNavbar =
             <Profile />
           }
         />
-
 
         {/* =========================================
             TEACHER DASHBOARD
@@ -332,7 +297,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             TEACHER PROFILE
         ========================================= */}
@@ -345,7 +309,6 @@ const shouldHideNavbar =
             </RoleRoute>
           }
         />
-
 
         {/* =========================================
             MANAGE COURSES
@@ -360,7 +323,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             MANAGE HOMEWORK
         ========================================= */}
@@ -373,7 +335,6 @@ const shouldHideNavbar =
             </RoleRoute>
           }
         />
-
 
         {/* =========================================
             MANAGE EXAMS
@@ -388,7 +349,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             ESSAY REVIEW
         ========================================= */}
@@ -401,7 +361,6 @@ const shouldHideNavbar =
             </RoleRoute>
           }
         />
-
 
         {/* =========================================
             ESSAY CORRECTION
@@ -416,7 +375,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             EXAM QUESTIONS
         ========================================= */}
@@ -427,7 +385,6 @@ const shouldHideNavbar =
             <ExamQuestions />
           }
         />
-
 
         {/* =========================================
             TEACHER EXAM RESULTS
@@ -440,7 +397,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             TEACHER STUDENT RESULT
         ========================================= */}
@@ -452,7 +408,6 @@ const shouldHideNavbar =
           }
         />
 
-
         {/* =========================================
             TEACHER STUDENTS
         ========================================= */}
@@ -463,7 +418,6 @@ const shouldHideNavbar =
             <TeacherStudents />
           }
         />
-
 
         {/* =========================================
             TEACHER VIEW STUDENT DASHBOARD
@@ -488,9 +442,6 @@ const shouldHideNavbar =
             </RoleRoute>
           }
         />
-
-
-
 
       </Routes>
     </>
